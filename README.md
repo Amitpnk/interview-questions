@@ -4,13 +4,17 @@
 
 | No. | Questions |
 | --- | --------- |
-|1  | [Can you store different types in an array in c#?](#Can-you-store-different-types-in-an-array-in-c#?) |
-|2  | [What is jagged array?](#What-is-jagged-array) |
-|3  | [Why use abstract class? Should we design it as abstract class or concrete (non abstract) class?](#Why-use-abstract-class)  |
-|4  | [Why use interfaces? What is advantage of using interfaces?](#What-is-advantage-of-using-interfaces?) |
-|5  | [What is recursive function?](#What-is-recursive-function?) |
-|6  | [Storing different list types in a single generic list?](#Storing-different-list-types-in-a-single-generic-list?) |
-|7  | [Can an abstract class have a constructor? You cannot create an instance of an abstract class. So, what is use of constructor in an abstract class?](#Can-an-abstract-class-have-a-constructor?) |
+||**c# and OOPS**|
+|1  | [Can you store different types in an array in c#?](#can-you-store-different-types-in-an-array-in-c#?) |
+|2  | [What is jagged array?](#what-is-jagged-array) |
+|3  | [Why use abstract class? Should we design it as abstract class or concrete (non abstract) class?](#why-use-abstract-class)  |
+|4  | [Why use interfaces? What is advantage of using interfaces?](#what-is-advantage-of-using-interfaces?) |
+|5  | [What is recursive function?](#what-is-recursive-function?) |
+|6  | [Storing different list types in a single generic list?](#storing-different-list-types-in-a-single-generic-list?) |
+|7  | [Can an abstract class have a constructor? You cannot create an instance of an abstract class. So, what is use of constructor in an abstract class?](#can-an-abstract-class-have-a-constructor?) |
+|8  | [Can you call an abstract method from an abstract class constructor?](#can-you-call-an-abstract-method-from-an-abstract-class-constructor?)|
+|9  | [What happens if finally block throws an exception? How to handle exceptions that occur in finally block](#what-happens-if-finally-block-throws-an-exception?)|
+
 
 1. ### Can you store different types in an array in c#?
 
@@ -238,7 +242,30 @@ public static double Factorial(int number)
 Yes, by creating list of list of objects
 
 ```c#
-List<List<object>> list = new List<List<object>> ();
+    List<List<object>> lists = new List<List<object>>();
+
+    List<object> list1 = new List<object>();
+    list1.Add(101);
+    list1.Add(102);
+    list1.Add(103);
+
+    lists.Add(list1);
+
+    List<object> list2 = new List<object>();
+    list2.Add("Test1");
+    list2.Add("Test2");
+    list2.Add("Test3");
+
+    lists.Add(list2);
+
+    foreach (var item in lists)
+    {
+        foreach (var obj in item)
+        {
+            Console.WriteLine(obj);
+        }
+    }
+
 ```
 
 7. ### Can an abstract class have a constructor?
@@ -250,3 +277,99 @@ Yes, an abstract class can have constructor. If you want to initialise certain f
 though we cannot create an instance of an abstract class, we can create instances of derived class. hence parent abstract class constructor is automatically called.
 
 Note: Abstract classes can't be directly instantiated. The abstract class constructor gets executed thourgh derived class. So, it is good practice to use protected access modifier with abstract class constructor. using public doesn't make sense
+
+8. ### Can you call an abstract method from an abstract class constructor?
+
+yes
+
+#### An abstract method in an abstract class does not have any implemention, so what is the use of calling it from abstract class constructor?
+
+If you want abstract method to be invoked automatically whenevver an instance of derived class of abstract class is created
+
+9. ### What happens if finally block throws an exception
+
+#### How to handle exceptions that occur in finally block?
+
+* Should be handled at higher level (Global level)
+* Finally block execution stops at point where exception is thrown
+
+10. ### Difference between is and as in C#
+
+TODO
+
+11. ### Can we use private class
+
+NO. Nothing unless its in a nested Class
+
+```c#
+public class Class1
+{
+    temp _temp ;
+    public Class1()
+    {
+        _temp = new temp();   
+    }    
+
+    private class temp
+    {
+        string str;
+        public string GetStr()
+        {
+        return str;
+        }
+
+    }
+}
+```
+
+12. ### Difference between string and String in C#
+
+13. ### Difference between int and Int32 in C#
+
+Int32 and int are same, both of them allow us to create a 32 bit integer. int is alias for Int32
+
+only difference is for Int32 we need namespace.
+
+```c#
+using System;
+```
+
+14. ### An abstract class has default implementation for method. The method's default implementation is needed in some class but not in some other class. How can you achieve it?
+
+By achieving virtual method in Abstract class
+
+```c#
+public abstract class AbstractClass
+{
+    public virtual void AbstractClassMethod()
+    {
+        Console.WriteLine("Default implementation");
+    }
+}
+
+public class SomeClass: AbstractClass
+{
+
+}
+
+public class SomeOtherClass : AbstractClass
+{
+    public override void AbstractClassMethod()
+    {
+        Console.WriteLine("new implementation");
+    }
+}
+```
+
+15. ### What is access modifier of default constructor in c#
+
+public
+
+```c#
+public class Customer
+{
+   
+}
+```
+
+16. ### 

@@ -6,23 +6,14 @@ namespace ConsoleApp
     {
         static void Main()
         {
-        
-            double facotrial = Facotrial(number);
-            Console.WriteLine(facotrial);
+            //int num = Convert.ToInt32(Console.ReadLine());
 
+            //double facotrial = FactorialNumber.Factorial(num);
+            //Console.WriteLine(facotrial);
 
-        }
+            //DiffTypeSingleGeneric.SingleMethod();
 
-        public static double Factorial(int number)
-        {
-            if (number==0)
-            {
-                return 1;
-            }
-
-            return number * Factorial(number - 1);
+            var savingCustomer = new SavingCustomer();
         }
     }
-
-  
 }
