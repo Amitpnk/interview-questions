@@ -22,11 +22,6 @@ jobs:
         with:
           args: --pdf-engine=xelatex --output=output/${{env.FILE_NAME}}.pdf README.md
 
-      - name: Create epub
-        uses: docker://pandoc/latex:2.10
-        with:
-          args: --output=output/${{env.FILE_NAME}}.epub README.md
-      
       - name: Upload
         uses: actions/upload-artifact@main
         with:

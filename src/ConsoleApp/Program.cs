@@ -13,7 +13,26 @@ namespace ConsoleApp
 
             //DiffTypeSingleGeneric.SingleMethod();
 
-            var savingCustomer = new SavingCustomer();
+            //var savingCustomer = new SavingCustomer();
+
+            //int? ticketOnSale = 100;
+
+            //int availableTickets;
+
+
+
+            //availableTickets = ticketOnSale ?? 0;
+
+            //Console.WriteLine(availableTickets);
+
+
+            string strNumber = "100GB";
+
+            int Result;
+
+            int.TryParse(strNumber,out Result);
+
+            Console.WriteLine(Result);
         }
     }
 }

@@ -1,0 +1,37 @@
+string & string builder
+
+why string is immutable
+benefit of dependency injection
+
+property of interfaces
+different types of interfaces 
+
+rest and soap
+
+what is webapi
+
+different types of authentication
+
+jwt
+
+angular
+observable & promise
+
+jsx
+ref and key
+component life cycle
+
+armstrong number 
+fibonacci series
+factorial
+palindrome nnumber
+reverse string
+reverse number
+prime number
+
+ref & out
+async and await
+
+bridge dp
+adapter dp
+
