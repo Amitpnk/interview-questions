@@ -1,10 +1,10 @@
 # C# Interview Questions & Answers
 
-### Table of Contents
+## Table of Contents
 
 | No. | Questions |
 | --- | --------- |
-||**c# and OOPS**|
+||**C# and OOPS**|
 |1  | [Can you store different types in an array in c#?](#can-you-store-different-types-in-an-array-in-c#?) |
 |2  | [What is jagged array?](#what-is-jagged-array) |
 |3  | [Why use abstract class? Should we design it as abstract class or concrete (non abstract) class?](#why-use-abstract-class)  |
@@ -14,7 +14,21 @@
 |7  | [Can an abstract class have a constructor? You cannot create an instance of an abstract class. So, what is use of constructor in an abstract class?](#can-an-abstract-class-have-a-constructor?) |
 |8  | [Can you call an abstract method from an abstract class constructor?](#can-you-call-an-abstract-method-from-an-abstract-class-constructor?)|
 |9  | [What happens if finally block throws an exception? How to handle exceptions that occur in finally block](#what-happens-if-finally-block-throws-an-exception?)|
+||**SQL server**|
+|1  | [Defining SQL order of execution](#defining-sql-order-of-execution) |
+|2  | [How to find nth highest salary in sql](#how-to-find-nth-highest-salary-in-sql) |
+|3 | [How to find duplicate rows from a SQL Table](#how-to-find-duplicate-rows-from-a-sql-table) |
+|4 | [Can sql views be updated](#can-sql-views-be-updated) |
+|5 | [SQL query to find employees hired in last n months](#sql-query-to-find-employees-hired-in-last-n-months) |
+|6 | [Transform rows into columns in sql server](#transform-rows-into-columns-in-sql-server) |
+|7 | [SQL query to find rows that contain only numerical data](#sql-query-to-find-rows-that-contain-only-numerical-data) |
+|8 | [SQL Query to find department with highest number of  employees](#sql-query-to-find-department-with-highest-number-of-employees) |
+|9 | [Different types of join in sql](#different-types-of-join-in-sql) |
+|10 | [What is purpose of right join?](#what-is-purpose-of-right-join) |
+ 
 
+
+## C# and OOPS
 
 1. ### Can you store different types in an array in c#?
 
@@ -482,256 +496,140 @@ int[] val2 = {1,2,3};
 
 TODO
 
-1. ### What are the two authentication modes in SQL Server?
+## SQL server
 
-There are two authentication modes –
+1. ### Defining SQL order of execution
 
-* Windows Mode
-* Mixed Mode
+    * FROM clause
+    * WHERE clause
+    * GROUP BY clause
+    * HAVING clause
+    * SELECT clause
+    * DISTINCT clause
+    * ORDER BY clause
 
-2. ### What Is SQL Profiler?
+    ```SQL
+    SELECT DISTINCT <TOP_specification> <select_list>
+    FROM <left_table>
+    <join_type> JOIN <right_table>
+    ON <join_condition>
+    WHERE <where_condition>
+    GROUP BY <group_by_list>
+    HAVING <having_condition>
+    ORDER BY <order_by_list>
+    ```
 
-system administrator to monitor events in the SQL server.
+    including on, outer and top
 
-3. ### What are the differences between local and global temporary tables and table variables
+    * FROM clause
+    * ON clause
+    * OUTER clause
+    * WHERE clause
+    * GROUP BY clause
+    * HAVING clause
+    * SELECT clause
+    * DISTINCT clause
+    * ORDER BY clause
+    * TOP clause
 
-Local temporary tables are visible when there is a connection, and are deleted when the connection is closed.
-
-```sql
-CREATE TABLE #<tablename>
-```
-
-Global temporary tables are visible to all users, and are deleted when the connection that created it is closed.
-
-```sql
-CREATE TABLE ##<tablename>
-```
-
-4. ### What is CHECK constraint?
-
-CHECK constraint is used to limit the value range that can be placed in a column
-
-```sql
-CREATE TABLE Persons (
-    ID int NOT NULL,
-    LastName varchar(255) NOT NULL,
-    FirstName varchar(255),
-    Age int,
-    CHECK (Age>=18)
-);
-```
-
-5. ### Can SQL servers linked to other servers?
-
-SQL server can be connected to any database which has OLE-DB provider to give a link. Example: Oracle has OLE-DB provider which has link to connect with the SQL server group.
-
-8. ### What is sub query and its properties?
-
-A sub-query is a query which can be nested inside a main query like Select, Update, Insert or Delete statements.  
-
-9. ### What are scheduled tasks in SQL Server?
-
-Scheduled tasks or jobs are used to automate processes that can be run on a scheduled time at a regular interval. This scheduling of tasks helps to reduce human intervention during night time and feed can be done at a particular time. 
-
-10. ### What is COALESCE in SQL Server?
-
-COALESCE is used to return first non-null expression within the arguments. 
-
-```SQL
-SELECT COALESCE(NULL, NULL, 2, 'SQL');
--- OUTPUT - 2
-```
-
-11. ### How exceptions can be handled in SQL Server Programming?
-
-Exceptions are handled using TRY----CATCH constructs 
-
-```SQL
-BEGIN TRY
---T-SQL statements
-END TRY
-BEGIN CATCH
---T-SQL statements
-END CATCH 
-```
-
-12. ### What is the purpose of FLOOR function?
-
-FLOOR function is used to round up a non-integer value to the previous least integer. Example is given
-
-```SQL
-SELECT FLOOR(25.75) AS FloorValue;
--- OUTPUT - 25
-```
-
-13. ### Can we check locks in database? If so, how can we do this lock check?
-
-Yes, we can check locks in the database. It can be achieved by using in-built stored procedure called sp_lock.
-
-14. ### What is the use of SIGN function?
-
-SIGN function is used to determine whether the number specified is Positive, Negative and Zero. This will return +1,-1 or 0.
+2. ### How to find nth highest salary in sql
 
 ```sql
-SELECT SIGN(-12);
--- OUTPUT -> -1
+with  result as
+(
+	select salary, dense_rank() over (order by salary desc) DenseRank
+	from [tblEmployee]
+)
+select top 1 * from result where denserank =2;
 ```
 
-15. ### What is a Trigger?
-
-Triggers are used to execute a batch of SQL code when insert or update or delete commands are executed against a table.
-
-16. ### What are the types of Triggers?
-
-There are four types of triggers and they are:
-
-* Insert
-* Delete
-* Update
-* Instead of
-
-17. ### What is an IDENTITY column in insert statements?
-
-IDENTITY column is used in table columns to make that column as Auto incremental number or a surrogate key.
-
-18. ### What is Bulkcopy in SQL?
-
-Bulkcopy is a tool used to copy large amount of data from Tables. 
-
-19. ### What will be query used to get the list of triggers in a database?
-
-Query to get the list of triggers in database-
+3. ### How to find duplicate rows from a SQL Table
 
 ```sql
-Select * from sys.objects where type='tr'
+WITH result AS 
+(SELECT *, 
+        ROW_NUMBER() OVER(PARTITION BY salary
+           ORDER BY id) AS DuplicateCount
+    FROM [tblEmployee]
+	)
+SELECT *
+FROM result where DuplicateCount <2 ;
 ```
 
-20. ### What is the difference between UNION and UNION ALL?
+4. ### Can sql views be updated
 
-UNION: To select related information from two tables UNION command is used. It is similar to JOIN command.
+Yes, as per MSDN you can do Insert, update, delete on a view as long as it is derived from just a single table
 
-UNION All: The UNION ALL command is equal to the UNION command, except that UNION ALL selects all values. It will **not remove duplicate rows**, instead it will retrieve all rows from all tables.
+```sql
+DELETE FROM my_View WHERE id = 3;
+```
 
-------------------------------
+5. ### SQL query to find employees hired in last n months
 
-21. ### How can we get count of the number of records in a table?
+```sql
+Select *
+FROM Employees
+Where DATEDIFF(MONTH, HireDate, GETDATE()) Between 1 and N
+```
 
-Following are the queries can be used to get the count of records in a table -
+6. ### Transform rows into columns in sql server
 
+Using PIVOT operator we can very easily transform rows to columns
 
-Select * from <tablename>
+```sql
+Select Country, City1, City2, City3
+From
+(
+  Select Country, City,
+    'City'+
+      cast(row_number() over(partition by Country order by Country) 
+     as varchar(10)) ColumnSequence
+  from Countries
+) Temp
+pivot
+(
+  max(City)
+  for ColumnSequence in (City1, City2, City3)
+) Piv
+```
 
- Select count(*) from <tablename> Select rows from sysindexes where id=OBJECT_ID(tablename) and indid<2
+7. ### SQL query to find rows that contain only numerical data
 
-28. What is the use of SET NOCOUNT ON/OFF statement?
+ISNUMERIC function returns 1 
+```sql
+SELECT Value FROM TestTable WHERE ISNUMERIC(Value) = 1
+```
 
-By default, NOCOUNT is set to OFF and it returns number of records got affected whenever the command is getting executed. If the user doesn't want to display the number of records affected, it can be explicitly set to ON- (SET NOCOUNT ON).
+8. ### SQL Query to find department with highest number of  employees
 
-29. Which SQL server table is used to hold the stored procedure scripts?
+```sql
+SELECT TOP 1 DepartmentName
+FROM Employees
+JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID
+GROUP BY DepartmentName
+ORDER BY COUNT(*) DESC
+```
 
-Sys.SQL_Modules is a SQL Server table used to store the script of stored procedure.
+9. ### Different types of join in sql
 
-Name of the stored procedure is saved in the table called Sys.Procedures.
+* Inner join <br>
+* Left join <br>
+* Right join <br>
+* Full join <br>
+* Cross join <br>
 
-30. What are Magic Tables in SQL Server?
+10. ### What is purpose of right join
 
-During DML operations like Insert, Delete, and Update, SQL Server creates magic tables to hold the values during the DML operations. These magic tables are used inside the triggers for data transaction.
+Right join returns all rows from Right table irrespective of whetherr match exists in left table or not
 
-31. What is the difference between SUBSTR and CHARINDEX in the SQL Server?
+Another business case for using RIGHT JOIN on the above 2 tables is to retrieve all the Department Names and the total number of Employees with in each department.
 
-The SUBSTR function is used to return specific portion of string in a given string. But, CHARINDEX function gives character position in a given specified string.
-
-SUBSTRING('Smiley',1,3)
-Gives result as Smi
-
-CHARINDEX('i', 'Smiley',1)
-Gives 3 as result as I appears in 3rd position of the string
-
-33. What is ISNULL() operator?
-
-ISNULL function is used to check whether value given is NULL or not NULL in sql server. This function also provides to replace a value with the NULL.
-
-35. What will be the maximum number of index per table?
-
-For SQL Server 2008 100 Index can be used as maximum number per table. 1 Clustered Index and 999 Non-clustered indexes per table can be used in SQL Server.
-
-1000 Index can be used as maximum number per table. 1 Clustered Index and 999 Non-clustered indexes per table can be used in SQL Server.
-
-1 Clustered Index and 999 Non-clustered indexes per table can be used in SQL Server.
-
-36. What is the difference between COMMIT and ROLLBACK?
-
-Every statement between BEGIN and COMMIT becomes persistent to database when the COMMIT is executed. Every statement between BEGIN and ROOLBACK are reverted to the state when the ROLLBACK was executed.
-
-37. What is the difference between varchar and nvarchar types?
-
-Varchar and nvarchar are same but the only difference is that nvarhcar can be used to store Unicode characters for multiple languages and it also takes more space when compared with varchar.
-
-38. What is the use of @@SPID?
-
-A @@SPID returns the session ID of the current user process.
-
-39. What is the command used to Recompile the stored procedure at run time?
-
-Stored Procedure can be executed with the help of keyword called RECOMPILE.
-
-Example
-
-Exe <SPName>  WITH RECOMPILE
-Or we can include WITHRECOMPILE in the stored procedure itself.
-
-40. How to delete duplicate rows in SQL Server?
-
-Duplicate rows can be deleted using CTE and ROW NUMER feature of SQL Server.
-
-41. Where are SQL Server user names and passwords stored in SQL Server?
-
-User Names and Passwords are stored in sys.server_principals and sys.sql_logins. But passwords are not stored in normal text.
-
-42. What is the difference between GETDATE and SYSDATETIME?
-
-Both are same but GETDATE can give time till milliseconds and SYSDATETIME can give precision till nanoseconds. SYSDATE TIME is more accurate than GETDATE.
-
-43. How data can be copied from one table to another table?
-
-INSERT INTO SELECT
-
-This command is used to insert data into a table which is already created.
-
-SELECT INTO
-
-This command is used to create a new table and its structure and data can be copied from existing table.
-
-44. What is TABLESAMPLE?
-
-TABLESAMPLE is used to extract sample of rows randomly that are all necessary for the application. The sample rows taken are based on the percentage of rows.
-
-45. Which command is used for user defined error messages?
-
-RAISEERROR is the command used to generate and initiates error processing for a given session. Those user defined messages are stored in sys.messages table.
-
-46. What do mean by XML Datatype?
-
-XML data type is used to store XML documents in the SQL Server database. Columns and variables are created and store XML instances in the database.
-
-47. What is CDC?
-
-CDC is abbreviated as Change Data Capture which is used to capture the data that has been changed recently. This feature is present in SQL Server 2008.
-
-48. What is SQL injection?
-
-SQL injection is an attack by malicious users in which malicious code can be inserted into strings that can be passed to an instance of SQL server for parsing and execution. All statements have to checked for vulnerabilities as it executes all syntactically valid queries that it receives.
-
-Even parameters can be manipulated by the skilled and experienced attackers.
-
-49. What are the methods used to protect against SQL injection attack?
-
-Following are the methods used to protect against SQL injection attack:
-
-Use Parameters for Stored Procedures
-Filtering input parameters
-Use Parameter collection with Dynamic SQL
-In like clause, user escape characters
-50. What is Filtered Index?
-
-Filtered Index is used to filter some portion of rows in a table to improve query performance, index maintenance and reduces index storage costs. When the index is created with WHERE clause, then it is called Filtered Index
+```sql
+Select DepartmentName, Count(Employees.DepartmentID) as TotalEmployees
+From Employees
+Right Join Departments
+ON Departments.DepartmentID = Employees.DepartmentID
+Group By DepartmentName
+Order By TotalEmployees
+```
