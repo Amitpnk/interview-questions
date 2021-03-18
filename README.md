@@ -763,6 +763,16 @@ Template is an HTML view of Angular in which we can write directives.
 
 10. ### Explain architecture of Angular
 
+![Architecture.png](./docs/img/Architecture.png)
+
+* Template - HTML view 
+* Component - Binds View and Model
+* Modules - Groups Components logically
+* Bindings - Defines how view and component communicate
+* Directive - Changes HTML dom behaviour
+* Services - Helps share common logic across project
+* DI - Dependency injection helps to inject instance across constructor
+
 11. ### What is SPA
 
 Single page application, where main UI gets loaded once and then UI is loaded on demand
@@ -771,7 +781,7 @@ Single page application, where main UI gets loaded once and then UI is loaded on
 
 Via Routing
 
-13. #### What is routing 
+13. ### What is routing 
 
 * Routing is simple collection which has two things URL and compoent 
 * when this URL is called, it loads appropriate component
