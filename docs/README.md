@@ -763,7 +763,7 @@ Template is an HTML view of Angular in which we can write directives.
 
 10. ### Explain architecture of Angular
 
-![Architecture.png](./docs/img/Architecture.png)
+![Architecture.png](./img/Architecture.png)
 
 * Template - HTML view 
 * Component - Binds View and Model
