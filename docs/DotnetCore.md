@@ -4,25 +4,25 @@
 | No. | Questions |
 | --- | --------- |
 ||**Dotnet core**|
-|1   |	[What is ASP.NET MVC Core?](#what-is-asp.net-mvc-core?)	|
-|2   |	[Difference between Webform, MVC 5 and .NET Core?](#difference-between-webform,-mvc-5-and-.net-core?)	|
+|1   |	[What is ASP.NET MVC Core?](#what-is-asp.net-mvc-core)	|
+|2   |	[Difference between Webform, MVC 5 and .NET Core?](#difference-between-webform,-mvc-5-and-.net-core)	|
 |3   |	[What is MVC Architecture](#what-is-mvc-architecture)	|
-|4   |	[Why do we have wwwroot folder?](#why-do-we-have-wwwroot-folder?)	|
+|4   |	[Why do we have wwwroot folder?](#why-do-we-have-wwwroot-folder)	|
 |5   |	[Explain appsettings.json](#explain-appsettings.json)	|
-|6   |	[How to read configuration from appsettings.json?](#how-to-read-configuration-from-appsettings.json?)	|
-|7   |	[What is dependency injection?](#what-is-dependency-injection?)	|
-|8   |	[Why do we need DI?](#why-do-we-need-di?)	|
-|9   |	[How do we implement DI?](#how-do-we-implement-di?)	|
-|10  |	[What is use of Middleware?](#what-is-use-of-middleware?)	|
-|11  |	[How to do implement?](#how-to-do-implement?)	|
+|6   |	[How to read configuration from appsettings.json?](#how-to-read-configuration-from-appsettings.json)	|
+|7   |	[What is dependency injection?](#what-is-dependency-injection)	|
+|8   |	[Why do we need DI?](#why-do-we-need-di)	|
+|9   |	[How do we implement DI?](#how-do-we-implement-di)	|
+|10  |	[What is use of Middleware?](#what-is-use-of-middleware)	|
+|11  |	[How to do implement?](#how-to-do-implement)	|
 |12  |	[Differernce between ConfigureServices & Configure method in Startup.c](#differernce-between-configureservices-&-configure-method-in-startup.c)	|
-|13  |	[Difference between Scoped vs Transient vs Singleton?](#difference-between-scoped-vs-transient-vs-singleton?)	|
-|14  |	[What is razor?](#what-is-razor?)	|
-|15  |	[What is Kestrel?](#what-is-kestrel?)	|
+|13  |	[Difference between Scoped vs Transient vs Singleton?](#difference-between-scoped-vs-transient-vs-singleton)	|
+|14  |	[What is razor?](#what-is-razor)	|
+|15  |	[What is Kestrel?](#what-is-kestrel)	|
 |16  |	[Why Kestrel?](#why-kestrel)	|
-|17  |	[what are cookies?](#what-are-cookies?)	|
-|18  |	[Session management?](#session-management?)	|
-|19  |	[Different ways of doing session management?](#different-ways-of-doing-session-management?)	|
+|17  |	[what are cookies?](#what-are-cookies)	|
+|18  |	[Session management?](#session-management)	|
+|19  |	[Different ways of doing session management?](#different-ways-of-doing-session-management)	|
 
 
 
