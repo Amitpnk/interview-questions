@@ -6,7 +6,7 @@
 | --- | --------- |
 ||**Design Principle**|
 |	1	|	[What is Design principle?](#what-is-design-principle)	|
-|	2	|	[What if we don't follow SOLID principles](#what-if-we-don't-follow-solid-principles)	|
+|	2	|	[What if we don't follow SOLID principles](#what-if-we-dont-follow-solid-principles)	|
 |	3	|	[Single Responsibility Principle](#single-responsibility-principle)	|
 |	4	|	[Interface Segregation Principle](#interface-segregation-principle)	|
 |	5	|	[Open closed principle](#open-closed-principle)	|
