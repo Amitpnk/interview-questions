@@ -1,0 +1,7 @@
+* [Home](/) 
+* [C# and OOPS?](./CsharpOops) 
+* [.NET Core](./DotnetCore) 
+* [Design principle](./DesginPrinciple) 
+* [SQL Server](./SQLServer) 
+* [Angular](./SQLServer) 
+* [Design Pattern](./DesignPattern) 
