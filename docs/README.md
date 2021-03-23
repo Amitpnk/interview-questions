@@ -1,4 +1,9 @@
-# Full stack developer - Interview Questions & Answers 
+#  
+
+<div>
+    <br>
+    <h1 align="center" style="font-size: 40px"><strong>Full stack developer - Interview Questions & Answers </strong></h1> <br>
+</div>
 
 ## Table of Contents
 
