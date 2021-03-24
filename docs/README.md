@@ -10,8 +10,8 @@
 | No. | Topics |
 | --- | --------- |
 |1  | [C# and OOPS?](./CsharpOops.md) |
-|2  | [.NET Core](./DotnetCore) |
-|3  | [Design principle](./DesginPrinciple) |
-|4  | [SQL Server](./SQLServer) |
-|5  | [Angular](./Angular) |
-|6  | [Design Pattern](./DesignPattern) |
+|2  | [.NET Core](./DotnetCore.md) |
+|3  | [Design principle](./DesginPrinciple.md) |
+|4  | [SQL Server](./SQLServer.md) |
+|5  | [Angular](./Angular.md) |
+|6  | [Design Pattern](./DesignPattern.md) |

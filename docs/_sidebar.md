@@ -3,5 +3,5 @@
 * [.NET Core](./DotnetCore) 
 * [Design principle](./DesginPrinciple) 
 * [SQL Server](./SQLServer) 
-* [Angular](./SQLServer) 
+* [Angular](./Angular) 
 * [Design Pattern](./DesignPattern) 

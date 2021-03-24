@@ -28,6 +28,12 @@
 |21|[what is benefit of dependency injection](#what-is-benefit-of-dependency-injection)|
 |22|[differentiate between ng serve and ng build](#differentiate-between-ng-serve-and-ng-build)|
 |23|[Explain --prod parameter in ng build](#explain---prod-parameter-in-ng-build)|
+|24|[Explain ViewChild and ViewChildren](#explain-viewchild-and-viewchildren)
+|25|[Why do we need template reference variables?](#why-do-we-need-template-reference-variables?)
+|26|[What is ContentProjection?](#what-is-contentprojection?)
+|27|[Explain content projection slot?](#explain-content-projection-slot?)
+|28|[Explain events and sequence of component life cycle?](#explain-events-and-sequence-of-component-life-cycle?)
+|29|[Constructor vs ngOnInit()](#constructor-vs-ngoninit())
 
 1. ### What is use of Angular
 
@@ -101,18 +107,18 @@ $ npm install -g @angular/cli
 ng new project-app
 ```
 
-6. ### Explain importance of Component and Modules
+7. ### Explain importance of Component and Modules
 
 * Component is where you write your binding code. 
 * Module logically groups components
 
 we can create component by ```@component``` and module by ```@NgModule```
 
-7. ### what are Annotation or Metadata
+8. ### what are Annotation or Metadata
 
 It's decorator
 
-8. ### What is template
+9. ### What is template
 
 Template is an HTML view of Angular in which we can write directives.
 
@@ -120,14 +126,14 @@ Template is an HTML view of Angular in which we can write directives.
 * Inline (template)
 * Seperate HTML file (templateUrl)
 
-9. ### Explaing four types of data binding in angular
+10. ### Explaing four types of data binding in angular
 
 * Property binding (UI to component) - []
 * Event binding (component to UI) - ()
 * Interpolation (Expression) - {{}}
 * Two way binding - [()]
 
-10. ### Explain architecture of Angular
+11. ### Explain architecture of Angular
 
 ![Architecture.png](./img/Architecture.png)
 
@@ -139,20 +145,20 @@ Template is an HTML view of Angular in which we can write directives.
 * Services - Helps share common logic across project
 * DI - Dependency injection helps to inject instance across constructor
 
-11. ### What is SPA
+12. ### What is SPA
 
 Single page application, where main UI gets loaded once and then UI is loaded on demand
 
-12. ### How to implement SPA in angular
+13. ### How to implement SPA in angular
 
 Via Routing
 
-13. ### What is routing 
+14. ### What is routing 
 
 * Routing is simple collection which has two things URL and compoent 
 * when this URL is called, it loads appropriate component
 
-14. ### How you implement routing
+15. ### How you implement routing
 
 Step 1: Define routing collection in app-routing.ts
 
@@ -160,11 +166,11 @@ Step 2: Define ```<router-outlet/>``` where component should be loaded
 
 Step 3: To navigate define ```routerLink```
 
-15. ### What is lazy loading
+16. ### What is lazy loading
 
 Lozy loadng means on demand loading. Loading only the necessary HTML, CSS and Javascript files, so that you have better performance
 
-16. ### How to implement lazy loading
+17. ### How to implement lazy loading
 
 Step 1: Create seperate module w.r.t compoent 
 
@@ -193,11 +199,11 @@ const routes: Routes = [
 ];
 ```
 
-17. ### Define services
+18. ### Define services
 
 Services helps us to share common logic accross angular project
 
-18. ### What is dependency injection
+19. ### What is dependency injection
 
 Dependency injection whether creating object instances from component. Angular injects via constructor
 
@@ -206,7 +212,7 @@ There is two types of DI
 * Centrailised DI
 * Conditional DI
 
-19. ### How to implement dependency injection
+20. ### How to implement dependency injection
 
 Steps1: Create inheritance logger file
 
@@ -282,15 +288,69 @@ constructor(log: Injector) {
 }
 ```
 
-20. ### what is benefit of dependency injection
+21. ### what is benefit of dependency injection
 
 * decouple class 
 
-21. ### differentiate between ng serve and ng build
+22. ### differentiate between ng serve and ng build
 
 * ng serve - builds in inmemory 
 * ng build - hard disk 
 
-22. ### Explain --prod parameter in ng build
+23. ### Explain --prod parameter in ng build
 
 Compresses our JS files
+
+24. ### Explain ViewChild and ViewChildren
+
+*ViewChild* helps to reference view object in component to which it is connected
+
+*ViewChild* references one object while *ViewChildren* reference collection
+
+```html
+<div #div1>This is div1</div>
+```
+```ts
+export class comp1{
+  @ViewChild('div1', ... )
+}
+```
+
+25. ### Why do we need template reference variables?
+
+A template reference variable is used to give reference to a DOM element, component, directive or web component within template 
+
+```html
+<div #div1>This is div1</div>
+{{div1.textContent}}
+```
+
+26. ### What is ContentProjection?
+
+Scnerio where we want to project content from parent to child component
+
+```ts
+<ng-content>
+</ng-content>
+```
+
+27. ### Explain content projection slot?
+
+If we want to project specific content to specific slot
+
+```ts
+<ng-content select="slot1"></ng-content>
+```
+
+28. ### Explain events and sequence of component life cycle?
+
+![AngularLifeCycle.png](./img/AngularLifeCycle.png)
+
+
+29. ### Constructor vs ngOnInit()
+
+|Constructor  |ngOnInit()|
+|---|---|
+|typescript concept|angular concept|
+|initialize class variables|fires after UI is binded wit component|
+|DI|loading of UI|
