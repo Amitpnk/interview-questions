@@ -1,11 +1,11 @@
-#  
+<!-- #  
 
 <div>
     <br>
     <h1 align="center" style="font-size: 40px"><strong>Full stack developer - Interview Questions & Answers </strong></h1> <br>
-</div>
+</div> -->
 
-## Table of Contents
+# Table of Contents
 
 | No. | Topics |
 | --- | --------- |
