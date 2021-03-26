@@ -1,5 +1,6 @@
 * [Home](/) 
-* [C# and OOPS?](./CsharpOops) 
+* [C# and .Net Framework](./CsharpOops) 
+* [OOPS?](./Oops) 
 * [.NET Core](./DotnetCore) 
 * [Design principle](./DesginPrinciple) 
 * [SQL Server](./SQLServer) 
