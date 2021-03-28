@@ -1,17 +1,8 @@
-armstrong number 
-fibonacci series
-factorial
-palindrome nnumber
-reverse string
-reverse number
-prime number
-
-
 ## Table of Contents
 
 | No. | Questions |
 | --- | --------- |
-||**Dotnet core**|
+||**Simple program**|
 |1   |	[What is ASP.NET MVC Core?](#what-is-asp.net-mvc-core)	|
 
 

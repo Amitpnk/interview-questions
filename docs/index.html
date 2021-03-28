@@ -8,18 +8,35 @@
   <meta name="description" content="Interview question and answer">
   <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css"
+    title="Simple">
+  <link rel="stylesheet" href="assets/css/main.css">
+
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css"
+    title="Simple">
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- Alternate Stylesheets -->
+  <link rel="stylesheet alternate" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css"
+    title="Defaults">
+  <link rel="stylesheet alternate"
+    href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css" title="Simple Dark">
+
 </head>
 
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
+      name: 'Interview-Questions',
+      repo: 'https://github.com/Amitpnk',
       loadSidebar: true,
       search: 'auto',
       auto2top: true,
-      // coverpage: true,
-      subMaxLevel: 2,
+      coverpage: true,
+      subMaxLevel: 3,
       autoHeader: true,
       tabs: {
         persist: true,
@@ -27,48 +44,27 @@
         theme: 'classic',
         tabComments: true,
         tabHeadings: true
+      },
+      executeScript: true,
+      search: {
+        noData: 'No results!',
+        placeholder: 'Search question'
       }
     }
   </script>
- <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
- <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
- <script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
- <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
- </body>
- </html>
- 
- <style>
-     .cover-main blockquote p {
-         font-size: 2rem;
-     }
- 
-     .cover-main img {
-         width: 500px;
-     }
- 
-     .cover-main ul li {
-         font-size: 1rem;
-     }
- 
-     .cover-main ul li img {
-         width: 50px;
-     }
- 
-     .cover-main {
-         color: #CCCCCC;
-     }
- 
-     .sidebar li > p a {
-         font-size: 15px;
-         font-weight: 700;
-     }
- 
-     .sidebar li.active > p a {
-         color: #42b983;
-     }
- 
-     .content {
-         margin-top: 10px !important;
-         padding-top: 0 !important;
-     }
- </style>
+
+  <script src="assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1/dist/docsify-tabs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/external-script.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/ga.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script>
+    // Initialize the default attribute listener
+    classChange.attrs();
+  </script>

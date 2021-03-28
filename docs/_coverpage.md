@@ -1,13 +1,11 @@
-<div>
-    <br>
-    <h1 align="center" style="font-size: 80px;"><strong>Interview question & answer</strong></h1>
-    <h1 align="center" style="color: #df2b34;"><strong>Interview question for Full stack developer</strong></h1>
-</div>
-Hello Job hunter
+# Interview Questions & Answers
 
-This will help you to crack Interview
+> Interview Questions & Answers for Full stack developer
 
-[Get started](#)
-[Contact us](mailto:amit.naik8103@gmail.com)
+- Oops concept
+- C# and .Net
+- .Net core
+- Design princple and many more
 
-![color](#1f222f)
+[Get Started](?id=table-of-contents)
+[GitHub](https://github.com/Amitpnk/csharp-interview-questionss)
