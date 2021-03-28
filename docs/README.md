@@ -1,18 +1,21 @@
-<!-- #  
+# Full stack developer - Interview Questions & Answers 
 
-<div>
-    <br>
-    <h1 align="center" style="font-size: 40px"><strong>Full stack developer - Interview Questions & Answers </strong></h1> <br>
-</div> -->
+[![Documentation](https://github.com/Amitpnk/interview-questions/actions/workflows/main.yaml/badge.svg)](https://github.com/Amitpnk/interview-questions/actions/workflows/main.yaml)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Amitpnk/interview-questions/blob/develop/LICENSE)
 
-# Table of Contents
+Crack you next tech interview or for technical recruiters, team leads
 
-| No. | Topics |
-| --- | --------- |
-|1  | [C# and .Net Framework](./CsharpOops.md)  |
-|2  | [OOPS](./Oops) |
-|2  | [.NET Core](./DotnetCore.md) |
-|3  | [Design principle](./DesginPrinciple.md) |
-|4  | [SQL Server](./SQLServer.md) |
-|5  | [Angular](./Angular.md) |
-|6  | [Design Pattern](./DesignPattern.md) |
+## Screenshots
+
+### screenshot-1
+
+<p float="left">
+  <img alt="Simple theme cover page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/blob/main/docs/img/screenshot-1.png" width="49%">
+  <img alt="Simple theme cover page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/blob/main/docs/img/screenshot-2.png" width="49%">
+</p>
+
+![screenshot](./img/screenshot-1.png)
+
+![screenshot](./img/screenshot-2.png)
+
+Credits

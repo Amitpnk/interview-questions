@@ -1,10 +1,9 @@
-# C# and OOPS
+# C# and .Net Framework
 
 ## Table of Contents
 
 | No. | Questions |
 | --- | --------- |
-||**C# and OOPS**|
 |1  | [Can you store different types in an array in c#?](#can-you-store-different-types-in-an-array-in-c#?) |
 |2  | [What is jagged array?](#what-is-jagged-array) |
 |3  | [Why use abstract class? Should we design it as abstract class or concrete (non abstract) class?](#why-use-abstract-class)  |
