@@ -155,10 +155,10 @@ Order By TotalEmployees
 
 11. ### How to get organization hierarchy
 
-
+```sql
 Declare @ID int ;
 Set @ID = 7;
-```sql
+
 WITH EmployeeCTE AS
 (
  Select EmployeeId, EmployeeName, ManagerID
