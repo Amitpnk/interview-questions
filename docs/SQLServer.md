@@ -16,6 +16,7 @@
 |9 | [Different types of join in sql](#different-types-of-join-in-sql) |
 |10 | [What is purpose of right join?](#what-is-purpose-of-right-join) |
 
+
 1. ### Defining SQL order of execution
 
     * FROM clause
@@ -152,3 +153,94 @@ Group By DepartmentName
 Order By TotalEmployees
 ```
 
+11. ### How to get organization hierarchy
+
+
+Declare @ID int ;
+Set @ID = 7;
+```sql
+WITH EmployeeCTE AS
+(
+ Select EmployeeId, EmployeeName, ManagerID
+ From Employees
+ Where EmployeeId = @ID
+ 
+ UNION ALL
+ 
+ Select Employees.EmployeeId , Employees.EmployeeName, Employees.ManagerID
+ From Employees
+ JOIN EmployeeCTE
+ ON Employees.EmployeeId = EmployeeCTE.ManagerID
+)
+
+Select E1.EmployeeName, ISNULL(E2.EmployeeName, 'No Boss') as ManagerName
+From EmployeeCTE E1
+LEFT Join EmployeeCTE E2
+ON E1.ManagerID = E2.EmployeeId
+```
+
+12. ### How to delete duplicate rows from a SQL Table
+
+```sql
+WITH result AS 
+(SELECT *, 
+        ROW_NUMBER() OVER(PARTITION BY salary
+           ORDER BY id) AS DuplicateCount
+    FROM [tblEmployee]
+	)
+DELETE
+FROM result where DuplicateCount > 1 ;
+```
+
+13. ### Difference between Clustered and non clustered index
+
+With a clustered index the rows are stored physically on the disk in the same order as the index. Therefore, there can be only one clustered index.
+
+With a non clustered index there is a second list that has pointers to the physical rows. You can have many non clustered indices, although each new index will increase the time it takes to write new records
+
+|  |Clustered |Non clustered |
+|---|---|---|
+|Indexes |One index per table| Multiple index per table|
+|Unique|True|False|
+
+
+14. ### Difference between Logical read and physical read
+
+15. ### Performance tuning on SQL server
+
+* Select * Statement
+* Normalize tables
+* Keep clustered index small
+* Store image path instead of image
+* Use CTE instead of Temp table
+* Appropriate naming convention (like usp instead of sp)
+* Stored procedure - for complex logic
+
+16. ### Explain Row_number(), partition, rank() and DenseRank()
+
+```sql
+select 
+	ROW_NUMBER() over (order by name) as rownumber,
+	ROW_NUMBER() over (partition by salary order by name) as rownumber_partition,
+	dense_rank() over (  order by salary) as salary_dense,
+	rank() over (  order by salary) as salary_rank,
+	name, 
+	salary 
+from [Employee] 
+```
+ 
+|	rownumber	|	rownumber_partition	|	salary_dense	|	salary_rank	|	name	|	salary	|
+|---|---|---|---|---|---
+|	5	|	1	|	1	|	1	|	Ravi	|	10000.00	|
+|	3	|	1	|	2	|	2	|	menaka	|	15000.00	|
+|	7	|	2	|	2	|	2	|	Vishal	|	15000.00	|
+|	2	|	1	|	3	|	4	|	Mahesh	|	18000.00	|
+|	1	|	1	|	4	|	5	|	akshay	|	20000.00	|
+|	4	|	2	|	4	|	5	|	Rahul	|	20000.00	|
+|	6	|	3	|	4	|	5	|	Sam	|	20000.00	|
+
+Note: column
+* rownumber - for generate serial number
+* rownumber_partition - to find duplicate
+* salary_dense - to find nth highest salary
+* salary_rank - serial number for unique salary
