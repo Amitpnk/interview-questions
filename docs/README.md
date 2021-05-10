@@ -5,17 +5,34 @@
 
 Crack you next tech interview or for technical recruiters, team leads
 
+## Give a Star! :star:
+If you like or are using this project to learn or start your solution, please give it a star. Thanks!
+
+## Support This Project
+
+If you have found this project helpful, either as a library that you use or as a learning tool, please consider buying me a coffee:
+
+<a href="https://www.buymeacoffee.com/codewithamit" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important" ></a>
+
+
 ## Screenshots
 
 ### screenshot-1
 
 <p float="left">
-  <img alt="Simple theme cover page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/blob/main/docs/img/screenshot-1.png" width="49%">
-  <img alt="Simple theme cover page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/blob/main/docs/img/screenshot-2.png" width="49%">
+  <img alt="Simple theme cover page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/screenshot-1.png" width="49%">
+  <img alt="Simple theme cover page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/screenshot-2.png" width="49%">
 </p>
 
-![screenshot](./img/screenshot-1.png)
+<!-- ![screenshot](./img/screenshot-1.png)
 
-![screenshot](./img/screenshot-2.png)
+![screenshot](./img/screenshot-2.png) -->
 
-Credits
+## Reference
+
+* Kudvenkat youtube channel
+* Shivprasad Koirala youtube channel
+
+## Contact
+
+Having any issues or troubles getting started? Drop a mail to amit.naik8103@gmail.com or [Raise a Bug or Feature Request](https://github.com/Amitpnk/Clean-architecture-ASP.NET-Core/issues/new). Always happy to help.

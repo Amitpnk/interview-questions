@@ -444,6 +444,13 @@ int[] val2 = {1,2,3};
 
 19. ### static class and instance
 
+20. ### What are pillar of OOPS concept
+
+* Inheritance
+* Encapsulation
+* Abstraction
+* Polymorphism
+
 20. ### Inheritence
 
 21. ### Method hiding
