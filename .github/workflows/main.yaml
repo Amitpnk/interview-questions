@@ -17,10 +17,20 @@ jobs:
         run: |
           mkdir output  # create output dir          
       
-      - name: Create PDF
+      - name: Create .Net fundamentals PDF
         uses: docker://pandoc/latex:2.10
         with:
-          args: --pdf-engine=xelatex --output=output/${{env.FILE_NAME}}.pdf docs/README.md
+          args: --pdf-engine=xelatex --output=output/${{env.FILE_NAME}}.pdf docs/DotNetFundamental.md
+
+      - name: Create C# PDF
+        uses: docker://pandoc/latex:2.10
+        with:
+          args: --pdf-engine=xelatex --output=output/${{env.FILE_NAME}}.pdf docs/CsharpOops.md
+
+      - name: Create Angular PDF
+        uses: docker://pandoc/latex:2.10
+        with:
+          args: --pdf-engine=xelatex --output=output/${{env.FILE_NAME}}.pdf docs/Angular.md
 
       - name: Upload
         uses: actions/upload-artifact@main
