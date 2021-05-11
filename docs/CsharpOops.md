@@ -459,15 +459,9 @@ int[] val2 = {1,2,3};
 
 23. ### Difference between Class and Struct 
 
-24. ### Interface and difference between explicit and implicit
-
 25. ### Difference between abstract and interface
 
 26. ### Multple class in inheritence
-
-27. ### Delegates and it's usage
-
-28. ### Multicast delegates
 
 29. ### Difference between Types and Type members
 
@@ -483,98 +477,3 @@ int[] val2 = {1,2,3};
 
 35. ### Lambda expression
 
-
-
-37. ### What are threads(multithreading)
-
-If we want to run code parallely then we use threads.
-
-```c#
-Thread t1 = new Thread(Method1);
-t1.Start();
-
-Thread t2 = new Thread(Method2);
-t2.Start();
-```
-
-38. ### How are threads different from TPL?  
-
-```c#
-Task t1 = new Task(Method1);
-t1.Start();
-
-Task t2 = new Task(Method2);
-t2.Start();
-```
-
-39. ### Difference between Task and Thread
-
-Importance of task
-* parallel processing
-* return, result, cancel, Async, Await
-
-40. ### How do you handle exceptions in c#?
-
-```c#
-try{
-    int z =1/0;
-} catch(Exception ex){
-    Console.WriteLine("Exception");
-}
-finally
-{
-    Console.WriteLine("Clean up code");
-}
-```
-
-50. ### What is finally
-
-It executed, if code throw exception or not
-
-51. ### What out keyword
-
-If we want multiple return values from funtion 
-
-```c#
-Main(){
-    Calculate(10,5, out add, out sub);
-}
-
-Calculate(int n1, int n2, out int add, out int sub){
-    add = n1 + n2;
-    sub = n1 - n2;
-}
-```
-
-36. ### Difference between ref and out?
-
-* In ref we have to initialize the value before passing
-* In out we have to modify inside the function
-
-ref
-```c#
-static void methodFunction(ref int i)
-{
-    i = i + 44;
-}
-main()
-{ 
-    int val = 10; // have to initial the value
-    methodFunction(ref val);
-    Console.WriteLine(val);
-}
-```
-
-out 
-```c#
-static void methodFunction(out int i)
-{
-    i = 44;
-}
-main()
-{ 
-    int val;
-    methodFunction(out val);
-    Console.WriteLine(val);
-}
-```
