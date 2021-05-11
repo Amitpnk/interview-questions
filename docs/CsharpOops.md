@@ -81,8 +81,6 @@ class Program
 }
 ```
 
-**[⬆ Back to Top](#table-of-contents)**
-
 2. ### What is jagged array?
 
 A jagged array is an array of arrays.
@@ -126,8 +124,6 @@ class Program
     }
 }
 ```
-
-**[⬆ Back to Top](#table-of-contents)**
 
 3. ### Why use abstract class
 
@@ -451,7 +447,7 @@ int[] val2 = {1,2,3};
 * Abstraction
 * Polymorphism
 
-20. ### Inheritence
+
 
 21. ### Method hiding
 
@@ -477,3 +473,78 @@ int[] val2 = {1,2,3};
 
 35. ### Lambda expression
 
+### Difference between Abstraction and Encapsulation
+
+Abstraction - Show only whats necessary (Design phase)
+Encapsulation - Hide complexity (Execution phase)
+
+Encapsulation implements Abstraction
+
+```c#
+public class Employee
+{
+    public string Name {get; set;}
+    public string Address {get; set;}
+    public void Validate()
+    {
+        CheckName();
+        CheckAddress();
+    }
+
+    // Implement encapsulation
+    private void CheckName()
+    {
+
+    }
+    
+    private void CheckAddress()
+    {
+        
+    }
+}
+```
+
+### Inheritence
+
+Defines parent child relationship
+
+### virtual keyword and overriding
+
+Virtual keyword helps us to define some logic in parent class which can be overridden in the child class
+
+```c#
+class baseClass 
+{
+    public virtual void show()
+    {
+        Console.WriteLine("Base class");
+    }
+}
+ 
+class derived : baseClass
+{
+    public override void show()
+    {
+        Console.WriteLine("Derived class");
+    }
+}
+ 
+class Program {
+    public static void Main()
+    {
+        baseClass obj;
+ 
+        obj = new baseClass();
+        obj.show();
+
+        obj = new derived();
+        obj.show();
+    }
+}
+```
+
+output
+```ps1
+Base class
+Derived class
+```

@@ -43,7 +43,7 @@ namespace ConsoleApp
 
         static void methodFunction(out int i)
         {
-            i = i + 44;
+            i = 44;
         }
     }
 }
