@@ -26,13 +26,24 @@ namespace ConsoleApp
             //Console.WriteLine(availableTickets);
 
 
-            string strNumber = "100GB";
+            //string strNumber = "100GB";
 
-            int Result;
+            //int Result;
 
-            int.TryParse(strNumber,out Result);
+            //int.TryParse(strNumber, out Result);
 
-            Console.WriteLine(Result);
+            //Console.WriteLine(Result);
+
+
+            int val = 10; // have to initial the value
+            methodFunction(out val);
+            Console.WriteLine(val);
+
+        }
+
+        static void methodFunction(out int i)
+        {
+            i = i + 44;
         }
     }
 }
