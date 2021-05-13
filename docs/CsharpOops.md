@@ -548,3 +548,5 @@ output
 Base class
 Derived class
 ```
+
+### throw and throw ex
