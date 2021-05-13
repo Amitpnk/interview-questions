@@ -344,6 +344,15 @@ If we want to project specific content to specific slot
 
 28. ### Explain events and sequence of component life cycle?
 
+3 most commonly used hooks
+
+|Life cycle hook|Purpose|
+|---|---|
+|ngOnChanges| Executes, everytiem value of input property changes. The hook method recevies a SimpleChanges object containing current and previous property values.|
+|ngOnInit| Executes after constructor and aftre ngOnChange hook for first time. It is most commonly used for component initialisatino and retreivingg data from database|
+|ngOnDestroy|Generally used for performing cleanup|
+
+
 ![AngularLifeCycle.png](./img/AngularLifeCycle.png)
 
 

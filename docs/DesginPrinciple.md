@@ -16,9 +16,7 @@
 |	9	|	[What is KISS](#what-is-kiss)	|
 |	10	|	[What is DRY](#what-is-dry)	|
 
-
-
-1. ### What is Design principle?
+## What is Design principle?
 
 * Design principle enable us manage most of software design problems
 * SOLID Principles are subset of many principles promoted by Uncle Bob (Robert C Martin)
@@ -29,14 +27,14 @@ Different types of design principle
 * KISS
 * DRY
 
-2. ### What if we don't follow SOLID principles
+## What if we don't follow SOLID principles
  
 * End up with tight coupling of code
 * End up with duplication of code
 * End up creating new bugs by fixing another bug
 * End up with code which is not testable
 
-3. ### Single Responsibility Principle
+## Single Responsibility Principle
 
 SRP says that class should have only one responsiblity and not mulitple
 
@@ -66,7 +64,80 @@ public class FileLogger
 }
 ```
 
-4. ### Interface Segregation Principle
+## Open closed principle
+
+Open for Extension Closed for Modification
+
+```c#
+public class Checkout
+{
+    public virtual double CalculateShippingCost(double orderAmount)
+    {
+        return orderAmount;
+    }
+}
+
+class Flipkart : Checkout
+{
+    public override double CalculateShippingCost(double orderAmount)
+    {
+        return orderAmount + (orderAmount * 0.10);
+    }
+}
+
+class Amazon : Checkout
+{
+    public override double CalculateShippingCost(double orderAmount)
+    {
+        return orderAmount + (orderAmount * 0.05);
+    }
+}
+```
+
+## Liskov substitution principle
+
+Parent class should be able to refer child objects seamlessly during runtime polymorphism
+
+```c#
+interface IPaymentTransaction  
+{  
+    void ProcessTransaction();  
+}  
+  
+interface IPaymentCheckBalance  
+{  
+    void CheckBalance();  
+    void DeductAmount();  
+}  
+  
+class Paypal : IPaymentTransaction, IPaymentCheckBalance  
+{  
+    public void CheckBalance()  
+    {  
+        Console.WriteLine("CheckBalance Method Called");  
+    }  
+  
+    public void DeductAmount()  
+    {  
+        Console.WriteLine("DeductAmount Method Called");  
+    }  
+  
+    public   void ProcessTransaction()  
+    {  
+        Console.WriteLine("ProcessTransaction Method Called");  
+    }  
+}  
+  
+class COD : IPaymentTransaction  
+{  
+    public   void ProcessTransaction()  
+    {  
+        Console.WriteLine("ProcessTransaction Method Called");  
+    }  
+} 
+```
+
+## Interface Segregation Principle
 
 * Show only those methods to client which they need
 * ISP was first used and formulated by Robert C Martin while consulting for xerox
@@ -118,54 +189,63 @@ public class HPPrint : IPrintContent, IFaxContent, IPhotoCopyContent
 }
 ```
 
-5. ### Open closed principle
-
-Open for Extension Closed for Modification
-
-```c#
-public class Checkout
-{
-    public virtual double CalculateShippingCost(double orderAmount)
-    {
-        return orderAmount;
-    }
-}
-
-class Flipkart : Checkout
-{
-    public override double CalculateShippingCost(double orderAmount)
-    {
-        return orderAmount + (orderAmount * 0.10);
-    }
-}
-
-class Amazon : Checkout
-{
-    public override double CalculateShippingCost(double orderAmount)
-    {
-        return orderAmount + (orderAmount * 0.05);
-    }
-}
-```
-
-6. ### Liskov substitution principle
-
-Parent class should be able to refer child objects seamlessly during runtime polymorphism
-
-7. ### Dependency inversion principle
+## Dependency inversion principle
 
 High level modules should not depend on low-level modules, but should depend on abstraction
 
-8. ### What is YAGNI 
+```c#
+public class Customer  
+{  
+    private IErrorHandling _errorHandling;  
+    public Customer(IErrorHandling errorHandling)  
+    {  
+        _errorHandling = errorHandling;  
+    }  
+    public void Add()  
+    {  
+        try  
+        {  
+            // TODO: Calling Add method DAL
+        }  
+        catch (Exception ex)  
+        {  
+            _errorHandling.Handle(ex.Message);  
+        }  
+    }  
+}  
+
+public interface IErrorHandling  
+{  
+    void Handle(string error);  
+}  
+public class FileLogger : IErrorHandling  
+{  
+    public void Handle(string error)  
+    {  
+        Console.WriteLine("file log");  
+    }  
+}  
+
+public class EmailLogger : IErrorHandling  
+{  
+    public void Handle(string error)  
+    {  
+        Console.WriteLine("inserting to db");  
+    }  
+}  
+
+```
+
+## What is YAGNI 
 
 You are not going to need it
 
 YAGNI says- do not add any functionality until it's deemed necessary; in other words,  write the code which you need in the current situation
 
-9. ### What is KISS 
+## What is KISS 
 
 Keep it simple 
 
-10. ### What is DRY
+## What is DRY
 
 Do not Repeat Yourself
