@@ -45,10 +45,10 @@ It mostly works with HTTP and RPC (Remote procedure call). It works with XML for
 
 ## What is difference between POST and put
 
-Idempotent - If we run multiple times and still value is same
-Or if request and response are same
-Non-idempotent - If we run multiple times and value is changes
-Or if request and response are not same
+Idempotent - If we run multiple times and still value is same <br>
+Or if request and response are same <br>
+Non-idempotent - If we run multiple times and value is changes<br> 
+Or if request and response are not same<br>
 
 ||Create|Update||
 |---|---|---|---|
@@ -57,8 +57,31 @@ Or if request and response are not same
 
 ## What is difference between PUT and PATCH
 
-Response type for PDF file
+||PUT|PATCH|
+|---|---|---|
+|Update| Full update | customized update |
 
-Ihttpresponse and httpresponse
+*Request for put* <br>
+http://localhost/Product/1001<br>
+*Response*
+```JSON
+{
+    "Name": "Amit",
+    "Amount": 10000
+}
+```
 
-API to API authentications
+*Request for patch* <br>
+http://localhost/Product/1001 <br>
+*Response*
+```JSON
+{
+    "Name": "Amit",
+}
+```
+
+## Response type for PDF file
+
+## Ihttpresponse and httpresponse
+
+## API to API authentications
