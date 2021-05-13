@@ -1,12 +1,5 @@
 # API 
 
-## Table of Contents
-
-| No. | Questions |
-| --- | --------- |
-||**Web API**|
-|1|[What is Web API](#what-is-web-api)|
-
 ## What is Web API
 
 API -> Application Programming Interface<br>
@@ -81,7 +74,19 @@ http://localhost/Product/1001 <br>
 ```
 
 ## Response type for PDF file
-
+Why should I use IHttpActionResult instead of HttpResponseMessage?
 ## Ihttpresponse and httpresponse
 
+What exactly is OAuth (Open Authorization)?  
+
 ## API to API authentications
+
+Why are the FromBody and FromUri attributes needed in ASP.NET Web API?  
+
+Explain briefly CORS (Cross-Origin Resource Sharing)? 
+
+ What's the difference between OpenID and OAuth?
+
+  What is ASP.NET Web API OData?  
+
+  Explain briefly OWIN (Open Web Interface for .NET) Self Hosting?  
