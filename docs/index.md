@@ -1,19 +1,20 @@
 # Table of Contents
 
-| No. | Topics                                   |
-| --- | ---------------------------------------- |
-| 1   | [C# and .Net Framework](./CsharpOops.md) |
-| 2   | [.NET Core](./DotnetCore.md)             |
-| 3   | [Design principle](./DesginPrinciple.md) |
-| 4   | [SQL Server](./SQLServer.md)             |
-| 5   | [Angular](./Angular.md)                  |
-| 6   | [Design Pattern](./DesignPattern.md)     |
-| 7   | [Web API](./API.md)                      |
-| 8   | [Simple program](./SimpleProgram.md)     |
-
 <table>
   <tr>
-    <td align="center"><a href="#/CsharpOops"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/c-sharp.png?s=100" width="100px;" alt=""/><br /><sub><b>C#</b></sub></a>  </td>
-    <td align="center"><a href="CsharpOops.md"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/solid.png?s=100" width="100px;" alt=""/><br /><sub><b>Design principle</b></sub></a>  </td>
+    <td align="center"><a href="#/CsharpOops"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/c-sharp.png?s=100" width="100px;" alt=""/><br /><sub><b>C# and .Net Framework</b></sub></a>  </td>
+    <td align="center"><a href="#/DotNetFundamental"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/dotnet.png?s=100" width="100px;" alt=""/><br /><sub><b>Design principle</b></sub></a>  </td>
+      <td align="center"><a href="#/DotnetCore"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/dotnetcore.png?s=100" width="100px;" alt=""/><br /><sub><b>Design principle</b></sub></a>  </td>
+  </tr>
+    <tr>
+    <td align="center"><a href="#/API"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/api.png?s=100" width="100px;" alt=""/><br /><sub><b>C# and .Net Framework</b></sub></a>  </td>
+    <td align="center"><a href="#/DesginPrinciple"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/solid.png?s=100" width="100px;" alt=""/><br /><sub><b>Design principle</b></sub></a>  </td>
+      <td align="center"><a href="#/SQLServer"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/sql.jpg?s=100" width="100px;" alt=""/><br /><sub><b>Design principle</b></sub></a>  </td>
+  </tr>
+
+   <tr>
+    <td align="center"><a href="#/Angular"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/angular.png?s=100" width="100px;" alt=""/><br /><sub><b>C# and .Net Framework</b></sub></a>  </td>
+    <td align="center"><a href="#/DesignPattern"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/solid.png?s=100" width="100px;" alt=""/><br /><sub><b>Design principle</b></sub></a>  </td>
+      <td align="center"><a href="#/SimpleProgram"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/algo.jpg?s=100" width="100px;" alt=""/><br /><sub><b>Design principle</b></sub></a>  </td>
   </tr>
 </table>
