@@ -13,7 +13,7 @@
 
 <table>
   <tr>
-    <td align="center"><a href="./CsharpOops"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/c-sharp.png?s=100" width="100px;" alt=""/><br /><sub><b>C#</b></sub></a>  </td>
+    <td align="center"><a href="#/CsharpOops"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/c-sharp.png?s=100" width="100px;" alt=""/><br /><sub><b>C#</b></sub></a>  </td>
     <td align="center"><a href="CsharpOops.md"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/solid.png?s=100" width="100px;" alt=""/><br /><sub><b>Design principle</b></sub></a>  </td>
   </tr>
 </table>

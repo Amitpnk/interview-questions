@@ -1,4 +1,4 @@
-* [Home](/) 
+* [Home](/?id=table-of-contents) 
 * [C# and .Net Framework](./CsharpOops) 
 * [.Net Fundamental](./DotNetFundamental) 
 * [.NET Core](./DotnetCore) 
