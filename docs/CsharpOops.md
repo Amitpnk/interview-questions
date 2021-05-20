@@ -549,3 +549,51 @@ Throw ex resets error stack trace from where original error originated
 
 If we having library which is published in nuget, which we don't want to expose complete stack trace then Throw ex is used
 
+```c#
+static void Main(string[] args) {
+    try {
+        ThrowException1(); // line 19
+    } catch (Exception x) {
+        Console.WriteLine("Exception 1:");
+        Console.WriteLine(x.StackTrace);
+    }
+    try {
+        ThrowException2(); // line 25
+    } catch (Exception x) {
+        Console.WriteLine("Exception 2:");
+        Console.WriteLine(x.StackTrace);
+    }
+}
+
+private static void ThrowException1() {
+    try {
+        DivByZero(); // line 34
+    } catch {
+        throw; // line 36
+    }
+}
+private static void ThrowException2() {
+    try {
+        DivByZero(); // line 41
+    } catch (Exception ex) {
+        throw ex; // line 43
+    }
+}
+
+private static void DivByZero() {
+    int x = 0;
+    int y = 1 / x; // line 49
+}
+
+```
+Output
+```ps1
+Exception 1:
+   at UnitTester.Program.DivByZero() in <snip>\Dev\UnitTester\Program.cs:line 49
+   at UnitTester.Program.ThrowException1() in <snip>\Dev\UnitTester\Program.cs:line 36
+   at UnitTester.Program.TestExceptions() in <snip>\Dev\UnitTester\Program.cs:line 19
+
+Exception 2:
+   at UnitTester.Program.ThrowException2() in <snip>\Dev\UnitTester\Program.cs:line 43
+   at UnitTester.Program.TestExceptions() in <snip>\Dev\UnitTester\Program.cs:line 25
+```
