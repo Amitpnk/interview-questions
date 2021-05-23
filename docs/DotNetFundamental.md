@@ -292,3 +292,51 @@ void button_click()
 * Delegates are for callbacks, not encapsulated
 * Events are publisher subscriber model, encapsulated
 
+## use of “using” keyword
+
+* Using directives
+
+```c#
+using System;
+using System.IO
+using Namespace = Application.Services;
+```
+
+These are used to import namespaces (or create aliases for namespaces or types). These go at the top of the file, before any declarations
+
+* Using statements
+
+```c#
+using (Stream input = File.OpenRead(filename))
+{
+    ...
+}
+```
+
+This can only be used with types that implement IDisposable, and is syntactic sugar for a try/finally block which calls Dispose in the finally block
+
+## Equivalent code of using statement
+
+```c#
+using(MyType obj = new MyType())
+{
+  //... do stuff.
+}
+```
+
+Is equivalent to:
+
+```c#
+MyType obj = new MyType();
+try
+{
+  //.... do stuff
+}
+finally
+{
+  if(obj != null)
+  {
+      obj.Dispose();
+  }
+}
+```

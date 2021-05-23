@@ -586,6 +586,7 @@ private static void DivByZero() {
 }
 
 ```
+
 Output
 ```ps1
 Exception 1:
@@ -596,4 +597,47 @@ Exception 1:
 Exception 2:
    at UnitTester.Program.ThrowException2() in <snip>\Dev\UnitTester\Program.cs:line 43
    at UnitTester.Program.TestExceptions() in <snip>\Dev\UnitTester\Program.cs:line 25
+```
+
+## Why do we need private constructor?
+
+* To restrict a class being inherited.
+* Restrict a class being instantiate or creating multiple instance/object.
+* To achieve the singleton design pattern.
+
+```c#
+public class TestPrivateConstructor
+{
+    private TestPrivateConstructor()
+    {  }
+
+    public static int sum(int a , int b)
+    {
+        return a + b;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // calling the private constructor using class name directly 
+        int result = TestPrivateConstructor.sum(10, 15);
+        
+        // TestPrivateConstructor objClass = new TestPrivateConstructor(); 
+        // Will throw the error. We can't create object of this class
+    }
+}
+```
+
+## Sealed Class
+
+Sealed classes are used to restrict the users from inheriting the class
+
+```c#
+sealed class class_name
+{
+    // data members
+    // methods
+}
 ```
