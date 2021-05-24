@@ -355,7 +355,7 @@ Both are used for cleaning Unmanaged resources.
 ||Finalize|Dispose|
 |---|---|---|
 |Syntax| Created using class destructor | created Dispose() method |
-|Called| called non-determinitic way (automaticaly) |Need to explicitly call to release resources|
+|Execution| called non-determinitic way (automaticaly) |Need to explicitly call to release resources|
 
 
 <b>Finalize</b>
