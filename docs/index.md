@@ -2,7 +2,7 @@
 
 | No. | Topics |
 | --- | --------- |
-|1  | [C# and .Net Framework](./CsharpOops.md)  |
+|1  | [C# and Oops concept](./CsharpOops.md)  |
 |2  | [.NET Fundamental](DotNetFundamental.md)|
 |3  | [.NET Core](./DotnetCore.md) |
 |4  | [Design principle](./DesginPrinciple.md) |
@@ -15,7 +15,7 @@
 
 <table>
   <tr>
-    <td align="center"><a href="#/CsharpOops"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/c-sharp.png?s=100" width="100px;" alt=""/><br /><sub><b>C# and .Net Framework</b></sub></a>  </td>
+    <td align="center"><a href="#/CsharpOops"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/c-sharp.png?s=100" width="100px;" alt=""/><br /><sub><b>C# and Oops concept</b></sub></a>  </td>
     <td align="center"><a href="#/DotNetFundamental"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/dotnet.png?s=100" width="100px;" alt=""/><br /><sub><b>Dot net fundamental</b></sub></a>  </td>
       <td align="center"><a href="#/DotnetCore"><img src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/logo/dotnetcore.png?s=100" width="100px;" alt=""/><br /><sub><b>Dot net core</b></sub></a>  </td>
   </tr>

@@ -267,6 +267,7 @@ class Example
     }
 }
 ```
+
 ## Anonymous method
 
 * If we want to use the delegate only inside the same function
@@ -291,6 +292,12 @@ void button_click()
 * Events uses delegates
 * Delegates are for callbacks, not encapsulated
 * Events are publisher subscriber model, encapsulated
+
+## Dispose object 
+
+Dispose unmanaged resources as soon as you are done wusing them
+1. Calling Dispose method
+2. Creating a Using block {}
 
 ## use of “using” keyword
 
@@ -340,3 +347,64 @@ finally
   }
 }
 ```
+
+## Difference between Finalize and Dispose in C#
+
+Both are used for cleaning Unmanaged resources.
+
+||Finalize|Dispose|
+|---|---|---|
+|Syntax| Created using class destructor | created Dispose() method |
+|Called| called non-determinitic way (automaticaly) |Need to explicitly call to release resources|
+
+
+<b>Finalize</b>
+
+Finalize is called by the Garbage Collector (GC). 
+
+```c#
+using System;
+namespace DemoApplication{
+   public class Demo{
+      ~Demo(){
+         Console.WriteLine("Finalize called");
+      }
+   }
+}
+```
+
+<b>Dispose</b>
+
+some resources like windows handles, database connections, network connections, files, etc. which cannot be collected by the Garbage Collector. If we want to explicitly release some specific objects then this is the best to implement IDisposable and override the Dispose() method of IDisposable interface
+
+```c#
+using System;
+namespace DemoApplication{
+   public class Demo : IDisposable{
+      private bool disposed = false;
+      public void Dispose(){
+         Dispose(true);
+         GC.SuppressFinalize(this);
+      }
+      protected virtual void Dispose(bool disposing){
+         if (!disposed){
+            if (disposing){
+               //clean up managed objects
+            }
+            //clean up unmanaged objects
+            disposed = true;
+         }
+      }
+   }
+}
+
+```
+ 
+## Can we call Garbage collector explicitly
+
+Yes, but it not recommended
+
+```c#
+GC.Collect(0);
+```
+

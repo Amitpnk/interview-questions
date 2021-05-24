@@ -1,4 +1,4 @@
-# C# and .Net Framework
+# C# and Oops concept
 
 ## Can you store different types in an array in c#?
 
