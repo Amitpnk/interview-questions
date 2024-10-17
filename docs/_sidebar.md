@@ -8,3 +8,5 @@
 * [Angular](./Angular) 
 * [Design Pattern](./DesignPattern) 
 * [Simple Program](./SimpleProgram) 
+* [Software Architect](./SoftwareArchitect) 
+* [Architecture Pattern](./ArchitecturePattern) 
