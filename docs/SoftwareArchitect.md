@@ -5,7 +5,10 @@
 | --- | --------- |
 ||**Software Architect**|
 |1   |	[Can you walk us through a recent project where you played the role of an architect? What challenges did you face, and how did you overcome them?](#Can-you-walk-us-through-a-recent-project-where-you-played-the-role-of-an-architect?-What-challenges-did-you-face,-and-how-did-you-overcome-them?)	|
-
+|2   |	[Can you talk about a challenging situation you faced at work and how you overcame it?](#can-you-talk-about-a-challenging-situation-you-faced-at-work-and-how-you-overcame-it)	|
+|3   |	[In your experience, how do you approach client interactions during the software development cycle?](#in-your-experience-how-do-you-approach-client-interactions-during-the-software-development-cycle)	|
+|4   |	[Can you discuss some challenges you faced when transitioning from traditional monolithic architectures to microservices?](#can-you-discuss-some-challenges-you-faced-when-transitioning-from-traditional-monolithic-architectures-to-microservices)	|
+|5   |	[How do you manage technical debt while architecting new solutions?](#how-do-you-manage-technical-debt-while-architecting-new-solutions) |
 
 
 1. ### Can you walk us through a recent project where you played the role of an architect? What challenges did you face, and how did you overcome them?
@@ -73,7 +76,7 @@ In my experience, effective client interactions are key to the success of any so
 
 Here’s how I approach client interactions:
 
-1. Initial Requirement Gathering & Analysis
+ 1. Initial Requirement Gathering & Analysis
 Understand the business needs: During the initial discussions, I focus on understanding the client’s business objectives, pain points, and high-level requirements. This helps me align the technical solution with their goals.
 Ask clarifying questions: I ask detailed questions to uncover implicit requirements or constraints that might not be evident at first. This helps prevent misunderstandings later in the project.
 Document requirements clearly: I ensure that all requirements are well-documented in a clear and structured way (using user stories or functional specifications) and validate them with the client for alignment. This often involves creating wireframes or prototypes early on to give the client a tangible feel for what the solution might look like.
@@ -95,6 +98,8 @@ Gather feedback for improvement: Post-launch, I seek feedback to ensure the syst
 6. Long-Term Relationship & Iterative Improvements
 Build trust through transparency: Throughout the project, I maintain a transparent and collaborative approach, which helps build a lasting relationship with the client. They are kept informed of risks, progress, and challenges, which builds trust and helps avoid surprises.
 Continual improvement: After the initial release, I often work with clients on iterative improvements, offering advice on how they can evolve the system as their business grows.
+
+<br/>
 
 4. ### Can you discuss some challenges you faced when transitioning from traditional monolithic architectures to microservices?
 
