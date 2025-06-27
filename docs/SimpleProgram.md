@@ -253,6 +253,14 @@ public static string Convert(int i)
 }  
 ```
 
+## simple
+input - [1,2,3,4,5]
+output - [120,60,40,30,24]
+2*3*4*5 =120
+1*3*4*5 =60
+1*2*4*5 =40
+
+
 ## Bubble Sort Algorithm In C#
 
 ## Quick Sort Algorithm In C#
@@ -262,3 +270,5 @@ public static string Convert(int i)
 ## Insertion Sort Algorithm In C#
 
 ## Binary Search In C#
+
+## 
