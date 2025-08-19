@@ -1,27 +1,21 @@
-# C# and Oops concept
+# C# and OOP Concepts – Interview Questions
 
-## Can you store different types in an array in c#?
+## Can you store different types in an array in C#?
 
-Yes, we care create by using an object array and ArrayList
+Yes. This can be achieved using **object arrays** or **ArrayList**.
 
-Example 1:
+### Example 1 – Using `object[]`
 
-```c#
+```csharp
 class Program
 {
     static void Main()
     {
         object[] objectArray = new object[3];
-        objectArray[0] = 101; // integer
-        objectArray[1] = "C#"; // string
+        objectArray[0] = 101;          // int
+        objectArray[1] = "C#";         // string
+        objectArray[2] = new Customer { ID = 99, Name = "Pragim" }; // custom type
 
-        Customer c = new Customer();
-        c.ID = 99;
-        c.Name = "Pragim";
-
-        objectArray[2] = c; // Customer - Complext Type 
-
-        // loop thru the array and retrieve the items
         foreach (object obj in objectArray)
         {
             Console.WriteLine(obj);
@@ -34,610 +28,200 @@ class Customer
     public int ID { get; set; }
     public string Name { get; set; }
 
-    public override string ToString()
-    {
-        return this.Name;
-    }
+    public override string ToString() => this.Name;
 }
 ```
 
-Example 2:
+### Example 2 – Using `ArrayList`
 
-```c#
-class Program
+```csharp
+System.Collections.ArrayList arrayList = new System.Collections.ArrayList();
+arrayList.Add(101);
+arrayList.Add("C#");
+arrayList.Add(new Customer { ID = 99, Name = "Pragim" });
+
+foreach (object obj in arrayList)
 {
-    static void Main()
-    {
-        System.Collections.ArrayList arrayList = new System.Collections.ArrayList();
-        arrayList.Add(101); // integer
-        arrayList.Add("C#"); // integer
-
-        Customer c = new Customer();
-        c.ID = 99;
-        c.Name = "Pragim";
-
-        arrayList.Add(c); // Customer - Complext Type 
-
-        // loop thru the array and retrieve the items
-        foreach (object obj in arrayList)
-        {
-            Console.WriteLine(obj);
-        }
-    }
+    Console.WriteLine(obj);
 }
 ```
 
-## What is jagged array?
+**Note:** Best practice is to prefer **generics** (`List<T>`) over `ArrayList`.
 
-A jagged array is an array of arrays.
+---
 
-```c#
-class Program
-{
-    static void Main()
-    {
-        string[] employeeNames = new string[3];
-        employeeNames[0] = "Mark";
-        employeeNames[1] = "Matt";
-        employeeNames[2] = "John";
+## What is a jagged array?
 
-        string[][] jaggedArray = new string[3][];
-        
-        jaggedArray[0] = new string[3];
-        jaggedArray[1] = new string[1];
-        jaggedArray[2] = new string[2];
-        
-        jaggedArray[0][0] = "Bachelor";
-        jaggedArray[0][1] = "Master";
-        jaggedArray[0][2] = "Doctorate";
+A **jagged array** is an array of arrays where inner arrays can have different lengths.
 
-        jaggedArray[1][0] = "Bachelor";
-
-        jaggedArray[2][0] = "Bachelor";
-        jaggedArray[2][0] = "Master";
-
-        for(int i=0; i< jaggedArray.Length; i++)
-        {
-            Console.WriteLine(employeeNames[i]);
-            Console.WriteLine("------------");
-
-            string[] innerArray = jaggedArray[i];
-            for(int j=0; j< innerArray.Length; j++))
-            {
-                Console.WriteLine(innerArray[j]);
-            }
-        }
-    }
-}
+```csharp
+string[][] jaggedArray = new string[3][];
+jaggedArray[0] = new string[] { "Bachelor", "Master", "Doctorate" };
+jaggedArray[1] = new string[] { "Bachelor" };
+jaggedArray[2] = new string[] { "Bachelor", "Master" };
 ```
 
-## Why use abstract class
+---
 
-When we want to move common functionality of 2 or more related classes into a base class and when we don't want base class to be instantiated
+## Why use an abstract class?
 
-```c#
-static void Main(string[] args)
-{
+* Move common functionality of related classes into a base class.
+* Prevent base class instantiation.
+* Support **code reusability** and **polymorphism**.
 
-    FullTimeEmployee fullTimeEmployee = new FullTimeEmployee()
-    {
-        Id = 101,
-        FirstName = "Mark",
-        LastName = "May",
-        AnnualSalary = 3500000
-    };
+---
 
-    Console.WriteLine(fullTimeEmployee.GetFullName());
-    Console.WriteLine(fullTimeEmployee.GetMonthlySalary());
+## What is the advantage of using interfaces?
 
-    Console.WriteLine("Hello World!");
+* Enables decoupled system design.
+* Supports **Dependency Injection**.
+* Facilitates **unit testing and mocking**.
 
-    ContractEmployee contractEmployee = new ContractEmployee()
-    {
-        Id = 101,
-        FirstName = "Mark",
-        LastName = "May",
-        HourlyPay = 40000,
-        TotalHours = 40
-    };
+---
 
-    contractEmployee.GetFullName();
-    contractEmployee.GetMonthlySalary();
-}
+## What is a recursive function?
 
-public abstract class BaseEmployee
-{
-    public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+A recursive function is one that calls itself.
 
-    public string GetFullName()
-    {
-        return FirstName + " " + LastName;
-    }
-}
+Example: Factorial
 
-public class FullTimeEmployee : BaseEmployee
-{
-    public int AnnualSalary { get; set; }
-
-    public int GetMonthlySalary()
-    {
-        return AnnualSalary / 12;
-    }
-}
-
-public class ContractEmployee : BaseEmployee
-{
-    public int HourlyPay { get; set; }
-    public int TotalHours { get; set; }
-
-    public int GetMonthlySalary()
-    {
-        return TotalHours * HourlyPay;
-    }
-}
-```
-
-## What is advantage of using interfaces?
-
-* Interfaces allow us to develop decoupled system
-* Interfaces are very useful for Dependency Injection
-* Interfaces make unit testing and mocking easy
-
-## What is recursive function
-
-A recursive function is a function that calls itself
-
-Example
-* used in finding factorial 
-* find file inside filedirectory
-
-Code snippet for Factorial:
-```
-4! = 4 * 3 * 2 * 1 = 24
-4! = 4 * (4-1) * (4-2) * (4-3) = 24
-```
-
-```c#
-static void Main()
-{
-    double facotrial = Facotrial(number);
-    Console.WriteLine(facotrial);
-}
-
+```csharp
 public static double Factorial(int number)
 {
-    if (number==0)
-    {
-        return 1;
-    }
-
+    if (number == 0) return 1;
     return number * Factorial(number - 1);
 }
 ```
 
-## Storing different list types in a single generic list?
-
-Yes, by creating list of list of objects
-
-```c#
-    List<List<object>> lists = new List<List<object>>();
-
-    List<object> list1 = new List<object>();
-    list1.Add(101);
-    list1.Add(102);
-    list1.Add(103);
-
-    lists.Add(list1);
-
-    List<object> list2 = new List<object>();
-    list2.Add("Test1");
-    list2.Add("Test2");
-    list2.Add("Test3");
-
-    lists.Add(list2);
-
-    foreach (var item in lists)
-    {
-        foreach (var obj in item)
-        {
-            Console.WriteLine(obj);
-        }
-    }
-
-```
+---
 
 ## Can an abstract class have a constructor?
 
-Yes, an abstract class can have constructor. If you want to initialise certain fields of abstract class before the instantiation of child-class takes place.
+Yes. It is used to initialize base class members before child instantiation.
+Best practice: mark it as `protected`.
 
-### You cannot create an instance of an abstract class. So, what is use of constructor in an abstract class?
-
-though we cannot create an instance of an abstract class, we can create instances of derived class. hence parent abstract class constructor is automatically called.
-
-Note: Abstract classes can't be directly instantiated. The abstract class constructor gets executed thourgh derived class. So, it is good practice to use protected access modifier with abstract class constructor. using public doesn't make sense
+---
 
 ## Can you call an abstract method from an abstract class constructor?
 
-yes
+Yes. The derived class implementation is executed automatically upon instantiation.
 
-### An abstract method in an abstract class does not have any implemention, so what is the use of calling it from abstract class constructor?
+---
 
-If you want abstract method to be invoked automatically whenevver an instance of derived class of abstract class is created
+## What happens if `finally` block throws an exception?
 
-## What happens if finally block throws an exception
+* The exception propagates up the call stack.
+* Best handled in a **global exception handler**.
 
-### How to handle exceptions that occur in finally block?
+---
 
-* Should be handled at higher level (Global level)
-* Finally block execution stops at point where exception is thrown
+## Difference between `is` and `as` in C\#
 
-## Difference between is and as in C#
+* `is` → checks compatibility, returns `true`/`false`.
+* `as` → performs safe casting, returns `null` if cast fails.
 
-TODO
+```csharp
+object obj = "Hello";
+if (obj is string) Console.WriteLine("It's a string");
 
-## Can we use private class
-
-NO. Nothing unless its in a nested Class
-
-```c#
-public class Class1
-{
-    temp _temp ;
-    public Class1()
-    {
-        _temp = new temp();   
-    }    
-
-    private class temp
-    {
-        string str;
-        public string GetStr()
-        {
-        return str;
-        }
-
-    }
-}
+string s = obj as string;
+Console.WriteLine(s ?? "Not a string");
 ```
 
-## Difference between string and String in C#
+---
 
-## Difference between int and Int32 in C#
+## Difference between `string` and `String` in C\#
 
-Int32 and int are same, both of them allow us to create a 32 bit integer. int is alias for Int32
+* Both are the same (`string` is an alias for `System.String`).
+* Convention: use `string` for declarations, `String` for static methods (e.g., `String.IsNullOrEmpty()`).
 
-only difference is for Int32 we need namespace.
+---
 
-```c#
-using System;
+## Difference between `int` and `Int32`
+
+* `int` is an alias for `System.Int32`. There is no difference.
+
+---
+
+## Difference between `throw` and `throw ex`
+
+* `throw` → preserves the original stack trace.
+* `throw ex` → resets the stack trace.
+
+---
+
+## Why use a private constructor?
+
+* To **restrict instantiation** (e.g., Singleton pattern).
+* To prevent inheritance.
+
+---
+
+## Sealed class
+
+Used to restrict further inheritance.
+
+```csharp
+sealed class A { }
 ```
 
-## An abstract class has default implementation for method. The method's default implementation is needed in some class but not in some other class. How can you achieve it?
+---
 
-By achieving virtual method in Abstract class
+# Additional Commonly Asked Questions
 
-```c#
-public abstract class AbstractClass
-{
-    public virtual void AbstractClassMethod()
-    {
-        Console.WriteLine("Default implementation");
-    }
-}
+## Difference between abstract class and interface
 
-public class SomeClass: AbstractClass
-{
+* Abstract class → can have fields, constructors, implemented methods.
+* Interface → only method declarations (until C# 8 default implementations).
+* A class can inherit one abstract class but implement multiple interfaces.
 
-}
+---
 
-public class SomeOtherClass : AbstractClass
-{
-    public override void AbstractClassMethod()
-    {
-        Console.WriteLine("new implementation");
-    }
-}
-```
+## Explain method hiding (`new`) vs overriding (`override`)
 
-## What is access modifier of default constructor in c#
+* **Override** → runtime polymorphism; child replaces parent implementation.
+* **New** → compile-time hiding; parent method still accessible via base reference.
 
-public
+---
 
-```c#
-public class Customer
-{
-   
-}
-```
+## Difference between Encapsulation and Abstraction
 
-## What is nullable type? difference between ? (nullable type) and ?? (Null Coalescing Operator)
+* **Abstraction** → hides implementation details, exposes functionality (design level).
+* **Encapsulation** → bundles data & methods, restricts direct access (implementation level).
 
-nullable type
-By default, all reference types, such as String, are nullable, but all value types, such as Int32, are not.
+---
 
-To make value type as nullable we use this operator
+## Static class vs instance class
 
+* **Static class** → cannot be instantiated, members are static, exists for application lifetime.
+* **Instance class** → requires object creation, each instance has its own copy.
 
-Null Coalescing Operator (??)
+---
 
+## Difference between `ref` and `out` parameters
 
-```c#
-int? ticketOnSale = null;
+* `ref` → must be initialized before passing.
+* `out` → must be assigned inside the method.
 
-int availableTickets;
+---
 
-availableTickets = ticketOnSale ?? 0;
+## Difference between `const`, `readonly`, and `static`
 
-Console.WriteLine(availableTickets);
-```
+* **const** → compile-time constant.
+* **readonly** → runtime constant (can be set in constructor).
+* **static** → shared across all instances.
 
-without Null Coalescing Operator (??)
+---
 
-```c#
-int? ticketOnSale = null;
+## What are `Func`, `Action`, and `Predicate` delegates?
 
-int availableTickets;
+* **Func<T>** → returns a value.
+* **Action<T>** → returns void.
+* **Predicate<T>** → returns a boolean.
 
-if (ticketOnSale == null)
-{
-    availableTickets = 0;
-}
-else
-{
-    availableTickets = ticketOnSale.Value;
-}
+---
 
-Console.WriteLine(availableTickets);
-```
+## Difference between value type and reference type
 
-## Difference between Parse and TryParse
-
-Parse() method throws an exception if it cannot parse value
-TryParse() retruns bool indicating whether it succeeded or failed
-
-```C#
-string strNumber = "100GB";
-
-int Result;
-
-int.TryParse(strNumber,out Result);
-
-Console.WriteLine(Result);
-```
-
-## What is Arrays?
-
-An array is collectioon of similar data types.
-
-Advantages: Arrays are strongly typed
-
-Disadvantages: Array cannot grow in size once initiazed
-
-```c#
-int[] val = new int[3];
-val[0] = 11;
-val[0] = 12;
-
-int[] val2 = {1,2,3};
-
-```
-
-## static class and instance
-
-## What are pillar of OOPS concept
-
-* Inheritance
-* Encapsulation
-* Abstraction
-* Polymorphism
-
-
-
-## Method hiding
-
-## Polymorphism and different types of it
-
-## Difference between Class and Struct 
-
-## Difference between abstract and interface
-
-## Multple class in inheritence
-
-## Difference between Types and Type members
-
-## Protected internal Access modifiers
-
-## Attributes
-
-## Reflection
-
-## Aync and await 
-
-## Func delegates
-
-## Lambda expression
-
-## Difference between Abstraction and Encapsulation
-
-Abstraction - Show only whats necessary (Design phase)
-Encapsulation - Hide complexity (Execution phase)
-
-Encapsulation implements Abstraction
-
-```c#
-public class Employee
-{
-    public string Name {get; set;}
-    public string Address {get; set;}
-    public void Validate()
-    {
-        CheckName();
-        CheckAddress();
-    }
-
-    // Implement encapsulation
-    private void CheckName()
-    {
-
-    }
-    
-    private void CheckAddress()
-    {
-        
-    }
-}
-```
-
-## Inheritence
-
-Defines parent child relationship
-
-## virtual keyword and overriding
-
-Virtual keyword helps us to define some logic in parent class which can be overridden in the child class
-
-```c#
-class baseClass 
-{
-    public virtual void show()
-    {
-        Console.WriteLine("Base class");
-    }
-}
- 
-class derived : baseClass
-{
-    public override void show()
-    {
-        Console.WriteLine("Derived class");
-    }
-}
- 
-class Program {
-    public static void Main()
-    {
-        baseClass obj;
- 
-        obj = new baseClass();
-        obj.show();
-
-        obj = new derived();
-        obj.show();
-    }
-}
-```
-
-output
-```ps1
-Base class
-Derived class
-```
-
-## throw and throw ex
-
-<b>throw</b> 
-
-Throw maintains complete error stack trace from where original error originated 
-
-For our internal application
-
-<b>throw ex</b> 
-
-Throw ex resets error stack trace from where original error originated 
-
-If we having library which is published in nuget, which we don't want to expose complete stack trace then Throw ex is used
-
-```c#
-static void Main(string[] args) {
-    try {
-        ThrowException1(); // line 19
-    } catch (Exception x) {
-        Console.WriteLine("Exception 1:");
-        Console.WriteLine(x.StackTrace);
-    }
-    try {
-        ThrowException2(); // line 25
-    } catch (Exception x) {
-        Console.WriteLine("Exception 2:");
-        Console.WriteLine(x.StackTrace);
-    }
-}
-
-private static void ThrowException1() {
-    try {
-        DivByZero(); // line 34
-    } catch {
-        throw; // line 36
-    }
-}
-private static void ThrowException2() {
-    try {
-        DivByZero(); // line 41
-    } catch (Exception ex) {
-        throw ex; // line 43
-    }
-}
-
-private static void DivByZero() {
-    int x = 0;
-    int y = 1 / x; // line 49
-}
-
-```
-
-Output
-```ps1
-Exception 1:
-   at UnitTester.Program.DivByZero() in <snip>\Dev\UnitTester\Program.cs:line 49
-   at UnitTester.Program.ThrowException1() in <snip>\Dev\UnitTester\Program.cs:line 36
-   at UnitTester.Program.TestExceptions() in <snip>\Dev\UnitTester\Program.cs:line 19
-
-Exception 2:
-   at UnitTester.Program.ThrowException2() in <snip>\Dev\UnitTester\Program.cs:line 43
-   at UnitTester.Program.TestExceptions() in <snip>\Dev\UnitTester\Program.cs:line 25
-```
-
-## Why do we need private constructor?
-
-* To restrict a class being inherited.
-* Restrict a class being instantiate or creating multiple instance/object.
-* To achieve the singleton design pattern.
-
-```c#
-public class TestPrivateConstructor
-{
-    private TestPrivateConstructor()
-    {  }
-
-    public static int sum(int a , int b)
-    {
-        return a + b;
-    }
-}
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        // calling the private constructor using class name directly 
-        int result = TestPrivateConstructor.sum(10, 15);
-        
-        // TestPrivateConstructor objClass = new TestPrivateConstructor(); 
-        // Will throw the error. We can't create object of this class
-    }
-}
-```
-
-## Sealed Class
-
-Sealed classes are used to restrict the users from inheriting the class
-
-```c#
-sealed class class_name
-{
-    // data members
-    // methods
-}
-```
+* **Value type** → stored on the stack, holds data directly (struct, int, bool).
+* **Reference type** → stored on the heap, variable holds reference (class, object, string).
