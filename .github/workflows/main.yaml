@@ -9,10 +9,10 @@ env:
 
 jobs:
   convert_via_pandoc:
-    runs-on: ubuntu-latest   
+    runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v3 
+      - uses: actions/checkout@v4   
 
       - name: Create output directory
         run: mkdir output
@@ -33,7 +33,7 @@ jobs:
           args: --pdf-engine=xelatex --output=output/${{env.FILE_NAME}}-Angular.pdf docs/Angular.md
 
       - name: Upload
-        uses: actions/upload-artifact@v3   
+        uses: actions/upload-artifact@v4    
         with:
           name: output
           path: output
