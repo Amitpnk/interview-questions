@@ -1,9 +1,9 @@
-# Full Stack Developer – Interview Questions & Answers
+# Interview Questions & Answers
 
 [![Documentation](https://github.com/Amitpnk/interview-questions/actions/workflows/main.yaml/badge.svg)](https://github.com/Amitpnk/interview-questions/actions/workflows/main.yaml)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Amitpnk/interview-questions/blob/main/LICENSE)
 
-Crack your next tech interview – or use it as a question bank if you are a technical recruiter or team lead.
+Practical interview questions and answers for software engineers – from .NET, full stack and cloud to AI and Forward Deployed Engineer (FDE) roles, plus techno-managerial and manager rounds. Use it to crack your next tech interview, or as a question bank if you are a technical recruiter or team lead.
 
 **Website:** [amitpnk.github.io/interview-questions](https://amitpnk.github.io/interview-questions)
 
@@ -23,9 +23,18 @@ Crack your next tech interview – or use it as a question bank if you are a tec
 | Coding Programs | [SimpleProgram.md](SimpleProgram.md) |
 | Design Principles | [DesignPrinciple.md](DesignPrinciple.md) |
 | Design Patterns | [DesignPattern.md](DesignPattern.md) |
+| Microservices *(coming soon)* | [Microservices.md](Microservices.md) |
+| Kafka *(coming soon)* | [Kafka.md](Kafka.md) |
 | Software Architect | [SoftwareArchitect.md](SoftwareArchitect.md) |
 | SQL Server | [SQLServer.md](SQLServer.md) |
 | Angular | [Angular.md](Angular.md) |
+| React *(coming soon)* | [React.md](React.md) |
+| Azure *(coming soon)* | [Azure.md](Azure.md) |
+| AWS *(coming soon)* | [AWS.md](AWS.md) |
+| AI & LLM Fundamentals *(coming soon)* | [AIFundamentals.md](AIFundamentals.md) |
+| Forward Deployed Engineer *(coming soon)* | [ForwardDeployedEngineer.md](ForwardDeployedEngineer.md) |
+| Techno-Managerial Round *(coming soon)* | [TechnoManagerRound.md](TechnoManagerRound.md) |
+| Manager Round *(coming soon)* | [ManagerRound.md](ManagerRound.md) |
 
 ## Project structure
 
