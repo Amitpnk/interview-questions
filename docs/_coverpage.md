@@ -1,6 +1,6 @@
 # Interview Questions & Answers
 
-> Practical questions and answers for software engineers – from .NET, full stack and cloud to AI
+> Practical questions and answers for software engineers – from .NET, full stack and cloud to AI, ML and GenAI
 
 - C# & .NET
 - ASP.NET Core
@@ -10,7 +10,8 @@
 - Angular & React
 - Microservices & Kafka
 - Azure & AWS
-- AI & LLMs
+- AI, ML & GenAI
+- RAG & AI Agents
 - Forward Deployed Engineer
 - Manager Rounds
 

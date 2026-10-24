@@ -26,7 +26,14 @@
   - [AWS](AWS.md)
 
 - **AI**
-  - [AI & LLM Fundamentals](AIFundamentals.md)
+  - [AI Fundamentals](AIFundamentals.md)
+  - [Machine Learning](MachineLearning.md)
+  - [Deep Learning](DeepLearning.md)
+  - [Generative AI & LLMs](GenerativeAI.md)
+  - [RAG & Vector Databases](RAG.md)
+  - [AI Agents](AIAgents.md)
+  - [MLOps & LLMOps](MLOps.md)
+  - [AI Evaluation & Safety](AIEvaluation.md)
   - [Forward Deployed Engineer](ForwardDeployedEngineer.md)
 
 - **Interview Rounds**

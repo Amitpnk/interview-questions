@@ -1,69 +1,49 @@
-# AI & LLM Fundamentals
+# AI Fundamentals
 
 > **Coming soon.** Answers for this page are in progress. The questions below show what will be covered.
 
-## Machine learning basics
+## Basics
 
-### What is the difference between AI, machine learning and deep learning?
-
-*Answer coming soon.*
-
-### What is the difference between supervised, unsupervised and reinforcement learning?
+### What is artificial intelligence (AI)?
 
 *Answer coming soon.*
 
-## Large language models
-
-### What is a large language model (LLM) and how does it work?
+### What is the difference between AI, machine learning, deep learning and generative AI?
 
 *Answer coming soon.*
 
-### What are tokens, context windows and temperature?
+### What is the difference between narrow AI and general AI?
 
 *Answer coming soon.*
 
-### What is the difference between prompt engineering, RAG and fine-tuning?
+### What are common real-world use cases of AI?
 
 *Answer coming soon.*
 
-### What are hallucinations and how do you reduce them?
+## Data
+
+### Why is data quality so important in AI?
 
 *Answer coming soon.*
 
-## Retrieval-augmented generation (RAG)
-
-### What is RAG and when should you use it?
+### What is the difference between structured and unstructured data?
 
 *Answer coming soon.*
 
-### What are embeddings and vector databases?
+### What are training, validation and test datasets?
 
 *Answer coming soon.*
 
-### How do you choose a chunking strategy?
+## AI for software engineers
+
+### How do you decide whether a problem needs AI at all?
 
 *Answer coming soon.*
 
-## Agents and tools
-
-### What is an AI agent?
+### Should you use a hosted AI API or build your own model?
 
 *Answer coming soon.*
 
-### What is tool use (function calling)?
-
-*Answer coming soon.*
-
-### What is the Model Context Protocol (MCP)?
-
-*Answer coming soon.*
-
-## Evaluation and safety
-
-### How do you evaluate an LLM application?
-
-*Answer coming soon.*
-
-### What is prompt injection and how do you defend against it?
+### What are the main costs of running AI in production?
 
 *Answer coming soon.*

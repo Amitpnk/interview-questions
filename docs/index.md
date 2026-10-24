@@ -1,6 +1,6 @@
 # Interview Questions & Answers
 
-<p class="hero">Short, practical answers with code samples for software engineering interviews – from .NET, full stack and cloud to AI, plus the managerial rounds. Pick a topic to start, or use the search box to find a question.</p>
+<p class="hero">Short, practical answers with code samples for software engineering interviews – from .NET, full stack and cloud to AI, ML and GenAI, plus the managerial rounds. Pick a topic to start, or use the search box to find a question.</p>
 
 ## Topics
 
@@ -20,7 +20,14 @@
   <a class="topic-card" href="#/React"><img src="img/logo/react.svg" alt=""><span class="topic-body"><span class="topic-title">React <span class="badge">Soon</span></span><span class="topic-desc">JSX, hooks, life cycle, keys, state management</span></span></a>
   <a class="topic-card" href="#/Azure"><img src="img/logo/azure.svg" alt=""><span class="topic-body"><span class="topic-title">Azure <span class="badge">Soon</span></span><span class="topic-desc">App Service, Functions, AKS, Service Bus, Key Vault</span></span></a>
   <a class="topic-card" href="#/AWS"><img src="img/logo/aws.svg" alt=""><span class="topic-body"><span class="topic-title">AWS <span class="badge">Soon</span></span><span class="topic-desc">EC2, Lambda, S3, DynamoDB, SQS, IAM</span></span></a>
-  <a class="topic-card" href="#/AIFundamentals"><img src="img/logo/ai.svg" alt=""><span class="topic-body"><span class="topic-title">AI & LLM Fundamentals <span class="badge">Soon</span></span><span class="topic-desc">LLMs, prompting, RAG, embeddings, agents, evals</span></span></a>
+  <a class="topic-card" href="#/AIFundamentals"><img src="img/logo/ai-fundamentals.svg" alt=""><span class="topic-body"><span class="topic-title">AI Fundamentals <span class="badge">Soon</span></span><span class="topic-desc">AI vs ML vs DL vs GenAI, data, when to use AI</span></span></a>
+  <a class="topic-card" href="#/MachineLearning"><img src="img/logo/ml.svg" alt=""><span class="topic-body"><span class="topic-title">Machine Learning <span class="badge">Soon</span></span><span class="topic-desc">Algorithms, overfitting, bias–variance, metrics</span></span></a>
+  <a class="topic-card" href="#/DeepLearning"><img src="img/logo/dl.svg" alt=""><span class="topic-body"><span class="topic-title">Deep Learning <span class="badge">Soon</span></span><span class="topic-desc">Neural networks, CNNs, RNNs, Transformers, attention</span></span></a>
+  <a class="topic-card" href="#/GenerativeAI"><img src="img/logo/ai.svg" alt=""><span class="topic-body"><span class="topic-title">Generative AI & LLMs <span class="badge">Soon</span></span><span class="topic-desc">LLMs, tokens, prompting, fine-tuning, hallucinations</span></span></a>
+  <a class="topic-card" href="#/RAG"><img src="img/logo/rag.svg" alt=""><span class="topic-body"><span class="topic-title">RAG & Vector Databases <span class="badge">Soon</span></span><span class="topic-desc">Embeddings, chunking, hybrid search, re-ranking</span></span></a>
+  <a class="topic-card" href="#/AIAgents"><img src="img/logo/agents.svg" alt=""><span class="topic-body"><span class="topic-title">AI Agents <span class="badge">Soon</span></span><span class="topic-desc">Tool calling, MCP, memory, multi-agent, guardrails</span></span></a>
+  <a class="topic-card" href="#/MLOps"><img src="img/logo/mlops.svg" alt=""><span class="topic-body"><span class="topic-title">MLOps & LLMOps <span class="badge">Soon</span></span><span class="topic-desc">Model lifecycle, drift, prompt versioning, serving</span></span></a>
+  <a class="topic-card" href="#/AIEvaluation"><img src="img/logo/ai-eval.svg" alt=""><span class="topic-body"><span class="topic-title">AI Evaluation & Safety <span class="badge">Soon</span></span><span class="topic-desc">Evals, prompt injection, OWASP LLM Top 10, responsible AI</span></span></a>
   <a class="topic-card" href="#/ForwardDeployedEngineer"><img src="img/logo/fde.svg" alt=""><span class="topic-body"><span class="topic-title">Forward Deployed Engineer <span class="badge">Soon</span></span><span class="topic-desc">Customer discovery, shipping AI to production, behavioural</span></span></a>
   <a class="topic-card" href="#/TechnoManagerRound"><img src="img/logo/techno-manager.svg" alt=""><span class="topic-body"><span class="topic-title">Techno-Managerial Round <span class="badge">Soon</span></span><span class="topic-desc">Technical leadership, estimation, delivery, team</span></span></a>
   <a class="topic-card" href="#/ManagerRound"><img src="img/logo/manager.svg" alt=""><span class="topic-body"><span class="topic-title">Manager Round <span class="badge">Soon</span></span><span class="topic-desc">About you, behavioural questions, wrapping up</span></span></a>

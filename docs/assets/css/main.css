@@ -848,3 +848,228 @@ section.cover .cover-main > p:last-child a:hover {
         margin-left: 0.4rem;
     }
 }
+
+/* ==========================================================================
+   Practice mode toggle
+   ========================================================================== */
+
+.practice-toggle .icon-eye-off {
+    display: none;
+}
+
+:root[data-practice="on"] .practice-toggle {
+    border-color: var(--brand);
+    background: var(--brand);
+    color: #fff;
+}
+
+:root[data-theme="dark"][data-practice="on"] .practice-toggle {
+    color: #0f0f17;
+}
+
+:root[data-practice="on"] .practice-toggle .icon-eye {
+    display: none;
+}
+
+:root[data-practice="on"] .practice-toggle .icon-eye-off {
+    display: block;
+}
+
+/* Hide answers; click the question to reveal */
+:root[data-practice="on"] .markdown-section .answer {
+    display: none;
+}
+
+:root[data-practice="on"] .markdown-section .answer.revealed {
+    display: block;
+    animation: answer-in 0.2s ease;
+}
+
+:root[data-practice="on"] .markdown-section h3 {
+    cursor: pointer;
+}
+
+:root[data-practice="on"] .markdown-section h3::after {
+    content: 'Show answer';
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--brand);
+}
+
+:root[data-practice="on"] .markdown-section h3.open::after {
+    content: 'Hide answer';
+}
+
+@keyframes answer-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Question actions: copy link and "revised" tick
+   ========================================================================== */
+
+.markdown-section h3 {
+    position: relative;
+    padding-right: 5.5rem;
+}
+
+.markdown-section .q-actions {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    display: flex;
+    gap: 0.35rem;
+    transform: translateY(-50%);
+}
+
+:root[data-practice="on"] .markdown-section .q-actions {
+    top: 0.85rem;
+    transform: none;
+}
+
+.markdown-section .q-btn {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.markdown-section .q-btn svg {
+    width: 15px;
+    height: 15px;
+}
+
+.markdown-section .q-btn:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+}
+
+.markdown-section .q-btn:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+}
+
+/* Copy-link button shows on hover (always visible on touch screens) */
+.markdown-section .q-link {
+    opacity: 0;
+}
+
+.markdown-section h3:hover .q-link,
+.markdown-section .q-link:focus-visible {
+    opacity: 1;
+}
+
+@media (hover: none) {
+    .markdown-section .q-link {
+        opacity: 1;
+    }
+}
+
+.markdown-section .q-check.done {
+    border-color: #10b981;
+    background: #10b981;
+    color: #fff;
+}
+
+.markdown-section .q-check:not(.done) svg {
+    opacity: 0.35;
+}
+
+/* Revised count and reset in the page meta line */
+.markdown-section .page-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.markdown-section .page-meta .revised-count {
+    font-weight: 600;
+}
+
+.markdown-section .page-meta.has-progress .revised-count {
+    color: #059669;
+}
+
+:root[data-theme="dark"] .markdown-section .page-meta.has-progress .revised-count {
+    color: #34d399;
+}
+
+.markdown-section .page-meta .reset-progress {
+    display: none;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text-muted);
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.markdown-section .page-meta.has-progress .reset-progress {
+    display: inline;
+}
+
+/* Revision progress on the home cards */
+.topic-card .topic-revised {
+    color: #059669;
+}
+
+:root[data-theme="dark"] .topic-card .topic-revised {
+    color: #34d399;
+}
+
+.markdown-section a.topic-card.has-progress {
+    background-image: linear-gradient(90deg, #10b981, #10b981);
+    background-size: calc(var(--progress, 0) * 100%) 3px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+}
+
+/* ==========================================================================
+   Toast message
+   ========================================================================== */
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    z-index: 50;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    background: var(--heading-color);
+    color: var(--page-bg);
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-hover);
+    opacity: 0;
+    transform: translate(-50%, 12px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+@media (max-width: 768px) {
+    .markdown-section h3 {
+        padding-right: 4.75rem;
+    }
+
+    .markdown-section .q-btn {
+        width: 28px;
+        height: 28px;
+    }
+}

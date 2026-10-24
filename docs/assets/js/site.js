@@ -85,7 +85,197 @@
     });
   }
 
-  function addPageStats() {
+  /* ---------- Revision progress (saved in this browser only) ---------- */
+
+  var REVISED_KEY = 'revised';
+
+  function loadRevised() {
+    try { return JSON.parse(localStorage.getItem(REVISED_KEY)) || {}; } catch (e) { return {}; }
+  }
+
+  function saveRevised(all) {
+    try { localStorage.setItem(REVISED_KEY, JSON.stringify(all)); } catch (e) { }
+  }
+
+  function revisedFor(file) {
+    return loadRevised()[file] || [];
+  }
+
+  function setRevised(file, id, done) {
+    var all = loadRevised();
+    var list = (all[file] || []).filter(function (x) { return x !== id; });
+    if (done) list.push(id);
+    if (list.length) all[file] = list; else delete all[file];
+    saveRevised(all);
+  }
+
+  /* ---------- Toast message ---------- */
+
+  var toastTimer;
+
+  function toast(message) {
+    var el = document.querySelector('.toast');
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'toast';
+      el.setAttribute('role', 'status');
+      document.body.appendChild(el);
+    }
+    el.textContent = message;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.classList.remove('show'); }, 1800);
+  }
+
+  /* ---------- Practice mode: hide answers, click a question to reveal ---------- */
+
+  var PRACTICE_KEY = 'practice';
+
+  function practiceOn() {
+    return document.documentElement.getAttribute('data-practice') === 'on';
+  }
+
+  function setPractice(on) {
+    document.documentElement.setAttribute('data-practice', on ? 'on' : 'off');
+    try { localStorage.setItem(PRACTICE_KEY, on ? 'on' : 'off'); } catch (e) { }
+    document.querySelectorAll('.answer.revealed').forEach(function (a) { a.classList.remove('revealed'); });
+  }
+
+  try { if (localStorage.getItem(PRACTICE_KEY) === 'on') document.documentElement.setAttribute('data-practice', 'on'); } catch (e) { }
+
+  window.togglePractice = function () {
+    var on = !practiceOn();
+    setPractice(on);
+    toast(on ? 'Practice mode on – click a question to reveal its answer' : 'Practice mode off');
+  };
+
+  // Wrap everything between one question (h3) and the next heading in <div class="answer">
+  function wrapAnswers() {
+    var section = document.querySelector('.markdown-section');
+    if (!section) return;
+    var stop = function (el) {
+      return /^H[1-3]$/.test(el.tagName) || el.classList.contains('page-footer') ||
+        el.classList.contains('docsify-pagination-container');
+    };
+
+    section.querySelectorAll('h3').forEach(function (h3) {
+      var answer = document.createElement('div');
+      answer.className = 'answer';
+      var next = h3.nextElementSibling;
+      while (next && !stop(next)) {
+        var move = next;
+        next = next.nextElementSibling;
+        answer.appendChild(move);
+      }
+      h3.insertAdjacentElement('afterend', answer);
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!practiceOn()) return;
+    var h3 = e.target.closest && e.target.closest('.markdown-section h3');
+    if (!h3 || e.target.closest('.q-actions')) return;
+    var answer = h3.nextElementSibling;
+    if (!answer || !answer.classList.contains('answer')) return;
+    e.preventDefault();
+    e.stopPropagation();
+    answer.classList.toggle('revealed');
+    h3.classList.toggle('open', answer.classList.contains('revealed'));
+  }, true);
+
+  /* ---------- Question actions: copy link, mark as revised ---------- */
+
+  // Fallback for browsers or contexts where the async clipboard API is blocked
+  function copyWithTextarea(text) {
+    var area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+    document.body.appendChild(area);
+    area.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { }
+    area.remove();
+    return ok;
+  }
+
+  var ICON_LINK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>';
+  var ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+  function addQuestionActions(vm, comingSoon) {
+    var file = vm.route.file;
+    var done = revisedFor(file);
+
+    document.querySelectorAll('.markdown-section h3[id]').forEach(function (h3) {
+      var id = h3.id;
+      var actions = document.createElement('span');
+      actions.className = 'q-actions';
+
+      var link = document.createElement('button');
+      link.type = 'button';
+      link.className = 'q-btn q-link';
+      link.title = 'Copy link to this question';
+      link.setAttribute('aria-label', 'Copy link to this question');
+      link.innerHTML = ICON_LINK;
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var url = location.href.split('#')[0] + '#' + vm.route.path + '?id=' + id;
+        var copied = navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject();
+        copied.then(function () { toast('Link copied'); }, function () {
+          toast(copyWithTextarea(url) ? 'Link copied' : 'Could not copy – use the address bar');
+          history.replaceState(null, '', url);
+        });
+      });
+      actions.appendChild(link);
+
+      if (!comingSoon) {
+        var check = document.createElement('button');
+        check.type = 'button';
+        check.className = 'q-btn q-check';
+        check.innerHTML = ICON_CHECK;
+        var update = function (isDone) {
+          check.classList.toggle('done', isDone);
+          check.title = isDone ? 'Revised – click to undo' : 'Mark as revised';
+          check.setAttribute('aria-label', check.title);
+          check.setAttribute('aria-pressed', isDone);
+        };
+        update(done.indexOf(id) !== -1);
+        check.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var isDone = !check.classList.contains('done');
+          setRevised(file, id, isDone);
+          update(isDone);
+          updateRevisedCount(file);
+        });
+        actions.appendChild(check);
+      }
+
+      h3.appendChild(actions);
+    });
+  }
+
+  function updateRevisedCount(file) {
+    var el = document.querySelector('.page-meta .revised-count');
+    if (!el) return;
+    var total = document.querySelectorAll('.markdown-section .q-check').length;
+    var ids = [].map.call(document.querySelectorAll('.markdown-section h3[id]'), function (h) { return h.id; });
+    // Only count ids that still exist on the page
+    var count = revisedFor(file).filter(function (id) { return ids.indexOf(id) !== -1; }).length;
+    el.textContent = count + ' / ' + total + ' revised';
+    el.parentNode.classList.toggle('has-progress', count > 0);
+  }
+
+  /* ---------- Page stats line under the title ---------- */
+
+  function isComingSoon() {
+    var label = document.querySelector('.markdown-section blockquote.callout-note strong');
+    return !!label && /coming soon/i.test(label.textContent);
+  }
+
+  function addPageStats(vm, comingSoon) {
     var section = document.querySelector('.markdown-section');
     var title = section && section.querySelector('h1');
     var questions = section ? section.querySelectorAll('h3').length : 0;
@@ -93,14 +283,28 @@
 
     var words = section.textContent.trim().split(/\s+/).length;
     var minutes = Math.max(1, Math.round(words / WORDS_PER_MINUTE));
-    var comingSoon = !!section.querySelector('blockquote.callout-note strong') &&
-      /coming soon/i.test(section.querySelector('blockquote.callout-note strong').textContent);
 
     var meta = document.createElement('p');
     meta.className = 'page-meta';
-    meta.textContent = comingSoon
-      ? questions + ' questions planned · coming soon'
-      : questions + ' questions · ' + minutes + ' min read';
+    if (comingSoon) {
+      meta.textContent = questions + ' questions planned · coming soon';
+    } else {
+      meta.innerHTML = '<span>' + questions + ' questions · ' + minutes + ' min read</span>' +
+        '<span class="sep">·</span><span class="revised-count"></span>' +
+        '<button type="button" class="reset-progress">Reset</button>';
+      meta.querySelector('.reset-progress').addEventListener('click', function () {
+        if (!confirm('Clear your revised ticks for this page?')) return;
+        var all = loadRevised();
+        delete all[vm.route.file];
+        saveRevised(all);
+        document.querySelectorAll('.q-check.done').forEach(function (c) {
+          c.classList.remove('done');
+          c.setAttribute('aria-pressed', false);
+          c.title = 'Mark as revised';
+        });
+        updateRevisedCount(vm.route.file);
+      });
+    }
     title.insertAdjacentElement('afterend', meta);
   }
 
@@ -117,8 +321,9 @@
     });
   }
 
-  // Home page: show the number of questions on each topic card
+  // Home page: show the number of questions (and revision progress) on each topic card
   function addCardCounts() {
+    var revised = loadRevised();
     document.querySelectorAll('.topic-card').forEach(function (card) {
       if (card.querySelector('.topic-count')) return;
       var page = card.getAttribute('href').replace('#/', '');
@@ -127,9 +332,15 @@
       }).then(function (text) {
         var count = (text.match(/^### /gm) || []).length;
         if (!count) return;
+        var done = (revised[page + '.md'] || []).length;
         var span = document.createElement('span');
         span.className = 'topic-count';
         span.textContent = count + ' questions';
+        if (done) {
+          span.innerHTML = count + ' questions · <span class="topic-revised">' + Math.min(done, count) + ' revised</span>';
+          card.style.setProperty('--progress', Math.min(1, done / count));
+          card.classList.add('has-progress');
+        }
         card.querySelector('.topic-body').appendChild(span);
       });
     });
@@ -160,7 +371,11 @@
 
     hook.doneEach(function () {
       styleCallouts();
-      addPageStats();
+      var comingSoon = isComingSoon();
+      addPageStats(vm, comingSoon);
+      addQuestionActions(vm, comingSoon);
+      updateRevisedCount(vm.route.file);
+      wrapAnswers();
       addCardCounts();
       renderDiagrams();
       onScroll();

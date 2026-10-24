@@ -3,7 +3,7 @@
 [![Documentation](https://github.com/Amitpnk/interview-questions/actions/workflows/main.yaml/badge.svg)](https://github.com/Amitpnk/interview-questions/actions/workflows/main.yaml)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Amitpnk/interview-questions/blob/main/LICENSE)
 
-Practical interview questions and answers for software engineers – from .NET, full stack and cloud to AI and Forward Deployed Engineer (FDE) roles, plus techno-managerial and manager rounds. Use it to crack your next tech interview, or as a question bank if you are a technical recruiter or team lead.
+Practical interview questions and answers for software engineers – from .NET, full stack and cloud to AI, ML, generative AI and Forward Deployed Engineer (FDE) roles, plus techno-managerial and manager rounds. Use it to crack your next tech interview, or as a question bank if you are a technical recruiter or team lead.
 
 **Website:** [amitpnk.github.io/interview-questions](https://amitpnk.github.io/interview-questions)
 
@@ -31,7 +31,14 @@ Practical interview questions and answers for software engineers – from .NET, 
 | React *(coming soon)* | [React.md](React.md) |
 | Azure *(coming soon)* | [Azure.md](Azure.md) |
 | AWS *(coming soon)* | [AWS.md](AWS.md) |
-| AI & LLM Fundamentals *(coming soon)* | [AIFundamentals.md](AIFundamentals.md) |
+| AI Fundamentals *(coming soon)* | [AIFundamentals.md](AIFundamentals.md) |
+| Machine Learning *(coming soon)* | [MachineLearning.md](MachineLearning.md) |
+| Deep Learning *(coming soon)* | [DeepLearning.md](DeepLearning.md) |
+| Generative AI & LLMs *(coming soon)* | [GenerativeAI.md](GenerativeAI.md) |
+| RAG & Vector Databases *(coming soon)* | [RAG.md](RAG.md) |
+| AI Agents *(coming soon)* | [AIAgents.md](AIAgents.md) |
+| MLOps & LLMOps *(coming soon)* | [MLOps.md](MLOps.md) |
+| AI Evaluation & Safety *(coming soon)* | [AIEvaluation.md](AIEvaluation.md) |
 | Forward Deployed Engineer *(coming soon)* | [ForwardDeployedEngineer.md](ForwardDeployedEngineer.md) |
 | Techno-Managerial Round *(coming soon)* | [TechnoManagerRound.md](TechnoManagerRound.md) |
 | Manager Round *(coming soon)* | [ManagerRound.md](ManagerRound.md) |

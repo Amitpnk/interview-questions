@@ -26,7 +26,14 @@ Questions still to be added to the docs.
 
 ## Placeholder pages
 
-- [ ] Answer the questions in [AI & LLM Fundamentals](docs/AIFundamentals.md)
+- [ ] Answer the questions in [AI Fundamentals](docs/AIFundamentals.md)
+- [ ] Answer the questions in [Machine Learning](docs/MachineLearning.md)
+- [ ] Answer the questions in [Deep Learning](docs/DeepLearning.md)
+- [ ] Answer the questions in [Generative AI & LLMs](docs/GenerativeAI.md)
+- [ ] Answer the questions in [RAG & Vector Databases](docs/RAG.md)
+- [ ] Answer the questions in [AI Agents](docs/AIAgents.md)
+- [ ] Answer the questions in [MLOps & LLMOps](docs/MLOps.md)
+- [ ] Answer the questions in [AI Evaluation & Safety](docs/AIEvaluation.md)
 - [ ] Answer the questions in [Forward Deployed Engineer](docs/ForwardDeployedEngineer.md)
 - [ ] Answer the questions in [Microservices](docs/Microservices.md)
 - [ ] Answer the questions in [Kafka](docs/Kafka.md)
