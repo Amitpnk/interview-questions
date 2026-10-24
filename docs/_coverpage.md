@@ -1,6 +1,6 @@
 # Interview Questions & Answers
 
-> Practical questions and answers for software engineers – from .NET, full stack and cloud to AI, ML and GenAI
+> Practical questions and answers for software engineers – from full stack and cloud to AI, ML and GenAI
 
 - C# & .NET
 - ASP.NET Core

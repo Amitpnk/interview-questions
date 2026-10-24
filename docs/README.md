@@ -3,7 +3,7 @@
 [![Documentation](https://github.com/Amitpnk/interview-questions/actions/workflows/main.yaml/badge.svg)](https://github.com/Amitpnk/interview-questions/actions/workflows/main.yaml)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Amitpnk/interview-questions/blob/main/LICENSE)
 
-Practical interview questions and answers for software engineers – from .NET, full stack and cloud to AI, ML, generative AI and Forward Deployed Engineer (FDE) roles, plus techno-managerial and manager rounds. Use it to crack your next tech interview, or as a question bank if you are a technical recruiter or team lead.
+Practical interview questions and answers for software engineers – from full stack and cloud to AI, ML, generative AI and Forward Deployed Engineer (FDE) roles, plus techno-managerial and manager rounds. Use it to crack your next tech interview, or as a question bank if you are a technical recruiter or team lead.
 
 **Website:** [amitpnk.github.io/interview-questions](https://amitpnk.github.io/interview-questions)
 

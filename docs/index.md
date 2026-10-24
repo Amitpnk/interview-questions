@@ -1,6 +1,6 @@
 # Interview Questions & Answers
 
-<p class="hero">Short, practical answers with code samples for software engineering interviews – from .NET, full stack and cloud to AI, ML and GenAI, plus the managerial rounds. Pick a topic to start, or use the search box to find a question.</p>
+<p class="hero">Short, practical answers with code samples for software engineering interviews – from full stack and cloud to AI, ML and GenAI, plus the managerial rounds. Pick a topic to start, or use the search box to find a question.</p>
 
 ## Topics
 
