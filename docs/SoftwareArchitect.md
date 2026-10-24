@@ -1,269 +1,478 @@
 # Software Architect
 
-## Experience and behavioural questions
+## The role
 
-### Can you walk us through a recent project where you played the role of an architect? What challenges did you face, and how did you overcome them?
+### What does a software architect do?
+
+<!-- level: beginner -->
+
+A software architect makes the **structural decisions that are expensive to change later**, and makes sure the system meets both the business goals and the quality goals (performance, security, availability, cost).
+
+Day to day, that means:
+
+- **Understanding the problem** – business goals, constraints, users, budget and deadlines
+- **Choosing the architecture** – style, technologies, integration and data strategy
+- **Defining non-functional requirements** – how fast, how available, how secure, how much it may cost
+- **Documenting and communicating decisions** – diagrams and Architecture Decision Records (ADRs)
+- **Guiding the team** – reviews, standards, mentoring and unblocking
+- **Managing risk and technical debt** – spotting problems before they become expensive
+
+```mermaid
+flowchart LR
+    B["Business goals<br/>& constraints"] --> A(("Architect"))
+    Q["Quality attributes<br/>performance, security, cost"] --> A
+    T["Technology options"] --> A
+    A --> D["Architecture &<br/>decisions (ADRs)"]
+    A --> G["Guidance for<br/>the team"]
+    A --> R["Risks &<br/>trade-offs"]
+```
+
+> **Interview tip:** Interviewers want to hear about **trade-offs**. For every decision you mention, say what you gave up and why it was worth it.
+
+### What is the difference between a software architect, a solution architect and a tech lead?
+
+<!-- level: intermediate -->
+
+| Role | Focus | Scope |
+| --- | --- | --- |
+| **Tech lead** | How the team builds it – code quality, delivery, mentoring | One team or product |
+| **Software architect** | How the system is structured – components, patterns, quality attributes | One system or product |
+| **Solution architect** | How a business problem is solved end to end – systems, integrations, vendors, cost | Several systems |
+| **Enterprise architect** | How the organisation's technology fits together – standards and roadmap | Whole organisation |
+
+In smaller companies one person often plays several of these roles.
+
+### What are non-functional requirements (quality attributes)?
+
+<!-- level: intermediate -->
+
+Functional requirements describe **what** the system does; non-functional requirements describe **how well** it does it. They drive most architecture decisions.
+
+| Quality attribute | Example requirement | Typical architecture answer |
+| --- | --- | --- |
+| Performance | 95% of API calls under 200 ms | Caching, indexing, async processing |
+| Scalability | Handle 10× traffic at peak | Stateless services, horizontal scaling |
+| Availability | 99.9% uptime | Redundancy, health checks, failover |
+| Security | Only authorised users see customer data | OAuth 2.0 / OpenID Connect, encryption, least privilege |
+| Maintainability | New developer productive in a week | Modular design, clean code, documentation |
+| Observability | Find the cause of an error in minutes | Centralised logging, tracing, metrics |
+| Cost | Run within a fixed cloud budget | Right-sizing, autoscaling, serverless |
+
+> **Common mistake:** Accepting vague requirements such as "the system must be fast". Turn each one into a measurable target, e.g. "p95 latency under 300 ms at 500 requests per second".
+
+### How do you document an architecture?
+
+<!-- level: intermediate -->
+
+Two lightweight tools cover most needs:
+
+**1. The C4 model** – four levels of diagrams, each zooming into the previous one:
+
+```mermaid
+flowchart LR
+    C1["1. Context<br/>system + users +<br/>external systems"] --> C2["2. Containers<br/>apps, APIs,<br/>databases"]
+    C2 --> C3["3. Components<br/>modules inside<br/>one container"]
+    C3 --> C4["4. Code<br/>classes<br/>(optional)"]
+```
+
+**2. Architecture Decision Records (ADRs)** – a short file per important decision, kept in the repository:
+
+```text
+ADR-007: Use RabbitMQ for alarm notifications
+
+Status:       Accepted
+Context:      Alarms must reach several services in near real time; services are deployed independently.
+Decision:     Publish alarm events to RabbitMQ; each service subscribes to the events it needs.
+Consequences: + Services are decoupled and can scale separately
+              - We must handle duplicate messages and monitor the broker
+```
+
+> **Interview tip:** ADRs show you think about trade-offs. Mention that they record **why** a decision was made, which is exactly what new team members ask months later.
+
+## Architecture styles
+
+### What is the difference between layered, Clean and Hexagonal architecture?
+
+<!-- level: intermediate -->
+
+All three separate business logic from technical details; they differ in **which way dependencies point**.
+
+- **Layered (N-tier)** – UI → Business → Data. Simple, but the business layer depends on the data layer, so the database leaks into business code.
+- **Clean / Onion** – the **domain is at the centre** and has no dependencies. Outer layers (UI, database, external services) depend inwards, through interfaces defined by the inner layers.
+- **Hexagonal (Ports & Adapters)** – the same idea described differently: the core exposes **ports** (interfaces), and **adapters** plug in for HTTP, databases, queues, etc.
+
+```mermaid
+flowchart TB
+    subgraph Infra ["Infrastructure – database, messaging, external APIs"]
+        subgraph Pres ["Presentation – API controllers, UI"]
+            subgraph App ["Application – use cases, interfaces"]
+                D["Domain<br/>entities & business rules"]
+            end
+        end
+    end
+```
+
+Dependencies always point **inwards**: the domain knows nothing about ASP.NET Core or SQL Server, so it is easy to test and the infrastructure can be swapped.
+
+### When would you choose a monolith, a modular monolith or microservices?
+
+<!-- level: intermediate -->
+
+| | Monolith | Modular monolith | Microservices |
+| --- | --- | --- | --- |
+| Deployment | One unit | One unit | Many independent units |
+| Team size | Small | Small to medium | Many teams |
+| Complexity | Low | Low to medium | High (network, data, operations) |
+| Scaling | Whole app | Whole app | Per service |
+| Best for | MVPs, simple domains | Most new business systems | Large domains, independent teams, very different scaling needs |
+
+```mermaid
+flowchart LR
+    M["Monolith"] -->|"add clear module<br/>boundaries"| MM["Modular monolith"]
+    MM -->|"extract modules that<br/>need to scale or ship<br/>independently"| MS["Microservices"]
+```
+
+> **Interview tip:** A strong answer is "start with a modular monolith, and extract microservices only where there is a clear reason – team autonomy, independent scaling or independent release cycles." It shows you don't choose microservices by default.
+
+### What is event-driven architecture?
+
+<!-- level: intermediate -->
+
+Services communicate by **publishing events** ("something happened") to a broker, instead of calling each other directly. Other services subscribe to the events they care about.
+
+```mermaid
+flowchart LR
+    O["Order service"] -->|"OrderPlaced"| B[("Message broker<br/>RabbitMQ / Kafka /<br/>Azure Service Bus")]
+    B --> P["Payment service"]
+    B --> I["Inventory service"]
+    B --> N["Notification service"]
+```
+
+| Advantages | Challenges |
+| --- | --- |
+| Loose coupling – the publisher doesn't know the subscribers | Eventual consistency – data is not updated everywhere at once |
+| Services scale and fail independently | Duplicate and out-of-order messages must be handled |
+| Easy to add new subscribers | Harder to trace a request end to end |
+
+### What is CQRS and when should you use it?
 
 <!-- level: advanced -->
 
-One of the recent projects where I played the role of an architect is the Gate Management System at Honeywell. The goal was to build a system that interfaces with third-party devices like UVSS (Under Vehicle Surveillance System), LPR (License Plate Recognition), and X-RAY to control the entry of vehicles into a site.
+**CQRS (Command Query Responsibility Segregation)** separates the model that **changes** data (commands) from the model that **reads** data (queries).
 
-#### Key responsibilities
+```mermaid
+flowchart LR
+    U["Client"] -->|"Command<br/>PlaceOrder"| CH["Command handlers<br/>business rules"]
+    CH --> W[("Write database")]
+    W -.->|"events / sync"| R[("Read database<br/>optimised views")]
+    U -->|"Query<br/>GetOrders"| QH["Query handlers"]
+    QH --> R
+```
 
-I designed the system using a microservices-based architecture, employing technologies like ASP.NET Core, gRPC, and SQL Server. The system's core was an API-driven, event-based solution that communicated with the third-party systems in real-time, ensuring that vehicle data from UVSS, LPR, and X-RAY was processed seamlessly. The front-end interface was built using React, providing a live, interactive GUI for the gate operators.
+**Use it when** reads and writes have very different shapes or loads – for example, complex validation on writes but dashboards and searches on reads. In .NET it is often implemented with **MediatR**.
 
-#### Challenges and solutions
+**Avoid it** for simple CRUD applications: it adds complexity and, with separate databases, eventual consistency.
 
-- **Real-time data processing:** One of the significant challenges was ensuring that the system could process data from multiple sources (UVSS, LPR, X-RAY) and act on it in real time. To address this, I used gRPC for low-latency, high-throughput communication between the services.
-- **Scalability:** The system needed to handle varying loads depending on the time of day, especially during peak hours. We addressed this by designing the solution with scalability in mind, using Docker containers to deploy microservices in a scalable way on AKS (Azure Kubernetes Service).
-- **Integration with legacy systems:** Since the system had to communicate with several legacy third-party devices, we encountered integration issues. To overcome this, I led the creation of adapter services that would translate data from these systems into a standard format that the Gate Management System could handle.
-- **Security:** The system handles sensitive data like vehicle details, so ensuring secure communication was critical. We used OAuth 2.0 and Azure AD for secure authentication and authorization. Additionally, the use of Azure Key Vault ensured secure storage of secrets like API keys.
-- **System Monitoring:** For monitoring and diagnostics, I integrated Azure Application Insights, which allowed us to track the performance of our microservices and quickly detect any issues.
+## Scale and reliability
 
-#### Result
+### What is the difference between vertical and horizontal scaling?
 
-The system was successfully deployed, providing a robust and real-time solution for vehicle management, with the added flexibility to integrate additional sensors or third-party devices as needed. It was scalable, secure, and highly responsive, ensuring that operators could efficiently manage vehicle entries.
+<!-- level: beginner -->
+
+- **Vertical scaling (scale up)** – give one server more CPU or memory. Simple, but limited and usually needs downtime.
+- **Horizontal scaling (scale out)** – add more servers behind a load balancer. Almost unlimited and fault-tolerant, but the application must be **stateless** (sessions and files stored outside the server).
+
+```mermaid
+flowchart LR
+    subgraph V ["Vertical"]
+        S1["Server<br/>4 CPU"] -->|"upgrade"| S2["Server<br/>16 CPU"]
+    end
+    subgraph H ["Horizontal"]
+        LB["Load balancer"] --> A1["Server"]
+        LB --> A2["Server"]
+        LB --> A3["Server"]
+    end
+```
+
+### What caching strategies do you know?
+
+<!-- level: intermediate -->
+
+The most common is **cache-aside**: the application checks the cache first and loads from the database only on a miss.
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant Cache as Redis cache
+    participant DB as Database
+    App->>Cache: Get product 42
+    alt Cache hit
+        Cache-->>App: Product
+    else Cache miss
+        App->>DB: SELECT product 42
+        DB-->>App: Product
+        App->>Cache: Store product 42 (with expiry)
+    end
+```
+
+| Strategy | How it works | Use when |
+| --- | --- | --- |
+| Cache-aside | App reads cache, falls back to DB, then fills the cache | Read-heavy data – the default choice |
+| Write-through | App writes to cache and DB together | Data is read right after it is written |
+| Write-behind | App writes to cache; DB is updated later | Very high write load, some risk is acceptable |
+| Read-through | Cache loads from DB itself on a miss | The cache library supports it |
+
+> **Common mistake:** Forgetting **invalidation**. Always set an expiry (TTL) and remove or update cache entries when the data changes.
+
+### What is the CAP theorem?
+
+<!-- level: advanced -->
+
+In a distributed system, when a **network partition** happens, you must choose between:
+
+- **Consistency (C)** – every read returns the latest write, or an error
+- **Availability (A)** – every request gets a response, even if it may be stale
+
+Partition tolerance (P) is not optional in a distributed system, so the real choice is **CP or AP** during a failure:
+
+| Choice | Behaviour during a partition | Examples |
+| --- | --- | --- |
+| CP | Rejects some requests to stay consistent | Banking balances, inventory reservations |
+| AP | Keeps answering, may return stale data | Product catalogue, social feeds, shopping carts |
+
+> **Interview tip:** Mention **PACELC** for extra credit: even without a partition, there is a trade-off between **latency** and **consistency**.
+
+### How do you design a system for high availability?
+
+<!-- level: advanced -->
+
+Remove every **single point of failure** and make failures fast to detect and recover from:
+
+- Run **multiple instances** of every service across **availability zones**
+- Put a **load balancer** with **health checks** in front
+- **Replicate** the database, with automatic failover
+- Use **retries with back-off, timeouts and circuit breakers** for calls between services
+- Keep services **stateless**; store state in the database or a distributed cache
+- **Monitor and alert** – you can't fix what you can't see
+
+```mermaid
+flowchart TB
+    U["Users"] --> LB["Load balancer<br/>+ health checks"]
+    subgraph Z1 ["Availability zone 1"]
+        A1["App instance"]
+        DB1[("Primary DB")]
+    end
+    subgraph Z2 ["Availability zone 2"]
+        A2["App instance"]
+        DB2[("Replica DB")]
+    end
+    LB --> A1
+    LB --> A2
+    A1 --> DB1
+    A2 --> DB1
+    DB1 -.->|"replication<br/>+ failover"| DB2
+```
+
+| Availability | Downtime per year |
+| --- | --- |
+| 99% | ~3.7 days |
+| 99.9% | ~8.8 hours |
+| 99.99% | ~53 minutes |
+
+### How do you approach a system design question in an interview?
+
+<!-- level: advanced -->
+
+Use a fixed structure so you don't jump straight to technologies:
+
+```mermaid
+flowchart LR
+    R["1. Requirements<br/>functional +<br/>non-functional"] --> E["2. Estimates<br/>users, requests/s,<br/>data size"]
+    E --> H["3. High-level<br/>design<br/>main components"]
+    H --> D["4. Deep dive<br/>data model, APIs,<br/>bottlenecks"]
+    D --> T["5. Trade-offs<br/>& scaling<br/>what you'd change"]
+```
+
+1. **Clarify requirements** – ask questions; agree what is in and out of scope
+2. **Estimate the scale** – rough numbers decide whether you need caching, sharding or queues
+3. **Draw the high-level design** – clients, API, services, databases, caches, queues
+4. **Deep dive** into the hardest parts – data model, APIs, consistency, hot spots
+5. **Discuss trade-offs** – failure handling, scaling, cost and what you'd do with more time
+
+## Experience questions
+
+> **Interview tip:** Answer experience questions with **STAR** – **S**ituation, **T**ask, **A**ction, **R**esult. Keep it to 2–3 minutes and be ready to go deeper on any decision. The answers below are personal examples – replace them with your own projects.
+
+### Walk us through a recent project where you were the architect. What challenges did you face?
+
+<!-- level: advanced -->
+
+**Situation:** At Honeywell, I was the architect of a **Gate Management System** that controls vehicle entry to a site. It integrates third-party devices: **UVSS** (Under Vehicle Surveillance System), **LPR** (License Plate Recognition) and **X-ray** scanners.
+
+**Task:** Process data from all devices in real time, give gate operators a live view, and make it easy to add new devices later.
+
+**Action:** I designed an API-driven, event-based **microservices** architecture with **ASP.NET Core**, **gRPC** and **SQL Server**, and a **React** front end for operators.
+
+```mermaid
+flowchart LR
+    subgraph Devices ["Third-party devices"]
+        UV["UVSS"]
+        LPR["LPR camera"]
+        XR["X-ray"]
+    end
+    UV --> AD["Adapter services<br/>translate to a<br/>standard format"]
+    LPR --> AD
+    XR --> AD
+    AD -->|"gRPC"| CORE["Gate core services<br/>ASP.NET Core on AKS"]
+    CORE --> DB[("SQL Server")]
+    UI["React operator GUI"] --> CORE
+    AAD["Azure AD<br/>OAuth 2.0"] -.-> CORE
+    KV["Azure Key Vault"] -.-> CORE
+    CORE -.-> AI["Application Insights"]
+```
+
+| Challenge | What I did |
+| --- | --- |
+| Real-time processing from several devices | **gRPC** for low-latency, high-throughput communication between services |
+| Peak-hour load | **Docker** containers on **AKS**, scaled with demand |
+| Legacy third-party devices | **Adapter services** that translate each device's data into one standard format |
+| Sensitive vehicle data | **OAuth 2.0** with **Azure AD**; secrets such as API keys in **Azure Key Vault** |
+| Diagnosing issues | **Azure Application Insights** for monitoring and diagnostics |
+
+**Result:** The system was deployed successfully. It processes vehicle data in real time, scales during peak hours, and new sensors or devices can be added by writing a new adapter.
 
 ---
 
-**Alternative answer:**
+**Alternative answer – HBOC OS portal**
 
-One of the key projects where I played a pivotal role as an architect was the HBOC OS (Honeywell Building Operations Center – OS) portal. This platform is essential for managing day-to-day operations of the HBOC team and offering services like alarm management, remote support, and cloud hosting for building automation systems like EBI and Niagara.
+**Situation:** At Honeywell, I owned the end-to-end architecture of the **HBOC OS** (Honeywell Building Operations Center) portal, which the HBOC team uses for alarm management, remote support and cloud hosting of building automation systems such as **EBI** and **Niagara**.
 
-#### Key responsibilities
+**Action:** **React** front end, **GraphQL** for flexible data fetching, **Web API** services and **PostgreSQL**, with an **event-driven** design using **RabbitMQ**.
 
-I was responsible for the end-to-end architecture and design of the portal, which utilized React on the front-end, GraphQL for efficient data fetching, Web API, and PostgreSQL for the backend.
-Additionally, the system was designed using an event-driven architecture, leveraging RabbitMQ to handle real-time communication and message-driven microservices.
+```mermaid
+flowchart LR
+    UI["React portal"] -->|"GraphQL"| GQL["GraphQL API"]
+    GQL --> SVC["Web API services<br/>Docker on AKS"]
+    SVC --> PG[("PostgreSQL")]
+    SVC <-->|"alarm & operational<br/>events"| MQ[("RabbitMQ")]
+    SVC -.-> KV["Azure Key Vault"]
+    APP["Cloud-hosted building<br/>systems – Azure App Services"] -.-> SVC
+```
 
-#### Challenges and solutions
+| Challenge | What I did |
+| --- | --- |
+| Complex queries across buildings and alarms | **GraphQL**, so the front end fetches only the data it needs – no over-fetching |
+| Real-time alarms and notifications | **RabbitMQ** as the message broker for event-driven processing |
+| Many buildings and remote sites | **Docker** on **AKS** to scale with load |
+| Secure cloud hosting for customers | **Azure App Services** with credentials and connection strings in **Azure Key Vault** |
+| Consistent alarm state | Kept data in **PostgreSQL** and **RabbitMQ** in sync, so the portal always shows the correct state |
 
-- **Complex data fetching requirements:** Since HBOC needed a flexible and efficient way to retrieve data, traditional REST APIs were not optimal for complex queries involving building automation systems and alarms. I introduced GraphQL for querying the backend, which gave the frontend the ability to request only the specific data needed, reducing over-fetching and improving performance.
-- **Handling real-time updates:** The system required real-time processing of alarms and operational data to ensure the timely resolution of issues. For this, I implemented RabbitMQ as a message broker, allowing the backend services to communicate efficiently and handle event-driven operations such as triggering alarms and notifications.
-- **Scalability and distributed operations:** As HBOC handled multiple buildings and remote sites, scalability was crucial. We containerized services using Docker and deployed them on Azure Kubernetes Service (AKS). This enabled seamless scaling based on load and operational demand, ensuring that the system could manage a large number of alarms and real-time events without performance degradation.
-- **Cloud hosting and remote access:** One of the project’s goals was to offer cloud hosting for building systems, which introduced challenges around data security and remote access. I designed the solution using Azure App Services and integrated Azure Key Vault for securing sensitive credentials and connection strings, ensuring the cloud-hosted services were securely accessible by HBOC customers.
-- **Data integrity and consistency:** With real-time alarms and a lot of data moving between systems, ensuring data consistency was key. I introduced distributed transactions across microservices, ensuring data was synchronized properly between PostgreSQL and RabbitMQ. This guaranteed that the portal reflected the accurate state of alarms and operations at any given time.
+**Result:** An efficient, scalable, real-time platform for managing alarms and remote support, with timely updates for customers.
 
-#### Result
+> **Interview tip:** Expect the follow-up "How did you keep the database and RabbitMQ consistent?" A good answer mentions the **Outbox pattern** – save the event in the same database transaction as the data, then publish it from the outbox.
 
-The HBOC OS portal became an efficient, scalable, and real-time platform that allowed the HBOC team to manage alarms and provide remote support effectively. By leveraging GraphQL, the system was highly responsive, and the event-driven architecture ensured that customers received timely updates and support for their building automation systems.
-
-### Can you talk about a challenging situation you faced at work and how you overcame it?
-
-<!-- level: advanced -->
-
-One of the more challenging situations I faced was during the development of the CDM-Historical project at Société Générale, where the system provided critical KPIs for monitoring electronic trading activity. The challenge arose when we needed to significantly enhance the performance of the system, which had become sluggish due to the growing volume of historical trading data. The system needed to provide real-time insights, but was frequently bogged down by the size of the data being processed.
-
-#### Challenges
-
-- **Performance bottlenecks:** The system’s backend, built using Web API and SQL Server, struggled to handle the massive volume of data being queried, leading to slow responses and affecting the overall user experience.
-- **Real-time data access:** Traders relied on the KPIs from the system to make informed decisions, so delays in accessing this data were unacceptable.
-- **Limited scalability:** As data volumes continued to grow, the current architecture wasn't scalable enough to meet future demands.
-
-#### Steps to overcome the challenges
-
-- **Database optimization:** I began by analyzing the SQL queries and database schema to identify bottlenecks. I optimized the queries by adding appropriate indexes, refactoring inefficient queries, and partitioning large tables to ensure faster access to the relevant data. This alone resulted in a significant performance boost.
-- **Caching frequently accessed data:** To minimize the load on the database, I implemented caching for frequently accessed data, leveraging Redis. This helped reduce the number of database calls and improved response times, especially for KPIs that were queried repeatedly by multiple users.
-- **Asynchronous processing:** Given the need to process large datasets, I introduced asynchronous processing to offload data retrieval and heavy computations to background tasks, ensuring that the UI remained responsive while complex queries were processed in parallel.
-- **Load balancing and scalability:** To future-proof the system, I refactored the architecture to support horizontal scaling using Docker containers. We deployed these containers in a Kubernetes environment, allowing us to easily scale the system by adding more containers during peak trading hours.
-
-#### Result
-
-By optimizing the database, implementing caching, and refactoring the system for scalability, we were able to improve the performance of the CDM-Historical system significantly. The response time for data retrieval was reduced by over 60%, and the system became far more scalable, ensuring that it could handle increasing data volumes as the business grew. Traders were able to access real-time insights without delay, resulting in a better overall user experience.
-
-### In your experience, how do you approach client interactions during the software development cycle?
+### Tell us about a challenging situation at work and how you overcame it.
 
 <!-- level: advanced -->
 
-In my experience, effective client interactions are key to the success of any software development project. I follow a structured approach during each phase of the software development cycle to ensure that the client is engaged, their requirements are understood, and feedback is incorporated.
+**Situation:** At Société Générale, the **CDM-Historical** system provides KPIs for monitoring electronic trading. As historical data grew, the system became slow – and traders needed the KPIs to make decisions.
 
-Here’s how I approach client interactions:
+**Task:** Make the system fast again, and make sure it would keep up with future data growth.
 
-#### 1. Initial Requirement Gathering & Analysis
+**Action:**
 
-- **Understand the business needs:** During the initial discussions, I focus on understanding the client’s business objectives, pain points, and high-level requirements. This helps me align the technical solution with their goals.
-- **Ask clarifying questions:** I ask detailed questions to uncover implicit requirements or constraints that might not be evident at first. This helps prevent misunderstandings later in the project.
-- **Document requirements clearly:** I ensure that all requirements are well-documented in a clear and structured way (using user stories or functional specifications) and validate them with the client for alignment. This often involves creating wireframes or prototypes early on to give the client a tangible feel for what the solution might look like.
+| Problem | What I did |
+| --- | --- |
+| Slow SQL queries on large tables | Analysed the queries and schema, added the right **indexes**, rewrote inefficient queries and **partitioned** large tables |
+| The same KPIs queried repeatedly | **Redis** caching for frequently accessed data |
+| Heavy calculations blocking the UI | Moved data retrieval and heavy computations to **asynchronous background processing** |
+| Architecture couldn't scale | Refactored for **horizontal scaling** with **Docker** on **Kubernetes**, adding containers during peak trading hours |
 
-#### 2. Design & Solution Validation
+```mermaid
+flowchart LR
+    UI["Trader dashboard"] --> API["Web API<br/>Docker on Kubernetes<br/>scaled out at peak"]
+    API --> C[("Redis cache<br/>frequent KPIs")]
+    API --> DB[("SQL Server<br/>indexed &<br/>partitioned tables")]
+    API --> BG["Background workers<br/>heavy calculations"]
+    BG --> DB
+```
 
-- **Present solution options:** Once I have a good grasp of the requirements, I typically present multiple design or architecture options to the client, explaining the trade-offs between cost, performance, scalability, and future flexibility.
-- **Collaborate on the design:** I involve the client in design discussions, making sure they understand why certain technical decisions are being made. For instance, I may explain why we are opting for a microservices architecture over a monolithic approach if scalability is a major concern.
-- **Prototype feedback:** At this stage, if possible, I create a prototype or proof of concept (PoC) for the client to interact with. This allows the client to provide early feedback on functionality, user experience, and whether the design meets their expectations.
+**Result:** Data retrieval response time dropped by **over 60%**, the system scaled with growing data volumes, and traders got their insights without delay.
 
-#### 3. Development & Regular Check-ins
-
-- **Frequent updates:** During the development phase, I ensure regular check-ins with the client, often through Agile methodologies like Scrum. Weekly or bi-weekly sprints provide opportunities for demonstrations and feedback loops.
-- **Manage expectations:** It’s important to keep the client updated on timelines, scope changes, and any challenges. I proactively manage expectations to ensure they understand what is being delivered and when.
-- **Demo working features:** I schedule regular sprint reviews or demos, where we showcase the working features to the client. This gives them visibility into the progress and helps adjust priorities if needed.
-
-#### 4. Testing & Quality Assurance
-
-- **Client involvement in testing:** During the testing phase, I encourage the client to be involved in user acceptance testing (UAT) to ensure the product aligns with their vision. I coordinate the UAT phase, ensuring the client has clear testing guidelines and that we address feedback promptly.
-- **Iterate based on feedback:** I incorporate client feedback from UAT and ensure the solution meets the required quality standards before moving toward deployment.
-
-#### 5. Deployment & Post-Launch Support
-
-- **Smooth transition to production:** I work closely with the client to plan and execute the deployment. This includes coordinating any data migrations, managing potential downtime, and ensuring that the deployment process is as seamless as possible.
-- **Post-launch support:** I offer support immediately after launch, being available to address any issues or questions the client may have. I also provide detailed documentation and training if required.
-- **Gather feedback for improvement:** Post-launch, I seek feedback to ensure the system is working as expected and to discuss any additional features or improvements that may be required for future releases.
-
-#### 6. Long-Term Relationship & Iterative Improvements
-
-- **Build trust through transparency:** Throughout the project, I maintain a transparent and collaborative approach, which helps build a lasting relationship with the client. They are kept informed of risks, progress, and challenges, which builds trust and helps avoid surprises.
-- **Continual improvement:** After the initial release, I often work with clients on iterative improvements, offering advice on how they can evolve the system as their business grows.
-
-### Can you discuss some challenges you faced when transitioning from traditional monolithic architectures to microservices?
+### How do you approach client interactions during the software development cycle?
 
 <!-- level: advanced -->
 
-Transitioning from traditional monolithic architectures to microservices is often necessary to meet scalability, flexibility, and agility needs, but it comes with several challenges. Here’s how I approached and overcame some of the most significant challenges during this transition in my projects:
+I involve the client at every stage, so there are no surprises at the end.
 
-#### 1. Service Decomposition
+```mermaid
+flowchart LR
+    D["Discover"] --> DS["Design"] --> B["Build"] --> T["Test (UAT)"] --> R["Release"] --> E["Evolve"]
+    E -.->|"feedback"| D
+```
 
-**Challenge:** One of the hardest parts of transitioning to microservices is deciding how to break down the monolithic application into individual services. In a monolithic architecture, components are tightly coupled, and splitting them into services without affecting functionality or performance can be tricky.
+| Phase | What I do with the client |
+| --- | --- |
+| **Discover** | Understand business goals and pain points; ask clarifying questions; document requirements as user stories; validate with wireframes or prototypes |
+| **Design** | Present 2–3 options with trade-offs (cost, performance, scalability, flexibility); explain decisions such as microservices vs monolith; build a proof of concept where useful |
+| **Build** | Regular check-ins through Scrum; sprint demos of working features; manage expectations on scope and timelines |
+| **Test** | Coordinate user acceptance testing (UAT) with clear guidelines; act on feedback quickly |
+| **Release** | Plan the deployment, data migrations and downtime together; provide documentation and training |
+| **Evolve** | Support after launch; gather feedback; plan improvements as the business grows |
 
-**Solution:**
+The common thread is **transparency** – sharing risks, progress and problems early builds trust.
 
-- **Domain-Driven Design (DDD):** I used DDD principles to identify business domains and bounded contexts. This helped define the boundaries for each microservice based on business logic rather than technical layers.
-- **Iterative decomposition:** Instead of attempting to decompose everything at once, I started with a few critical services (e.g., authentication, billing) and gradually split the application. This reduced the risk and complexity of the migration.
-- **Refactoring alongside new features:** Whenever we had to implement a new feature, I leveraged that opportunity to extract related functionality into microservices, aligning both business needs and technical restructuring.
+### What challenges did you face moving from a monolith to microservices?
 
-#### 2. Data Management
+<!-- level: advanced -->
 
-**Challenge:** In monolithic architectures, there’s often a single, shared database. Transitioning to microservices requires each service to manage its own data, creating challenges in terms of data consistency and cross-service communication.
+I migrated **incrementally** using the **Strangler Fig** pattern: new and extracted features go to new services, an API gateway routes traffic, and the monolith shrinks over time.
 
-**Solution:**
+```mermaid
+flowchart LR
+    C["Clients"] --> GW["API Gateway"]
+    GW -->|"remaining features"| M["Monolith<br/>(shrinking)"]
+    GW --> S1["Auth service"]
+    GW --> S2["Billing service"]
+    GW --> S3["New feature<br/>service"]
+    S1 --- D1[("DB")]
+    S2 --- D2[("DB")]
+    S3 --- D3[("DB")]
+```
 
-- **Database per service:** I designed each microservice with its own database schema to ensure loose coupling between services. This also allowed services to use the most suitable database type (SQL or NoSQL) depending on their needs.
-- **Event-Driven Architecture:** To maintain data consistency across services, I implemented an **event-driven approach** using **RabbitMQ** or **Kafka**. Services would emit events when their state changed, and other services would subscribe to those events. This ensured that changes in one service were communicated to others asynchronously.
-- **Saga Pattern:** For distributed transactions that involved multiple microservices (e.g., order processing or user registration), I employed the **Saga Pattern** to manage long-running transactions and handle failures gracefully without locking resources across services.
+| Challenge | Solution |
+| --- | --- |
+| **Where to split** | **Domain-Driven Design** – one service per bounded context; start with a few critical services (e.g. authentication, billing); extract more when building new features |
+| **Shared database** | **Database per service** (SQL or NoSQL as needed); **events** via RabbitMQ or Kafka to share changes; the **Saga pattern** for multi-service transactions |
+| **Network calls** | **REST or gRPC** for synchronous calls, **message queues** for asynchronous work; **circuit breakers** with **Polly** to stop cascading failures |
+| **Finding services and routing** | Service discovery with **Consul** or **Azure Service Fabric**; an **API Gateway** (**Kong**) for routing, authentication and rate limiting; **Kubernetes Ingress** and **autoscaling** |
+| **Debugging across services** | Centralised logging with **Application Insights** or **ELK**; distributed tracing with **OpenTelemetry** or **Jaeger**; Kubernetes **health probes** |
+| **Security** | **OAuth 2.0 and JWT** validated at the gateway; **mTLS** between services; secrets in **Azure Key Vault**; **RBAC** per service |
 
-#### 3. Inter-Service Communication
-
-**Challenge:** In a monolithic system, method calls within the same codebase are easy and fast. In microservices, services must communicate over the network, which introduces latency, network failures, and complexities around API design.
-
-**Solution:**
-
-- **Synchronous communication:** For services that required real-time communication (e.g., user service calling authentication service), I utilized **RESTful APIs** or **gRPC** for faster, more efficient communication.
-- **Asynchronous communication:** For scenarios where real-time communication was unnecessary (e.g., logging, event processing), I implemented **message queues** like RabbitMQ, which decoupled services and ensured fault tolerance.
-- **Circuit Breaker Pattern:** To handle failures gracefully in synchronous communication, I applied the **Circuit Breaker Pattern** using tools like **Polly**. This helped prevent cascading failures by allowing services to fail fast and recover without overloading the system.
-
-#### 4. Managing Service Discovery and Load Balancing
-
-**Challenge:** In a monolithic system, components are deployed together, making it easy to locate and interact with different modules. In microservices, each service can be deployed on a different host, making service discovery and load balancing crucial.
-
-**Solution:**
-
-- **Service Discovery:** I used **Consul** or **Azure Service Fabric** to implement service discovery, allowing microservices to dynamically discover other services without hardcoded addresses.
-- **API Gateway:** To simplify client interaction and handle cross-cutting concerns (like authentication, logging, rate limiting), I introduced an **API Gateway** using **Kong**. This centralized service routing and improved the overall architecture by offloading these responsibilities from individual services.
-- **Load Balancing:** For scalability, I used **Kubernetes** to deploy services in containers and configured load balancing via **Kubernetes Ingress** and **Horizontal Pod Autoscaling**. This ensured that microservices scaled automatically based on traffic.
-
-#### 5. Monitoring and Debugging
-
-**Challenge:** In a monolithic application, you have a single codebase and log file, which makes debugging relatively straightforward. In a microservices architecture, logs are spread across multiple services, making it harder to trace issues.
-
-**Solution:**
-
-- **Centralized Logging:** I implemented **Azure Application Insights** or **ELK (Elasticsearch, Logstash, Kibana)** to aggregate logs from all microservices into a centralized location. This allowed for easier searching, filtering, and correlating logs across services.
-- **Distributed Tracing:** I introduced **distributed tracing** using tools like **Jaeger** or **OpenTelemetry** to track requests as they traveled through multiple services. This enabled us to pinpoint bottlenecks and failures quickly.
-- **Health checks:** To ensure services were functioning properly, I integrated **health checks** using Kubernetes’ liveness and readiness probes, providing real-time status monitoring of all microservices.
-
-#### 6. Security
-
-**Challenge:** Security concerns become more complex in microservices, as each service must be secured individually, and sensitive data is shared across services. Unlike monoliths where you can manage security centrally, microservices need security implemented at multiple levels.
-
-**Solution:**
-
-- **OAuth 2.0 and JWT:** I implemented **OAuth 2.0** and **JWT** tokens for securing APIs. The API Gateway handled token validation, ensuring only authorized requests were forwarded to the services.
-- **Service-to-service communication:** For secure internal communication, I utilized **mTLS (Mutual TLS)** and **Azure Key Vault** for managing secrets, ensuring encrypted communication between microservices.
-- **Role-Based Access Control (RBAC):** To manage access permissions effectively, I implemented **RBAC** across services, ensuring each service could access only the data and operations it was authorized to.
-
-#### Result
-
-By addressing these challenges, I successfully transitioned the monolithic systems into microservices-based architectures that were more scalable, maintainable, and responsive to business needs. This transformation enabled better agility in development, faster deployment cycles, and easier scaling of individual services based on demand. Additionally, the use of modern DevOps practices with **CI/CD pipelines**, **Kubernetes**, and **Docker** ensured that microservices could be deployed and managed efficiently.
+**Result:** More scalable and maintainable systems, faster and independent deployments through **CI/CD**, and services that scale individually based on demand.
 
 ### How do you manage technical debt while architecting new solutions?
 
 <!-- level: advanced -->
 
-Managing technical debt while architecting new solutions is crucial to ensuring long-term maintainability, scalability, and efficiency. Here's my approach:
+I treat technical debt like financial debt: some is acceptable if it is **visible, deliberate and paid back**.
 
-#### 1. Understanding and Prioritizing Technical Debt
+```mermaid
+flowchart LR
+    I["Identify<br/>reviews, SonarQube"] --> P["Prioritise<br/>by impact & risk"]
+    P --> B["Add to backlog<br/>next to features"]
+    B --> F["Fix incrementally<br/>every sprint"]
+    F --> PR["Prevent<br/>standards, tests, ADRs"]
+    PR --> I
+```
 
-**Challenge:** Technical debt often accumulates due to compromises made under time constraints or evolving requirements. While it may not be immediately visible, it can cause issues down the road, such as increased maintenance costs, performance problems, or reduced agility.
+| Step | How |
+| --- | --- |
+| **Identify** | Code reviews, **SonarQube** metrics, test coverage, outdated libraries, temporary workarounds |
+| **Prioritise** | High / medium / low by impact on security, performance and future change; high-impact items first |
+| **Make it visible** | Debt items go into the **product backlog** alongside features; explain the cost of delay to product owners in business terms |
+| **Fix incrementally** | Reserve part of every sprint for refactoring; small, safe changes instead of big rewrites |
+| **Prevent** | Modular design, **SOLID** and **Clean Architecture**, **TDD** and automated tests in **CI/CD**, architecture reviews, living documentation (Swagger, wiki, ADRs) |
+| **Avoid over-engineering** | Build for the MVP and real requirements; optimise when real usage shows a bottleneck |
 
-**Solution:**
-
-- **Identify and categorize debt:** I regularly assess areas where technical debt exists or could potentially accumulate. This includes areas like temporary workarounds, outdated libraries, poorly documented code, or insufficient test coverage.
-- **Prioritize based on impact:** Not all technical debt is created equal. I categorize debt into “high”, “medium”, and “low” impact based on how it affects the system’s performance, security, and future scalability. High-impact debt, especially those impacting critical paths or security, is prioritized.
-- **Collaborate with stakeholders:** Engaging both technical and business stakeholders helps align priorities. Sometimes the business needs to deliver features quickly, but I make sure to communicate the risks of delaying debt resolution, enabling informed decisions about trade-offs.
-
-#### 2. Building Solutions with Long-Term Vision
-
-**Challenge:** Architectural decisions made early in a project can either prevent or introduce technical debt. It's easy to focus on short-term deliverables without fully considering future growth, scalability, or changes in technology.
-
-**Solution:**
-
-- **Modular design:** I design systems with modularity in mind, breaking down functionality into loosely coupled components (e.g., microservices, modular front-end components) to ensure that future changes can be isolated. This limits the impact of technical debt to individual modules rather than the entire system.
-- **SOLID principles and design patterns:** By following the **SOLID principles** and employing appropriate design patterns (such as **factory pattern**, **repository pattern**, **CQRS**, etc.), I ensure the codebase is flexible and can be extended or refactored without accumulating significant debt.
-- **Plan for scalability:** Even if a system starts small, I architect solutions with scalability in mind. For example, choosing a database solution that can handle growth, designing APIs that can handle future versions, and ensuring that the system can integrate with cloud-based services when needed.
-
-#### 3. Incremental Refactoring
-
-**Challenge:** It’s often not possible to completely avoid technical debt, especially in the early stages of a project or when tight deadlines are involved. However, tackling debt later can feel overwhelming.
-
-**Solution:**
-
-- **Refactor regularly:** I ensure that refactoring is part of the development lifecycle rather than something deferred indefinitely. Each sprint or development cycle allocates a portion of time for improving code quality, simplifying logic, or addressing inefficiencies.
-- **Code reviews and pair programming:** Regular **code reviews** help catch technical debt before it gets merged into the codebase. I also encourage **pair programming** on complex modules, ensuring that multiple developers understand the system, which reduces the chances of introducing poor design decisions.
-- **Small, focused changes:** Instead of overhauling large portions of the system in one go, I advocate for smaller, incremental refactorings. This makes the changes less risky and easier to track, and prevents refactoring from delaying new feature development.
-
-#### 4. Automated Testing and CI/CD Pipelines
-
-**Challenge:** Technical debt often accumulates in the form of untested code or unreliable manual testing, which leads to hard-to-track bugs, regressions, and longer release cycles.
-
-**Solution:**
-
-- **Test-driven development (TDD):** I promote a **TDD** approach, where unit tests are written alongside production code. This ensures that technical debt related to insufficient test coverage is minimized from the start.
-- **Automated testing:** I implement automated testing, including unit, integration, and end-to-end tests, as part of the **CI/CD pipeline**. This allows for continuous verification of code quality and prevents debt from sneaking into the system unnoticed.
-- **Coverage analysis:** I regularly track test coverage to ensure all critical parts of the system are adequately tested, and I incorporate automated tools like **SonarQube** to measure technical debt and code quality metrics.
-
-#### 5. Documentation and Knowledge Sharing
-
-**Challenge:** Lack of documentation often contributes to technical debt, as it makes onboarding new team members difficult and makes understanding the codebase more challenging over time.
-
-**Solution:**
-
-- **Living documentation:** I ensure that all critical components of the architecture are well-documented. This includes both high-level design documents and inline code comments. Where applicable, I use tools like **Swagger** for API documentation and **Azure DevOps Wiki** for architecture discussions.
-- **Knowledge sharing:** I regularly conduct **knowledge-sharing sessions**, both for developers and stakeholders, to explain design decisions, system architecture, and where technical debt may lie. This fosters a shared understanding of the system and ensures that the team is aligned on long-term goals.
-
-#### 6. Enforcing Architectural Standards
-
-**Challenge:** When teams or services are developed in silos or with inconsistent architectural guidelines, technical debt often accumulates due to varying code quality, different design patterns, or lack of best practices.
-
-**Solution:**
-
-- **Coding standards and guidelines:** I enforce the use of standard design and coding principles (e.g., Clean Architecture, **SOLID**, and **DRY**) across teams. These architectural guidelines help maintain code consistency and avoid unnecessary debt.
-- **Architectural review boards:** I hold regular architecture review meetings where proposed changes to the system architecture are discussed and vetted by the team. This ensures alignment across all services and prevents debt from being introduced due to misaligned priorities or misunderstandings.
-
-#### 7. Balancing Feature Development and Debt Repayment
-
-**Challenge:** There's often pressure to deliver new features quickly, but this can lead to an accumulation of technical debt if shortcuts are taken. Balancing business needs with maintaining a clean codebase is always a challenge.
-
-**Solution:**
-
-- **Technical debt as part of backlog:** I treat technical debt similarly to feature development by adding debt-related tasks (like refactoring or performance optimization) to the **backlog**. I work with product owners to prioritize these tasks alongside new features, ensuring that debt is addressed as part of the development process.
-- **Communicating the trade-offs:** I explain the risks and costs of leaving technical debt unresolved to both technical and non-technical stakeholders. By quantifying the impact of technical debt (e.g., longer development cycles, reduced agility), I ensure there’s a shared understanding of why addressing it is critical.
-
-#### 8. Avoiding Premature Optimization
-
-**Challenge:** While it's important to manage technical debt, prematurely optimizing for edge cases can itself introduce complexity and unnecessary debt.
-
-**Solution:**
-
-- **Focus on the MVP:** I ensure that solutions are built to meet the **Minimum Viable Product (MVP)** requirements while leaving room for iteration. This allows for faster time to market and avoids introducing unnecessary complexity or over-engineered solutions.
-- **Iterative improvements:** Instead of trying to perfect the system from the beginning, I architect for flexibility and make iterative improvements as real-world usage patterns and bottlenecks emerge. This way, technical debt is kept in check without delaying important releases.
-
-#### Result
-
-By proactively managing technical debt throughout the development process, I ensure that it remains under control, minimizing its long-term impact on the system. This approach leads to a codebase that is easier to maintain, scale, and extend, while still meeting the immediate business needs. The key is finding the right balance between delivering new features and keeping the architecture clean, flexible, and future-proof.
+**Result:** Debt stays under control without slowing down delivery – the codebase remains easy to maintain, scale and extend.
