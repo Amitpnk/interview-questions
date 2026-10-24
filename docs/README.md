@@ -1,42 +1,86 @@
-# Full stack developer - Interview Questions & Answers
+# Full Stack Developer – Interview Questions & Answers
 
 [![Documentation](https://github.com/Amitpnk/interview-questions/actions/workflows/main.yaml/badge.svg)](https://github.com/Amitpnk/interview-questions/actions/workflows/main.yaml)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Amitpnk/interview-questions/blob/develop/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Amitpnk/interview-questions/blob/main/LICENSE)
 
-Crack you next tech interview or for technical recruiters, team leads
+Crack your next tech interview – or use it as a question bank if you are a technical recruiter or team lead.
 
-## Give a Star! :star:
-
-If you like or are using this project to learn or start your solution, please give it a star. Thanks!
-
-## Support This Project
-
-If you have found this project helpful, either as a library that you use or as a learning tool, please consider buying me a coffee:
-
-<a href="https://www.buymeacoffee.com/codewithamit" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important" ></a>
-
-## Screenshots
-
-### website link
-
-[Link](https://amitpnk.github.io/interview-questions)
-
-### screenshot of website
+**Website:** [amitpnk.github.io/interview-questions](https://amitpnk.github.io/interview-questions)
 
 <p float="left">
-  <a href="https://amitpnk.github.io/interview-questions"><img alt="Simple theme cover page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/screenshot-1.png" width="49%"></a>
-  <a href="https://amitpnk.github.io/interview-questions"><img alt="Simple theme cover page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/screenshot-2.png" width="49%"></a>
+  <a href="https://amitpnk.github.io/interview-questions"><img alt="Cover page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/screenshot-1.png" width="49%"></a>
+  <a href="https://amitpnk.github.io/interview-questions"><img alt="Question page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/screenshot-2.png" width="49%"></a>
 </p>
 
-<!-- ![screenshot](./img/screenshot-1.png)
+## Topics
 
-![screenshot](./img/screenshot-2.png) -->
+| Topic | Page |
+| --- | --- |
+| C# & OOP | [CsharpOops.md](CsharpOops.md) |
+| .NET Fundamentals | [DotNetFundamental.md](DotNetFundamental.md) |
+| ASP.NET Core | [DotnetCore.md](DotnetCore.md) |
+| Web API | [API.md](API.md) |
+| Coding Programs | [SimpleProgram.md](SimpleProgram.md) |
+| Design Principles | [DesignPrinciple.md](DesignPrinciple.md) |
+| Design Patterns | [DesignPattern.md](DesignPattern.md) |
+| Software Architect | [SoftwareArchitect.md](SoftwareArchitect.md) |
+| SQL Server | [SQLServer.md](SQLServer.md) |
+| Angular | [Angular.md](Angular.md) |
 
-## Reference
+## Project structure
 
-- Kudvenkat youtube channel
-- Shivprasad Koirala youtube channel
+```text
+interview-questions/
+├── docs/                   # Docsify website (published with GitHub Pages)
+│   ├── index.html          # Docsify configuration and plugins
+│   ├── index.md            # Home page
+│   ├── _coverpage.md       # Cover page
+│   ├── _sidebar.md         # Sidebar navigation
+│   ├── *.md                # One page per topic
+│   ├── assets/             # Custom CSS and icons
+│   └── img/                # Diagrams, logos and screenshots
+├── src/
+│   ├── ConsoleApp/         # C# samples used in the answers
+│   └── SQLScript/          # SQL scripts for the SQL Server samples
+├── .github/workflows/      # Builds PDF versions of the docs
+└── TODO.md                 # Topics still to be added
+```
+
+## Run the site locally
+
+```bash
+npm install -g docsify-cli
+docsify serve docs
+```
+
+Then open <http://localhost:3000>.
+
+## Contributing
+
+Each page uses the same layout, so new questions are easy to add:
+
+- `#` – page title (one per page)
+- `##` – category
+- `###` – question, written as a question
+- Code blocks use a language tag: `csharp`, `sql`, `ts`, `html`, `bash`, `json` or `text`
+
+The sidebar table of contents is generated from the headings automatically.
+
+## Give a star :star:
+
+If you like this project or use it to prepare for interviews, please give it a star. Thanks!
+
+## Support this project
+
+If you have found this project helpful, please consider buying me a coffee:
+
+<a href="https://www.buymeacoffee.com/codewithamit" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important"></a>
+
+## References
+
+- Kudvenkat YouTube channel
+- Shivprasad Koirala YouTube channel
 
 ## Contact
 
-Having any issues or troubles getting started? Drop a mail to amit.naik8103@gmail.com or [Raise a Bug or Feature Request](https://github.com/Amitpnk/Clean-architecture-ASP.NET-Core/issues/new). Always happy to help.
+Having any issues? Drop a mail to amit.naik8103@gmail.com or [raise a bug or feature request](https://github.com/Amitpnk/interview-questions/issues/new). Always happy to help.

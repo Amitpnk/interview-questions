@@ -1,11 +1,10 @@
 # Interview Questions & Answers
 
-> Interview Questions & Answers for Full stack developer
+> Questions and answers for full stack .NET developers
 
-- Oops concept
-- C# and .Net
-- .Net core
-- Design princple and many more
+- C# & OOP, .NET and ASP.NET Core
+- Design principles, design patterns and architecture
+- SQL Server, Web API and Angular
 
-[Get Started](?id=table-of-contents)
-[GitHub](https://github.com/Amitpnk/csharp-interview-questionss)
+[Get Started](?id=topics)
+[GitHub](https://github.com/Amitpnk/interview-questions)

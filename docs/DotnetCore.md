@@ -1,147 +1,170 @@
+# ASP.NET Core
 
-## Table of Contents
+## Basics
 
-| No. | Questions |
-| --- | --------- |
-||**Dotnet core**|
-|1   |	[What is ASP.NET MVC Core?](#what-is-asp.net-mvc-core)	|
-|2   |	[Difference between Webform, MVC 5 and .NET Core?](#difference-between-webform,-mvc-5-and-.net-core)	|
-|3   |	[What is MVC Architecture](#what-is-mvc-architecture)	|
-|4   |	[Why do we have wwwroot folder?](#why-do-we-have-wwwroot-folder)	|
-|5   |	[Explain appsettings.json](#explain-appsettings.json)	|
-|6   |	[How to read configuration from appsettings.json?](#how-to-read-configuration-from-appsettings.json)	|
-|7   |	[What is dependency injection?](#what-is-dependency-injection)	|
-|8   |	[Why do we need DI?](#why-do-we-need-di)	|
-|9   |	[How do we implement DI?](#how-do-we-implement-di)	|
-|10  |	[What is use of Middleware?](#what-is-use-of-middleware)	|
-|11  |	[How to do implement?](#how-to-do-implement)	|
-|12  |	[Differernce between ConfigureServices & Configure method in Startup.c](#differernce-between-configureservices-&-configure-method-in-startup.c)	|
-|13  |	[Difference between Scoped vs Transient vs Singleton?](#difference-between-scoped-vs-transient-vs-singleton)	|
-|14  |	[What is razor?](#what-is-razor)	|
-|15  |	[What is Kestrel?](#what-is-kestrel)	|
-|16  |	[Why Kestrel?](#why-kestrel)	|
-|17  |	[what are cookies?](#what-are-cookies)	|
-|18  |	[Session management?](#session-management)	|
-|19  |	[Different ways of doing session management?](#different-ways-of-doing-session-management)	|
+### What is ASP.NET Core MVC?
 
+It is an open-source, **cross-platform** web development framework from Microsoft for building web applications.
 
+### What is the difference between Web Forms, MVC 5 and ASP.NET Core?
 
-1. ### What is ASP.NET MVC Core?
+| | Web Forms | MVC 5 | ASP.NET Core |
+| --- | --- | --- | --- |
+| Cross-platform | No | No | Yes |
+| Performance | Slow | Better | Best (framework split into smaller packages) |
+| Simplicity | Complicated | Medium | Very simplified |
+| Cloud ready | No | Partly | Yes |
+| Self-hosting | No | No | Yes (Kestrel) |
 
-It is an open source *cross platform* web development framework to develop web application created by Mircosoft
+### What is MVC architecture?
 
-2. ### Difference between Webform, MVC 5 and .NET Core?
+MVC (Model–View–Controller) is an architecture pattern that separates an application into three parts:
 
-|| Webform | MVC5 | .NET Core |
-|---|---|---|---|
-|Cross platofrm|No|No|Yes|
-|Performance|Slow|Better|Best (dll is divided more)|
-|Simplification | complicated| Medium complicated|  Very simplified|
-|Cloud | No| Not complete|Yes|
-|Self hosting | No| No |Yes (Kestrel) |
+- **Model** – data and business logic
+- **View** – the UI
+- **Controller** – handles the request, works with the model and selects the view
 
-3. ### What is MVC Architecture
+### What is Razor?
 
-It is archtecture pattern.
+Razor is a view engine that lets you mix HTML and C# code. Server-side code in a `.cshtml` page starts with `@`.
 
-4. ### Why do we have wwwroot folder?
+### Why do we have the wwwroot folder?
 
-We can store static content like HTML, css, js files
+It stores static content such as HTML, CSS, JavaScript and image files.
 
-5. ### Explain appsettings.json
+## Configuration
 
-Appsettings.json file helps to store config information
+### What is appsettings.json?
 
-6. ### How to read configuration from appsettings.json?
+`appsettings.json` stores configuration information, such as connection strings and application settings.
 
-By IConfiguration 
+### How do you read configuration from appsettings.json?
 
-7. ### What is dependency injection?
+Through `IConfiguration`, injected into the class that needs it:
 
-DI is practice of providing dependent objects from outside rather then creating inside class
+```csharp
+public class HomeController : Controller
+{
+    private readonly IConfiguration _configuration;
 
-8. ### Why do we need DI?
+    public HomeController(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
 
-* High level modules should not depend on low-level modules
-* Decoupling
+    public IActionResult Index()
+    {
+        string connection = _configuration.GetConnectionString("DefaultConnection");
+        string title = _configuration["AppSettings:Title"];
+        return View();
+    }
+}
+```
 
-9. ### How do we implement DI?
+### What is the difference between `ConfigureServices` and `Configure` in Startup.cs?
 
-Change in one place, it is reflect in all places
+- `ConfigureServices` – configures the dependency injection container (registers services)
+- `Configure` – configures the middleware pipeline
 
-```c#
-ConfigureServices()
+> **Note:** From .NET 6, both are done in `Program.cs` – services through `builder.Services`, and middleware on the `app` object.
+
+## Dependency injection
+
+### What is dependency injection?
+
+DI is the practice of providing dependent objects from outside a class, rather than creating them inside it.
+
+### Why do we need DI?
+
+- High-level modules should not depend on low-level modules
+- Decoupling – a change in one place is reflected everywhere the dependency is used
+- Easier unit testing, because dependencies can be mocked
+
+### How do we implement DI?
+
+Register the service in `ConfigureServices` (or `builder.Services` in .NET 6+), then accept it in the constructor:
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
 {
     services.AddScoped(typeof(IRequestDeal<>), typeof(DealDomain<>));
 }
 ```
 
-10. ### What is use of Middleware?
+### What is the difference between Scoped, Transient and Singleton?
 
-Middleware helps to execute pre-processing logic before controller is executed
+- **`AddScoped`** – the same instance within the scope of a given HTTP request, but a new instance across different HTTP requests
+- **`AddTransient`** – a new instance every time one is requested, whether within the same HTTP request or across different ones
+- **`AddSingleton`** – a single instance is created when the service is first requested, and used by all HTTP requests for the lifetime of the application
 
-Middleware components are pieces of code, which are added to your application’s pipeline and have the job of handling each request and response
+| | Within the same HTTP request | Across different HTTP requests |
+| --- | --- | --- |
+| Scoped | Same instance | New instance |
+| Transient | New instance | New instance |
+| Singleton | Same instance | Same instance |
 
-11. ### How to do implement?
+## Middleware
 
-Step 1: 
-Create middleware class (From template)
+### What is middleware used for?
 
-Step 2: 
-Inside Invoke we can write logic 
+Middleware components are pieces of code added to the application's pipeline. Each one handles the request and response, and can run logic before and after the next component – for example, pre-processing before a controller executes.
 
-Step 3: 
-In configure method from startup.cs
+![Middleware](./img/middleware-1.png)
 
-```c#
+### How do you implement custom middleware?
+
+1. Create a middleware class (from the Visual Studio template, or by hand)
+2. Write your logic inside the `Invoke` / `InvokeAsync` method
+3. Register it in the `Configure` method of Startup.cs
+
+```csharp
+public class CustomMiddleware
+{
+    private readonly RequestDelegate _next;
+
+    public CustomMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        // logic before the next middleware
+        await _next(context);
+        // logic after the next middleware
+    }
+}
+```
+
+```csharp
 app.UseMiddleware<CustomMiddleware>();
 ```
 
-12. ### Differernce between ConfigureServices & Configure method in Startup.cs
+## Hosting
 
-ConfigureServices - helps to configure dependency object
+### What is Kestrel?
 
-Configure - helps us to configure middleware
+Kestrel is an open-source, cross-platform web server built into ASP.NET Core.
 
-13. ### Difference between Scoped vs Transient vs Singleton?
+### Why Kestrel?
 
-* *AddScoped* - With scoped service, we get same instance within scope of given http request but new instancce accross diferent http requests
+Kestrel is cross-platform and lightweight, so ASP.NET Core applications can be self-hosted on Windows, Linux and macOS without IIS.
 
-* *AddTransient* -  With transient service,  <u>a new instance is provided every time an instance is requested</u> whether it is scope of same http request or across different http requests
+## State management
 
-* *AddSingleton* - When service is first requested and that single instance is used by all http requests throughout application.
+### What are cookies?
 
-|| In scope of given http request  | Across different http requests | 
-|---|---|---|
-|Scoped|Same instance|New instance|
-|Transient|New instance|New instance|
-|Singleton|Same instance|Same instance|
+Cookies are small text files stored in the end user's browser by a website.
 
-14. ### What is razor?
+### What is session management?
 
-Razor is view engine in which we can write html and c# code
+Session management techniques maintain state between HTTP requests, because HTTP itself is stateless.
 
-Can write server side in cshtml page starting with @
+### What are the different ways of doing session management?
 
-15. ### What is Kestrel?
-
-Open source web server
-
-16. ### Why Kestrel?
-
-Kestrel is cross platform
-
-17. ### what are cookies?
-
-Cookies are text files which stores in end user website
-
-18. ### Session management?
-
-Session management techniques helps to maintain states between HTTP requests.
-
-19. ### Different ways of doing session management?
-
-* Session
-* ViewData
-* ViewBag
-* TempData
+- Session
+- Cookies
+- Query strings
+- ViewData
+- ViewBag
+- TempData

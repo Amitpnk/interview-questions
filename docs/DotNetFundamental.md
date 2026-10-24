@@ -1,125 +1,240 @@
-# C# and .Net Framework Fundamentals
+# .NET Fundamentals
 
-## What is Intermediate Language (IL) code (or MSIL-Microsoft ILS or CIL-Common IL )
+## Compilation and runtime
 
-* IL code is partially compiled code
-* on runtime this code is compiled to machine specific using the environmental properties (CPU,OS, machine configuration etc).
+### What is Intermediate Language (IL) code?
 
-via ILDASM tool we can view a IL code of a DLL or EXE
+IL is also called MSIL (Microsoft IL) or CIL (Common IL).
 
-## JIT (Just in compiler)
+- IL code is partially compiled code
+- At run time, IL code is compiled to machine-specific code using the environment's properties (CPU, OS, machine configuration, etc.)
 
-JIR compiled IL code to machine language
+You can view the IL code of a DLL or EXE with the **ILDASM** tool.
 
-## Different types of JIT
+### What is JIT (Just-In-Time compiler)?
 
-* Normal-JIT (Default): - Normal-JIT compiles only those methods that are called at runtime (cached takes more memory like ASP.NET and windows application)
-* Econo-JIT: - Econo-JIT compiles only those methods that are called at runtime (No caching takes less memory like mob device and console applicaion)
-* Pre-JIT: - Pre-JIT compiles complete source code into native code in a single compilation cycle. This is done at the time of deployment of the application
+The JIT compiler compiles IL code into machine (native) code at run time.
 
-## CLR (Common Language Runtime)
+### What are the different types of JIT?
 
-* Invokes JIT to compile from IL to machine language or native code
-* Cleans an unused objects by using GC
+- **Normal JIT (default)** – compiles only the methods called at run time and caches them. Uses more memory; suited to ASP.NET and Windows applications.
+- **Econo JIT** – compiles only the methods called at run time, without caching. Uses less memory; suited to mobile devices and console applications.
+- **Pre-JIT** – compiles the complete source code into native code in a single cycle, at deployment time (e.g. with NGen).
 
-## Managed code & unmanaged code
+### What is the CLR (Common Language Runtime)?
 
-* Managed code - which runs under the control of CLR
-* Unmanaged code - which runs outside CLR (like C++, C etc)
+- Invokes the JIT to compile IL into machine (native) code
+- Cleans up unused objects using the garbage collector (GC)
 
-## Garbage collector
+### What is the difference between managed and unmanaged code?
 
-Garbage collector is a back ground process which cleans unused managed resources. 
+- **Managed code** – runs under the control of the CLR
+- **Unmanaged code** – runs outside the CLR (e.g. C, C++ or COM components)
 
-```c#
-for (int a =0; a<1000000000; a++){
-       cls obj = new cls();
-}
-```
+### What is the CTS (Common Type System)?
 
-Can be checked via Visual studio Diagonotic viewer or CLR profiler 
+The CTS ensures that data types defined in two different languages compile to a common data type. For example, both of these compile to `System.Int32`:
 
-## CTS (Common Type System)
-
-Ensures data types defined in two different languages gets compiled to a common data type.
-
-```vb
+```vbnet
 Dim i As Integer
 ```
 
-```c#
+```csharp
 int i;
 ```
 
-## CLS(Common Language Specification)
+### What is the CLS (Common Language Specification)?
 
-Specification/set of rules/Guideliness of the source code.
+The CLS is a set of rules and guidelines that a .NET language must follow, so that code written in one language can be used from another.
 
-## Difference between Stack and Heap
+## Memory management
 
-Stack memory stores data types like int, double, boolean,
-Heap memory stores like string and objects.
+### What is the difference between stack and heap?
 
-## Difference between value and reference type
+- **Stack** memory stores value types such as `int`, `double` and `bool`
+- **Heap** memory stores reference types such as `string` and objects
 
-Value types contains actual data
-Reference types contains pointers and pointers point to actual data
+### What is the difference between value types and reference types?
 
-```c#
-int i =10;
+- **Value types** contain the actual data
+- **Reference types** contain a pointer (reference), and the pointer points to the actual data
+
+```csharp
+int i = 10;
 bool b = true;
-Customer obj= new Customer();
+Customer obj = new Customer();
 obj.Name = "Amit";
 ```
 
-![img](./img/StackHeap.png)
+![Stack and heap](./img/StackHeap.png)
 
-## Difference between boxing and unboxing
+### What is the difference between boxing and unboxing?
 
-Box - Convert from value to reference
-Unboxing - reference type to value
+- **Boxing** – converting a value type to a reference type
+- **Unboxing** – converting a reference type to a value type
 
-VR-B
-RV-U
+Mnemonic: **V**alue → **R**eference = **B**oxing, **R**eference → **V**alue = **U**nboxing.
 
-```c#
-public void method()
+```csharp
+public void Method()
 {
-     int i=10;
-     object obj =I;   //boxing
-     int j =(int)obj;  //unboxing
+    int i = 10;
+    object obj = i;    // boxing
+    int j = (int)obj;  // unboxing
 }
 ```
 
-unboxing and boxing bring down performance because data has to jump between heap and stack memory types
+Boxing and unboxing reduce performance, because data has to move between stack and heap memory.
 
-## Explain casting, implicit casting and explicit casting
+### What is the garbage collector?
 
-Casting where we convert one type of data type to other data type
+The garbage collector is a background process that cleans up unused **managed** resources.
 
-* Implicit casting -  move from lower to higher data type
-* Explicit casting -  move from higher to lower data type
-
-```c#
-int i1 =10;
-double d1 =i1; // implict casting
-
-double d2 = 500.2;
-int y = (int)d2; // explicit casting - data lose
+```csharp
+for (int a = 0; a < 1000000000; a++)
+{
+    Cls obj = new Cls();
+}
 ```
 
-## Difference between Array and ArrayList
+You can watch the GC at work with the Visual Studio Diagnostic Tools window or CLR Profiler.
 
-||Array|ArrayList|
-|---|---|---|
-|Fixed length|yes|no|
-|Strongly typed|yes|no|
-|Performance|Better then Array list|Slower because of boxing/unboxing|
+### Can we call the garbage collector explicitly?
 
-ArrayList is slower than Array because of Boxing and Unboxing
+Yes, but it is not recommended.
 
-```c#
-int[] arr = {1,2,3};  
+```csharp
+GC.Collect();
+```
+
+### How do you dispose of an object?
+
+Release unmanaged resources as soon as you are done with them, by either:
+
+1. Calling the `Dispose()` method
+2. Wrapping the object in a `using` block
+
+### What are the uses of the `using` keyword?
+
+**Using directives** import namespaces, or create aliases for namespaces or types. They go at the top of the file, before any declarations.
+
+```csharp
+using System;
+using System.IO;
+using Services = Application.Services;
+```
+
+**Using statements** can only be used with types that implement `IDisposable`. They are syntactic sugar for a `try`/`finally` block that calls `Dispose()` in the `finally` block.
+
+```csharp
+using (Stream input = File.OpenRead(filename))
+{
+    // ...
+}
+```
+
+### What is the equivalent code of a `using` statement?
+
+```csharp
+using (MyType obj = new MyType())
+{
+    // ... do stuff
+}
+```
+
+is equivalent to:
+
+```csharp
+MyType obj = new MyType();
+try
+{
+    // ... do stuff
+}
+finally
+{
+    if (obj != null)
+    {
+        obj.Dispose();
+    }
+}
+```
+
+### What is the difference between `Finalize` and `Dispose`?
+
+Both are used to clean up unmanaged resources.
+
+| | Finalize | Dispose |
+| --- | --- | --- |
+| Syntax | Written as a class destructor | Implemented as a `Dispose()` method |
+| Execution | Called non-deterministically (automatically) by the GC | Must be called explicitly to release resources |
+
+**Finalize** is called by the garbage collector:
+
+```csharp
+public class Demo
+{
+    ~Demo()
+    {
+        Console.WriteLine("Finalize called");
+    }
+}
+```
+
+**Dispose** – resources such as window handles, database connections, network connections and files cannot be collected by the garbage collector. To release them explicitly, implement `IDisposable`:
+
+```csharp
+public class Demo : IDisposable
+{
+    private bool disposed = false;
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposed)
+        {
+            if (disposing)
+            {
+                // clean up managed objects
+            }
+            // clean up unmanaged objects
+            disposed = true;
+        }
+    }
+}
+```
+
+## Types and collections
+
+### What are casting, implicit casting and explicit casting?
+
+Casting converts one data type to another.
+
+- **Implicit casting** – from a smaller to a larger data type (no data loss)
+- **Explicit casting** – from a larger to a smaller data type (possible data loss)
+
+```csharp
+int i1 = 10;
+double d1 = i1;      // implicit casting
+
+double d2 = 500.2;
+int y = (int)d2;     // explicit casting - data loss
+```
+
+### What is the difference between `Array` and `ArrayList`?
+
+| | Array | ArrayList |
+| --- | --- | --- |
+| Fixed length | Yes | No |
+| Strongly typed | Yes | No |
+| Performance | Better | Slower because of boxing/unboxing |
+
+```csharp
+int[] arr = { 1, 2, 3 };
 
 ArrayList arrList = new ArrayList();
 arrList.Add(1);
@@ -127,50 +242,83 @@ arrList.Add(2);
 arrList.Add("three");
 ```
 
-## Generic collection
+### What is a generic collection?
 
-Generic collection is strongly typed and flexible. It has better performance as compared to ArrayList
+A generic collection is strongly typed **and** flexible in size. It performs better than `ArrayList` because there is no boxing/unboxing.
 
-```c#
-List<int> lt = new List<int>();
-lt.Add(1);
-lt.Add(2);
+```csharp
+List<int> list = new List<int>();
+list.Add(1);
+list.Add(2);
 ```
 
-## What are threads(multithreading)
+## Methods and parameters
 
-If we want to run code parallely then we use threads.
+### What is the `out` keyword?
 
-```c#
-Thread t1 = new Thread(Method1);
-t1.Start();
+Use `out` when you want a method to return multiple values.
 
-Thread t2 = new Thread(Method2);
-t2.Start();
+```csharp
+static void Main()
+{
+    Calculate(10, 5, out int add, out int sub);
+}
+
+static void Calculate(int n1, int n2, out int add, out int sub)
+{
+    add = n1 + n2;
+    sub = n1 - n2;
+}
 ```
 
-## How are threads different from TPL?  
+### What is the difference between `ref` and `out`?
 
-```c#
-Task t1 = new Task(Method1);
-t1.Start();
+- With `ref`, the variable **must be initialised** before it is passed
+- With `out`, the method **must assign** the value before it returns
 
-Task t2 = new Task(Method2);
-t2.Start();
+`ref`:
+
+```csharp
+static void MethodFunction(ref int i)
+{
+    i = i + 44;
+}
+
+static void Main()
+{
+    int val = 10; // must be initialised
+    MethodFunction(ref val);
+    Console.WriteLine(val); // 54
+}
 ```
 
-## Difference between Task and Thread
+`out`:
 
-Importance of task
-* parallel processing
-* return, result, cancel, Async, Await
+```csharp
+static void MethodFunction(out int i)
+{
+    i = 44; // must be assigned
+}
 
-## How do you handle exceptions in c#?
+static void Main()
+{
+    int val;
+    MethodFunction(out val);
+    Console.WriteLine(val); // 44
+}
+```
 
-```c#
-try{
-    int z =1/0;
-} catch(Exception ex){
+## Exception handling
+
+### How do you handle exceptions in C#?
+
+```csharp
+try
+{
+    int z = 1 / 0;
+}
+catch (Exception ex)
+{
     Console.WriteLine("Exception");
 }
 finally
@@ -179,232 +327,111 @@ finally
 }
 ```
 
-## What is finally
+### What is `finally`?
 
-It executed, if code throw exception or not
+The `finally` block always executes, whether or not the code throws an exception.
 
-## What out keyword
+## Threading
 
-If we want multiple return values from funtion 
+### What are threads (multithreading)?
 
-```c#
-Main(){
-    Calculate(10,5, out add, out sub);
-}
+Threads let code run in parallel.
 
-Calculate(int n1, int n2, out int add, out int sub){
-    add = n1 + n2;
-    sub = n1 - n2;
-}
+```csharp
+Thread t1 = new Thread(Method1);
+t1.Start();
+
+Thread t2 = new Thread(Method2);
+t2.Start();
 ```
 
-## Difference between ref and out?
+### How are threads different from the TPL (Task Parallel Library)?
 
-* In ref we have to initialize the value before passing
-* In out we have to modify inside the function
+```csharp
+Task t1 = new Task(Method1);
+t1.Start();
 
-ref
-```c#
-static void methodFunction(ref int i)
-{
-    i = i + 44;
-}
-main()
-{ 
-    int val = 10; // have to initial the value
-    methodFunction(ref val);
-    Console.WriteLine(val);
-}
+Task t2 = new Task(Method2);
+t2.Start();
 ```
 
-out 
-```c#
-static void methodFunction(out int i)
-{
-    i = 44;
-}
-main()
-{ 
-    int val;
-    methodFunction(out val);
-    Console.WriteLine(val);
-}
-```
+The TPL works at a higher level than threads: tasks run on the thread pool, and the TPL manages scheduling across CPU cores for you.
 
-## Delegates and it's usage
+### What is the difference between a Task and a Thread?
 
-Delegates are callbacks which helps to communicate between async and parallel execution
+Tasks provide:
 
-Example: 
-if you have two parallel process and if you need to send data to other parallel process. In this scenario delegates will be helpful
+- Parallel processing that uses all CPU cores efficiently
+- Return values (`Task<T>`), results, continuations and cancellation
+- Support for `async` / `await`
 
-## Multicast delegates
+## Delegates and events
 
-Multicast delegates is nothing but basically multiple methods runs at one moment of time
+### What are delegates and how are they used?
 
-Example: 
-Broadcast error message via email, file log, sms, event log etc
+Delegates are type-safe function pointers, used for callbacks between async and parallel executions.
 
-```c#
+Example: if two processes run in parallel and one needs to send data to the other, a delegate is helpful.
+
+### What are multicast delegates?
+
+A multicast delegate calls multiple methods with a single invocation.
+
+Example: broadcasting an error message via email, file log, SMS, event log, etc.
+
+```csharp
 class Example
 {
     public delegate void MyDelegate();
 
-    private void Subscriber1(){
+    private void Subscriber1()
+    {
         Console.WriteLine("Subscriber 1");
     }
 
-    private void Subscriber2(){
+    private void Subscriber2()
+    {
         Console.WriteLine("Subscriber 2");
     }
 
-    void button_click()
+    void Button_Click()
     {
-        MyDelegate mydele =null;
-        mydele += this.Method1;
-        mydele += this.Method2;
-        mydele.Invoke();
+        MyDelegate myDelegate = null;
+        myDelegate += this.Subscriber1;
+        myDelegate += this.Subscriber2;
+        myDelegate.Invoke();
     }
 }
 ```
 
-## Anonymous method
+### What is an anonymous method?
 
-* If we want to use the delegate only inside the same function
-* Reduce overhead of instantiating the delegate thus increase performance
+- Used when the delegate is needed only inside the same function
+- Reduces the overhead of instantiating a separate method for the delegate
 
-## Events
-
-Event use delegates internally. They encapsulate delegates and make them safe
-
-```c#
-void button_click()
+```csharp
+MyDelegate myDelegate = delegate ()
 {
-    MyDelegate mydele =null;
-    mydele += this.Method1;
-    mydele += this.Method2;
-    mydele = null;              // throw exception
-}
+    Console.WriteLine("Anonymous method");
+};
 ```
 
-## Difference between Delegates and Events
+### What are events?
 
-* Events uses delegates
-* Delegates are for callbacks, not encapsulated
-* Events are publisher subscriber model, encapsulated
+Events use delegates internally. They encapsulate the delegate and make it safe: subscribers can only add (`+=`) or remove (`-=`) handlers, and cannot overwrite or invoke it.
 
-## Dispose object 
-
-Dispose unmanaged resources as soon as you are done wusing them
-1. Calling Dispose method
-2. Creating a Using block {}
-
-## use of “using” keyword
-
-* Using directives
-
-```c#
-using System;
-using System.IO
-using Namespace = Application.Services;
-```
-
-These are used to import namespaces (or create aliases for namespaces or types). These go at the top of the file, before any declarations
-
-* Using statements
-
-```c#
-using (Stream input = File.OpenRead(filename))
+```csharp
+void Button_Click()
 {
-    ...
+    MyDelegate myDelegate = null;
+    myDelegate += this.Subscriber1;
+    myDelegate += this.Subscriber2;
+    myDelegate = null; // a plain delegate can be wiped out like this; an event cannot
 }
 ```
 
-This can only be used with types that implement IDisposable, and is syntactic sugar for a try/finally block which calls Dispose in the finally block
+### What is the difference between delegates and events?
 
-## Equivalent code of using statement
-
-```c#
-using(MyType obj = new MyType())
-{
-  //... do stuff.
-}
-```
-
-Is equivalent to:
-
-```c#
-MyType obj = new MyType();
-try
-{
-  //.... do stuff
-}
-finally
-{
-  if(obj != null)
-  {
-      obj.Dispose();
-  }
-}
-```
-
-## Difference between Finalize and Dispose in C#
-
-Both are used for cleaning Unmanaged resources.
-
-||Finalize|Dispose|
-|---|---|---|
-|Syntax| Created using class destructor | created Dispose() method |
-|Execution| called non-determinitic way (automaticaly) |Need to explicitly call to release resources|
-
-
-<b>Finalize</b>
-
-Finalize is called by the Garbage Collector (GC). 
-
-```c#
-using System;
-namespace DemoApplication{
-   public class Demo{
-      ~Demo(){
-         Console.WriteLine("Finalize called");
-      }
-   }
-}
-```
-
-<b>Dispose</b>
-
-some resources like windows handles, database connections, network connections, files, etc. which cannot be collected by the Garbage Collector. If we want to explicitly release some specific objects then this is the best to implement IDisposable and override the Dispose() method of IDisposable interface
-
-```c#
-using System;
-namespace DemoApplication{
-   public class Demo : IDisposable{
-      private bool disposed = false;
-      public void Dispose(){
-         Dispose(true);
-         GC.SuppressFinalize(this);
-      }
-      protected virtual void Dispose(bool disposing){
-         if (!disposed){
-            if (disposing){
-               //clean up managed objects
-            }
-            //clean up unmanaged objects
-            disposed = true;
-         }
-      }
-   }
-}
-
-```
- 
-## Can we call Garbage collector explicitly
-
-Yes, but it not recommended
-
-```c#
-GC.Collect(0);
-```
-
+- Events use delegates
+- Delegates are for callbacks and are not encapsulated
+- Events follow the publisher–subscriber model and are encapsulated

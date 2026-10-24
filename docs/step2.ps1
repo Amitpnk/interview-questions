@@ -1,2 +1,0 @@
-cd..
-docsify serve docs

@@ -1,12 +1,19 @@
-* [Home](/?id=table-of-contents) 
-* [C# and .Net Framework](./CsharpOops) 
-* [.Net Fundamental](./DotNetFundamental) 
-* [.NET Core](./DotnetCore) 
-* [Web API](./API) 
-* [Design principle](./DesginPrinciple) 
-* [SQL Server](./SQLServer) 
-* [Angular](./Angular) 
-* [Design Pattern](./DesignPattern) 
-* [Simple Program](./SimpleProgram) 
-* [Software Architect](./SoftwareArchitect) 
-* [Architecture Pattern](./ArchitecturePattern) 
+- [Home](/)
+
+- **Programming**
+  - [C# & OOP](CsharpOops.md)
+  - [.NET Fundamentals](DotNetFundamental.md)
+  - [ASP.NET Core](DotnetCore.md)
+  - [Web API](API.md)
+  - [Coding Programs](SimpleProgram.md)
+
+- **Design**
+  - [Design Principles](DesignPrinciple.md)
+  - [Design Patterns](DesignPattern.md)
+  - [Software Architect](SoftwareArchitect.md)
+
+- **Database**
+  - [SQL Server](SQLServer.md)
+
+- **Front end**
+  - [Angular](Angular.md)

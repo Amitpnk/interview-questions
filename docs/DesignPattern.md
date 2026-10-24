@@ -1,48 +1,57 @@
-# Design Pattern
+# Design Patterns
 
-## Table of Contents
+## In practice
 
-| No. | Questions |
-| --- | --------- |
-||**Design Pattern**|
-|	1	|	[What are design pattern used in your project](#What-are-design-pattern-used-in-your-project)	|
+### Which design patterns have you used in your project?
 
-## What are design pattern used in your project
+It depends on the project. Commonly used patterns:
 
-Depends on project, CQRS, Mediator is combination for CQRS, Repository, if we use repository then we have to use UOW, Factory Design pattern for centralize object creation, Decorator for dynamic validation, Adapter, Strategy, Bridge and so
+- **CQRS**, usually combined with the **Mediator** pattern
+- **Repository** – and when you use repositories, the **Unit of Work** pattern
+- **Factory** – to centralise object creation
+- **Decorator** – for dynamic validation
+- **Adapter**, **Strategy**, **Bridge** and so on
 
-## What are design pattern used in microservice project
+### Which design patterns are used in a microservice project?
 
-![Microserivce design pattern](./img/microserivce-design-pattern.png)
+![Microservice design patterns](./img/microservice-design-pattern.png)
 
-## One line defination of design pattern 
+## Gang of Four patterns
 
-### Creational Patterns
-* <b>Abstract Factory</b>: Creates an instance of several families of classes
-* <b>Builder</b>: Separates object construction from its representation
-* <b>Factory Method</b>: Creates an instance of several derived classes
-* <b>Prototype</b>: A fully initialized instance to be copied or cloned
-* <b>Singleton</b>: A class in which only a single instance can exist
+### What are the creational patterns?
 
-### Structural Patterns
-* <b>Adapter</b>: Match interfaces of different classes
-* <b>Bridge</b>: Separates an object’s abstraction from its implementation
-* <b>Composite</b>: A tree structure of simple and composite objects
-* <b>Decorator</b>: Add responsibilities to objects dynamically
-* <b>Façade</b>: A single class that represents an entire subsystem
-* <b>Flyweight</b>: A fine-grained instance used for efficient sharing
-* <b>Proxy</b>: An object representing another object
+| Pattern | One-line definition |
+| --- | --- |
+| Abstract Factory | Creates an instance of several families of classes |
+| Builder | Separates object construction from its representation |
+| Factory Method | Creates an instance of several derived classes |
+| Prototype | A fully initialised instance to be copied or cloned |
+| Singleton | A class of which only a single instance can exist |
 
-### Behavioral Patterns
-* <b>Mediator</b>: Defines simplified communication between classes
-* <b>Memento</b>: Capture and restore an object's internal state
-* <b>Interpreter</b>: A way to include language elements in a program
-* <b>Iterator</b>: Sequentially access the elements of a collection
-* <b>Chain of Resp</b>: A way of passing a request between a chain of objects
-* <b>Command</b>: Encapsulate a command request as an object
-* <b>State</b>: Alter an object's behavior when its state changes
-* <b>Strategy</b>: Encapsulates an algorithm inside a class
-* <b>Observer</b>: A way of notifying change to a number of classes
-* <b>Template Method</b>: Defer the exact steps of an algorithm to a subclass
-* <b>Visitor</b>: Defines a new operation to a class without change
+### What are the structural patterns?
 
+| Pattern | One-line definition |
+| --- | --- |
+| Adapter | Matches interfaces of different classes |
+| Bridge | Separates an object's abstraction from its implementation |
+| Composite | A tree structure of simple and composite objects |
+| Decorator | Adds responsibilities to objects dynamically |
+| Façade | A single class that represents an entire subsystem |
+| Flyweight | A fine-grained instance used for efficient sharing |
+| Proxy | An object representing another object |
+
+### What are the behavioural patterns?
+
+| Pattern | One-line definition |
+| --- | --- |
+| Chain of Responsibility | Passes a request along a chain of objects |
+| Command | Encapsulates a command request as an object |
+| Interpreter | A way to include language elements in a program |
+| Iterator | Sequentially accesses the elements of a collection |
+| Mediator | Defines simplified communication between classes |
+| Memento | Captures and restores an object's internal state |
+| Observer | Notifies a number of classes of a change |
+| State | Alters an object's behaviour when its state changes |
+| Strategy | Encapsulates an algorithm inside a class |
+| Template Method | Defers the exact steps of an algorithm to a subclass |
+| Visitor | Defines a new operation on a class without changing it |
