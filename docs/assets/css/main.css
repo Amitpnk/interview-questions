@@ -496,16 +496,45 @@ section.cover .cover-main > p:last-child a:hover {
    ========================================================================== */
 
 .hero {
+    max-width: 48rem;
     margin: 0 0 2.5rem;
     color: var(--text-muted);
     font-size: 1.1rem;
 }
 
+/* Home page: let the card grid use the full width (topic pages keep a reading width) */
+body[data-page="index.md"] .markdown-section {
+    max-width: 92rem;
+    padding-left: clamp(1rem, 3vw, 3rem);
+    padding-right: clamp(1rem, 3vw, 3rem);
+    container-type: inline-size;
+}
+
+/* Columns follow the space available to the content (the sidebar takes room on tablets):
+   1 column on phones, 2 on tablets, 3 on laptops, 4 on wide screens */
 .topic-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
     margin: 1.5rem 0 3rem;
+}
+
+@container (min-width: 28rem) {
+    .topic-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@container (min-width: 50rem) {
+    .topic-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@container (min-width: 72rem) {
+    .topic-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
 
 .markdown-section a.topic-card {
@@ -1071,5 +1100,107 @@ section.cover .cover-main > p:last-child a:hover {
     .markdown-section .q-btn {
         width: 28px;
         height: 28px;
+    }
+}
+
+/* ==========================================================================
+   Responsive topic pages
+   ========================================================================== */
+
+/* Use more of wide screens (the home page has its own, wider limit) */
+@media (min-width: 1440px) {
+    .markdown-section {
+        max-width: 60rem;
+    }
+}
+
+@media (min-width: 1800px) {
+    .markdown-section {
+        max-width: 66rem;
+    }
+}
+
+/* Tablets: a narrower sidebar leaves more room for the content */
+@media (min-width: 769px) and (max-width: 1100px) {
+    :root {
+        --sidebar-width: 15rem;
+    }
+
+    .markdown-section {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+/* Wide tables scroll sideways instead of running off the page */
+.markdown-section .table-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.markdown-section pre {
+    max-width: 100%;
+}
+
+.markdown-section img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Phones */
+@media (max-width: 768px) {
+    /* Keep the title clear of the floating buttons */
+    .markdown-section {
+        padding-top: 4.5rem;
+    }
+
+    .markdown-section h1 {
+        font-size: 1.9rem;
+    }
+
+    .markdown-section h2 {
+        margin-top: 2.5rem;
+    }
+
+    .markdown-section h3 {
+        margin-top: 1.75rem;
+        padding: 0.75rem 4.5rem 0.75rem 0.85rem;
+        font-size: 1rem;
+    }
+
+    .markdown-section .q-actions {
+        right: 0.5rem;
+    }
+
+    .markdown-section pre > code {
+        font-size: 0.8rem;
+    }
+
+    /* Wide tables scroll sideways rather than squashing every column */
+    .markdown-section th,
+    .markdown-section td {
+        min-width: 7rem;
+    }
+
+    .markdown-section .page-meta {
+        font-size: 0.85rem;
+    }
+
+    .markdown-section blockquote.callout {
+        padding-left: 2.6rem;
+    }
+
+    .markdown-section blockquote.callout::before {
+        left: 0.75rem;
+    }
+
+    .markdown-section .mermaid-diagram {
+        padding: 0.75rem;
+    }
+
+    /* Leave room above the back-to-top button */
+    .markdown-section .page-footer {
+        margin-bottom: 3rem;
     }
 }

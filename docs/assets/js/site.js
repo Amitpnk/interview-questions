@@ -308,6 +308,17 @@
     title.insertAdjacentElement('afterend', meta);
   }
 
+  // Wrap tables so wide ones scroll sideways on small screens
+  function wrapTables() {
+    document.querySelectorAll('.markdown-section table').forEach(function (table) {
+      if (table.parentElement.classList.contains('table-scroll')) return;
+      var wrapper = document.createElement('div');
+      wrapper.className = 'table-scroll';
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    });
+  }
+
   function styleCallouts() {
     document.querySelectorAll('.markdown-section blockquote').forEach(function (quote) {
       var label = quote.querySelector('p:first-child > strong:first-child');
@@ -370,6 +381,7 @@
     });
 
     hook.doneEach(function () {
+      wrapTables();
       styleCallouts();
       var comingSoon = isComingSoon();
       addPageStats(vm, comingSoon);

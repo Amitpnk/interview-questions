@@ -34,7 +34,7 @@
   <!-- Stylesheets: light and dark theme follow the system setting -->
   <link rel="stylesheet" id="theme-light" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
   <link rel="stylesheet" id="theme-dark" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css" media="(prefers-color-scheme: dark)">
-  <link rel="stylesheet" href="assets/css/main.css?v=7">
+  <link rel="stylesheet" href="assets/css/main.css?v=12">
 
   <!-- Light/dark mode: runs before the page renders to avoid a flash of the wrong theme -->
   <script>
@@ -92,7 +92,7 @@
 
   <div id="app"></div>
   <!-- Site enhancements (docsify plugin): progress bar, page stats, difficulty badges, callouts, diagrams -->
-  <script src="assets/js/site.js?v=5"></script>
+  <script src="assets/js/site.js?v=7"></script>
   <script>
     window.$docsify = {
       name: 'Interview Questions',
@@ -118,6 +118,10 @@
       },
       pagination: {
         crossChapter: true
+      },
+      // Tables are wrapped in a sideways-scrolling container by site.js instead
+      themeable: {
+        responsiveTables: false
       }
     }
   </script>
