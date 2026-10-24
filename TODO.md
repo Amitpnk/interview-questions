@@ -40,5 +40,8 @@ Questions still to be added to the docs.
 - [ ] Answer the questions in [React](docs/React.md)
 - [ ] Answer the questions in [Azure](docs/Azure.md)
 - [ ] Answer the questions in [AWS](docs/AWS.md)
+- [ ] Answer the questions in [Docker](docs/Docker.md)
+- [ ] Answer the questions in [Kubernetes](docs/Kubernetes.md)
+- [ ] Answer the questions in [DevOps](docs/DevOps.md)
 - [ ] Answer the questions in [Techno-Managerial Round](docs/TechnoManagerRound.md)
 - [ ] Answer the questions in [Manager Round](docs/ManagerRound.md)

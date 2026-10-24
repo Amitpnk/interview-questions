@@ -31,6 +31,9 @@ Practical interview questions and answers for software engineers – from full s
 | React *(coming soon)* | [React.md](React.md) |
 | Azure *(coming soon)* | [Azure.md](Azure.md) |
 | AWS *(coming soon)* | [AWS.md](AWS.md) |
+| Docker *(coming soon)* | [Docker.md](Docker.md) |
+| Kubernetes *(coming soon)* | [Kubernetes.md](Kubernetes.md) |
+| DevOps *(coming soon)* | [DevOps.md](DevOps.md) |
 | AI Fundamentals *(coming soon)* | [AIFundamentals.md](AIFundamentals.md) |
 | Machine Learning *(coming soon)* | [MachineLearning.md](MachineLearning.md) |
 | Deep Learning *(coming soon)* | [DeepLearning.md](DeepLearning.md) |

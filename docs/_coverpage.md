@@ -10,6 +10,7 @@
 - Angular & React
 - Microservices & Kafka
 - Azure & AWS
+- Docker, Kubernetes & DevOps
 - AI, ML & GenAI
 - RAG & AI Agents
 - Forward Deployed Engineer

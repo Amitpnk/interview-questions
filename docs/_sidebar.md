@@ -25,6 +25,11 @@
   - [Azure](Azure.md)
   - [AWS](AWS.md)
 
+- **DevOps**
+  - [Docker](Docker.md)
+  - [Kubernetes](Kubernetes.md)
+  - [DevOps & CI/CD](DevOps.md)
+
 - **AI**
   - [AI Fundamentals](AIFundamentals.md)
   - [Machine Learning](MachineLearning.md)
