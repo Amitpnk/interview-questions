@@ -51,7 +51,14 @@
   function renderDiagrams() {
     if (!window.mermaid) return;
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    window.mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default', fontFamily: 'Inter, sans-serif' });
+    // The font must be set in themeVariables too, otherwise labels are measured
+    // in mermaid's default font and get clipped when drawn in Inter
+    window.mermaid.initialize({
+      startOnLoad: false,
+      theme: dark ? 'dark' : 'default',
+      fontFamily: 'Inter, sans-serif',
+      themeVariables: { fontFamily: 'Inter, sans-serif' }
+    });
 
     // Turn ```mermaid code blocks into diagram containers
     document.querySelectorAll('.markdown-section pre[data-lang="mermaid"]').forEach(function (pre) {
@@ -63,12 +70,16 @@
       pre.replaceWith(box);
     });
 
-    document.querySelectorAll('.mermaid-diagram').forEach(function (box) {
-      var id = 'mermaid-' + (++diagramCount);
-      window.mermaid.render(id, box.getAttribute('data-source')).then(function (result) {
-        box.innerHTML = result.svg;
-      }).catch(function () {
-        box.textContent = box.getAttribute('data-source');
+    // Wait for the web font so text is measured with the font it is drawn in
+    var fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    fontsReady.then(function () {
+      document.querySelectorAll('.mermaid-diagram').forEach(function (box) {
+        var id = 'mermaid-' + (++diagramCount);
+        window.mermaid.render(id, box.getAttribute('data-source')).then(function (result) {
+          box.innerHTML = result.svg;
+        }).catch(function () {
+          box.textContent = box.getAttribute('data-source');
+        });
       });
     });
   }
