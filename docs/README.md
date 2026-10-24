@@ -46,7 +46,7 @@ interview-questions/
 │   ├── _coverpage.md       # Cover page
 │   ├── _sidebar.md         # Sidebar navigation
 │   ├── *.md                # One page per topic
-│   ├── assets/             # Custom CSS and icons
+│   ├── assets/             # Custom CSS and site.js (docsify plugin)
 │   └── img/                # Diagrams, logos and screenshots
 ├── src/
 │   ├── ConsoleApp/         # C# samples used in the answers
@@ -72,6 +72,9 @@ Each page uses the same layout, so new questions are easy to add:
 - `##` – category
 - `###` – question, written as a question
 - Code blocks use a language tag: `csharp`, `sql`, `ts`, `html`, `bash`, `json` or `text`
+- Under each question, tag its difficulty: `<!-- level: beginner -->`, `<!-- level: intermediate -->` or `<!-- level: advanced -->` (shown as a badge on the site, hidden on GitHub)
+- Callout boxes are blockquotes starting with a bold label: `> **Interview tip:** …`, `> **Common mistake:** …` or `> **Note:** …`
+- Diagrams can be written as ` ```mermaid ` code blocks
 
 The sidebar table of contents is generated from the headings automatically.
 

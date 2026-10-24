@@ -4,12 +4,16 @@
 
 ### What are the pillars of OOP?
 
+<!-- level: beginner -->
+
 - **Abstraction** – show only what is necessary
 - **Encapsulation** – hide the complexity
 - **Inheritance** – reuse code through a parent–child relationship
 - **Polymorphism** – one interface, many implementations
 
 ### What is the difference between abstraction and encapsulation?
+
+<!-- level: beginner -->
 
 | Abstraction | Encapsulation |
 | --- | --- |
@@ -40,6 +44,8 @@ public class Employee
 
 ### What is inheritance?
 
+<!-- level: beginner -->
+
 Inheritance defines a parent–child relationship, so the child class reuses (and can extend) the members of the parent class.
 
 ```csharp
@@ -56,6 +62,8 @@ public class Manager : Employee
 
 ### Does C# support multiple inheritance?
 
+<!-- level: beginner -->
+
 Not for classes – a class can inherit from only **one** base class. A class can, however, implement **multiple interfaces**, which is how multiple inheritance is achieved in C#.
 
 ```csharp
@@ -65,6 +73,8 @@ public class HPPrinter : Printer, IFax, IScan
 ```
 
 ### What is polymorphism and what are its types?
+
+<!-- level: beginner -->
 
 Polymorphism means "many forms" – the same member behaves differently depending on the object.
 
@@ -78,6 +88,8 @@ public double Add(double a, double b) => a + b;
 ```
 
 ### What are the `virtual` keyword and overriding?
+
+<!-- level: beginner -->
 
 The `virtual` keyword lets a parent class define logic that a child class can override.
 
@@ -122,6 +134,8 @@ Derived class
 
 ### What is method hiding?
 
+<!-- level: intermediate -->
+
 Method hiding uses the `new` keyword to hide a parent method in the child class. Unlike overriding, the method that runs depends on the **reference type**, not the object type.
 
 ```csharp
@@ -144,6 +158,8 @@ obj.Show();             // Base class
 
 ### What is the difference between a class and a struct?
 
+<!-- level: intermediate -->
+
 | | Class | Struct |
 | --- | --- | --- |
 | Type | Reference type | Value type |
@@ -154,15 +170,21 @@ obj.Show();             // Base class
 
 ### What is the difference between types and type members?
 
+<!-- level: beginner -->
+
 - **Types** – classes, structs, interfaces, enums and delegates
 - **Type members** – the things inside a type: fields, properties, methods, constructors, events, indexers
 
 ### What is the difference between a static class and an instance class?
 
+<!-- level: intermediate -->
+
 - A **static class** cannot be instantiated, can contain only static members and is sealed. Its members are accessed through the class name, e.g. `Math.Max(1, 2)`.
 - An **instance class** must be created with `new`, and each object has its own copy of the instance fields.
 
 ### What is the access modifier of the default constructor in C#?
+
+<!-- level: beginner -->
 
 `public`
 
@@ -174,6 +196,8 @@ public class Customer
 ```
 
 ### What is the `protected internal` access modifier?
+
+<!-- level: intermediate -->
 
 A `protected internal` member is accessible from **anywhere in the same assembly**, and from **derived classes in other assemblies**.
 
@@ -187,6 +211,8 @@ A `protected internal` member is accessible from **anywhere in the same assembly
 | `public` | Yes | Yes | Yes | Yes | Yes |
 
 ### Can we create a private class?
+
+<!-- level: beginner -->
 
 No, unless it is a **nested** class.
 
@@ -213,6 +239,8 @@ public class Class1
 ```
 
 ### Why do we need a private constructor?
+
+<!-- level: intermediate -->
 
 - To prevent a class from being inherited
 - To prevent a class from being instantiated, or to stop multiple instances being created
@@ -245,6 +273,8 @@ class Program
 
 ### What is a sealed class?
 
+<!-- level: beginner -->
+
 A sealed class cannot be inherited.
 
 ```csharp
@@ -258,6 +288,8 @@ sealed class ClassName
 ## Abstract classes and interfaces
 
 ### Why use an abstract class?
+
+<!-- level: beginner -->
 
 When we want to move common functionality of two or more related classes into a base class, and we don't want the base class to be instantiated.
 
@@ -326,11 +358,15 @@ public class ContractEmployee : BaseEmployee
 
 ### What are the advantages of using interfaces?
 
+<!-- level: beginner -->
+
 - Interfaces allow us to develop decoupled systems
 - Interfaces are very useful for dependency injection
 - Interfaces make unit testing and mocking easy
 
 ### What is the difference between an abstract class and an interface?
+
+<!-- level: intermediate -->
 
 | | Abstract class | Interface |
 | --- | --- | --- |
@@ -343,6 +379,8 @@ public class ContractEmployee : BaseEmployee
 
 ### Can an abstract class have a constructor?
 
+<!-- level: intermediate -->
+
 Yes. Use it to initialise fields of the abstract class before the child class is instantiated.
 
 **You cannot create an instance of an abstract class, so what is the use of its constructor?**
@@ -353,6 +391,8 @@ Although we cannot create an instance of an abstract class, we can create instan
 
 ### Can you call an abstract method from an abstract class constructor?
 
+<!-- level: intermediate -->
+
 Yes.
 
 **An abstract method has no implementation, so what is the use of calling it from the constructor?**
@@ -360,6 +400,8 @@ Yes.
 When you want the abstract method to be invoked automatically whenever an instance of a derived class is created.
 
 ### An abstract class has a default implementation for a method. The default is needed in some derived classes but not in others. How can you achieve this?
+
+<!-- level: intermediate -->
 
 Make the method `virtual` in the abstract class, and override it only where needed.
 
@@ -389,6 +431,8 @@ public class SomeOtherClass : AbstractClass
 
 ### What is an array?
 
+<!-- level: beginner -->
+
 An array is a collection of elements of the same data type.
 
 - **Advantage:** arrays are strongly typed
@@ -403,6 +447,8 @@ int[] val2 = { 1, 2, 3 };
 ```
 
 ### Can you store different types in an array in C#?
+
+<!-- level: beginner -->
 
 Yes, by using an `object` array or an `ArrayList`.
 
@@ -471,6 +517,8 @@ class Program
 
 ### What is a jagged array?
 
+<!-- level: intermediate -->
+
 A jagged array is an array of arrays, where each inner array can have a different length.
 
 ```csharp
@@ -515,6 +563,8 @@ class Program
 
 ### Can you store different list types in a single generic list?
 
+<!-- level: intermediate -->
+
 Yes, by creating a list of lists of objects.
 
 ```csharp
@@ -547,6 +597,8 @@ foreach (var item in lists)
 
 ### What is the difference between `int` and `Int32`?
 
+<!-- level: beginner -->
+
 There is no difference – both create a 32-bit integer. `int` is the C# alias for `System.Int32`.
 
 The only difference is that `Int32` needs the `System` namespace:
@@ -557,9 +609,13 @@ using System;
 
 ### What is the difference between `string` and `String`?
 
+<!-- level: beginner -->
+
 There is no difference – `string` is the C# alias for `System.String`. By convention, use `string` for declarations and `String` when calling static methods (e.g. `String.Join`), although either works.
 
 ### What is a nullable type? What is the difference between `?` and `??`?
+
+<!-- level: intermediate -->
 
 By default, all reference types (such as `String`) are nullable, but value types (such as `Int32`) are not.
 
@@ -597,6 +653,8 @@ Console.WriteLine(availableTickets);
 
 ### What is the difference between `Parse` and `TryParse`?
 
+<!-- level: beginner -->
+
 - `Parse()` throws an exception if it cannot parse the value
 - `TryParse()` returns a `bool` indicating whether it succeeded, and returns the value through an `out` parameter
 
@@ -610,6 +668,8 @@ Console.WriteLine(result);  // 0
 ```
 
 ### What is the difference between `is` and `as`?
+
+<!-- level: intermediate -->
 
 - `is` checks whether an object is compatible with a type and returns a `bool`
 - `as` tries to cast an object to a type and returns `null` instead of throwing if the cast fails (reference and nullable types only)
@@ -629,6 +689,8 @@ Customer c = obj as Customer; // null, no exception
 ## Exceptions
 
 ### What is the difference between `throw` and `throw ex`?
+
+<!-- level: intermediate -->
 
 **`throw`** keeps the complete stack trace from where the original error occurred. Use it in your own applications.
 
@@ -702,7 +764,11 @@ Exception 2:
    at UnitTester.Program.TestExceptions() in <snip>\Dev\UnitTester\Program.cs:line 25
 ```
 
+> **Interview tip:** Say that you almost always use `throw;` in your own code. Interviewers often follow up by asking what is lost with `throw ex` – the answer is the original stack trace.
+
 ### What happens if a `finally` block throws an exception? How do you handle it?
+
+<!-- level: intermediate -->
 
 - Execution of the `finally` block stops at the point where the exception is thrown
 - The exception should be handled at a higher level (for example, a global exception handler)
@@ -710,6 +776,8 @@ Exception 2:
 ## Functions, delegates and async
 
 ### What is a recursive function?
+
+<!-- level: beginner -->
 
 A recursive function is a function that calls itself. Examples:
 
@@ -740,6 +808,8 @@ public static double Factorial(int number)
 
 ### What is a lambda expression?
 
+<!-- level: beginner -->
+
 A lambda expression is a short way to write an anonymous function, using the `=>` operator.
 
 ```csharp
@@ -750,6 +820,8 @@ var evens = numbers.Where(n => n % 2 == 0);
 ```
 
 ### What are `Func`, `Action` and `Predicate` delegates?
+
+<!-- level: intermediate -->
 
 They are built-in generic delegates, so you don't have to declare your own delegate types.
 
@@ -767,6 +839,8 @@ log(add(2, 3).ToString()); // 5
 
 ### What are `async` and `await`?
 
+<!-- level: intermediate -->
+
 `async` and `await` let you write asynchronous code that reads like synchronous code. `await` frees the current thread while a long-running operation (I/O, HTTP call, database query) completes, instead of blocking it.
 
 ```csharp
@@ -782,6 +856,8 @@ public async Task<string> GetPageAsync(string url)
 
 ### What are attributes?
 
+<!-- level: intermediate -->
+
 Attributes add declarative metadata to code (classes, methods, properties, etc.), which can be read at run time using reflection.
 
 ```csharp
@@ -796,6 +872,8 @@ public class Customer
 ```
 
 ### What is reflection?
+
+<!-- level: advanced -->
 
 Reflection lets code inspect the metadata of types at run time – for example, to list the properties and methods of a class, read attributes or create objects dynamically.
 

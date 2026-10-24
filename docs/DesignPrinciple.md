@@ -4,6 +4,8 @@
 
 ### What are design principles?
 
+<!-- level: beginner -->
+
 - Design principles help us manage most software design problems
 - The SOLID principles are a subset of the many principles promoted by Uncle Bob (Robert C. Martin)
 
@@ -15,6 +17,8 @@ Common design principles:
 - DRY
 
 ### What happens if we don't follow the SOLID principles?
+
+<!-- level: beginner -->
 
 - Tightly coupled code
 - Duplicated code
@@ -32,6 +36,8 @@ Common design principles:
 | D | Dependency Inversion | Depend on abstractions, not concrete classes |
 
 ### What is the Single Responsibility Principle (SRP)?
+
+<!-- level: beginner -->
 
 A class should have only one responsibility, not several.
 
@@ -65,6 +71,8 @@ public class FileLogger
 
 ### What is the Open/Closed Principle (OCP)?
 
+<!-- level: intermediate -->
+
 A class should be **open for extension** but **closed for modification**. New behaviour is added by extending the class, not by changing it.
 
 ```csharp
@@ -94,6 +102,8 @@ public class Amazon : Checkout
 ```
 
 ### What is the Liskov Substitution Principle (LSP)?
+
+<!-- level: advanced -->
 
 A parent class reference should be able to refer to child objects seamlessly at run time, without breaking the program.
 
@@ -139,6 +149,8 @@ class COD : IPaymentTransaction
 ```
 
 ### What is the Interface Segregation Principle (ISP)?
+
+<!-- level: intermediate -->
 
 - Show clients only the methods they need
 - ISP was first formulated by Robert C. Martin while consulting for Xerox
@@ -192,6 +204,8 @@ public class HPPrint : IPrintContent, IFaxContent, IPhotoCopyContent
 
 ### What is the Dependency Inversion Principle (DIP)?
 
+<!-- level: intermediate -->
+
 High-level modules should not depend on low-level modules; both should depend on abstractions.
 
 ```csharp
@@ -243,12 +257,18 @@ public class EmailLogger : IErrorHandling
 
 ### What is YAGNI?
 
+<!-- level: beginner -->
+
 **You Aren't Gonna Need It.** Don't add functionality until it is necessary – write only the code you need for the current situation.
 
 ### What is KISS?
 
+<!-- level: beginner -->
+
 **Keep It Simple, Stupid.** Prefer the simplest solution that works; avoid unnecessary complexity.
 
 ### What is DRY?
+
+<!-- level: beginner -->
 
 **Don't Repeat Yourself.** Every piece of logic should exist in one place, so that a change only has to be made once.

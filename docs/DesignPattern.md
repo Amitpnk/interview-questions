@@ -4,6 +4,8 @@
 
 ### Which design patterns have you used in your project?
 
+<!-- level: intermediate -->
+
 It depends on the project. Commonly used patterns:
 
 - **CQRS**, usually combined with the **Mediator** pattern
@@ -14,11 +16,15 @@ It depends on the project. Commonly used patterns:
 
 ### Which design patterns are used in a microservice project?
 
+<!-- level: advanced -->
+
 ![Microservice design patterns](./img/microservice-design-pattern.png)
 
 ## Gang of Four patterns
 
 ### What are the creational patterns?
+
+<!-- level: beginner -->
 
 | Pattern | One-line definition |
 | --- | --- |
@@ -29,6 +35,8 @@ It depends on the project. Commonly used patterns:
 | Singleton | A class of which only a single instance can exist |
 
 ### What are the structural patterns?
+
+<!-- level: intermediate -->
 
 | Pattern | One-line definition |
 | --- | --- |
@@ -41,6 +49,8 @@ It depends on the project. Commonly used patterns:
 | Proxy | An object representing another object |
 
 ### What are the behavioural patterns?
+
+<!-- level: intermediate -->
 
 | Pattern | One-line definition |
 | --- | --- |

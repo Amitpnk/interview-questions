@@ -4,9 +4,13 @@
 
 ### What is ASP.NET Core MVC?
 
+<!-- level: beginner -->
+
 It is an open-source, **cross-platform** web development framework from Microsoft for building web applications.
 
 ### What is the difference between Web Forms, MVC 5 and ASP.NET Core?
+
+<!-- level: intermediate -->
 
 | | Web Forms | MVC 5 | ASP.NET Core |
 | --- | --- | --- | --- |
@@ -18,6 +22,8 @@ It is an open-source, **cross-platform** web development framework from Microsof
 
 ### What is MVC architecture?
 
+<!-- level: beginner -->
+
 MVC (Model–View–Controller) is an architecture pattern that separates an application into three parts:
 
 - **Model** – data and business logic
@@ -26,9 +32,13 @@ MVC (Model–View–Controller) is an architecture pattern that separates an app
 
 ### What is Razor?
 
+<!-- level: beginner -->
+
 Razor is a view engine that lets you mix HTML and C# code. Server-side code in a `.cshtml` page starts with `@`.
 
 ### Why do we have the wwwroot folder?
+
+<!-- level: beginner -->
 
 It stores static content such as HTML, CSS, JavaScript and image files.
 
@@ -36,9 +46,13 @@ It stores static content such as HTML, CSS, JavaScript and image files.
 
 ### What is appsettings.json?
 
+<!-- level: beginner -->
+
 `appsettings.json` stores configuration information, such as connection strings and application settings.
 
 ### How do you read configuration from appsettings.json?
+
+<!-- level: intermediate -->
 
 Through `IConfiguration`, injected into the class that needs it:
 
@@ -63,6 +77,8 @@ public class HomeController : Controller
 
 ### What is the difference between `ConfigureServices` and `Configure` in Startup.cs?
 
+<!-- level: intermediate -->
+
 - `ConfigureServices` – configures the dependency injection container (registers services)
 - `Configure` – configures the middleware pipeline
 
@@ -72,15 +88,21 @@ public class HomeController : Controller
 
 ### What is dependency injection?
 
+<!-- level: beginner -->
+
 DI is the practice of providing dependent objects from outside a class, rather than creating them inside it.
 
 ### Why do we need DI?
+
+<!-- level: beginner -->
 
 - High-level modules should not depend on low-level modules
 - Decoupling – a change in one place is reflected everywhere the dependency is used
 - Easier unit testing, because dependencies can be mocked
 
 ### How do we implement DI?
+
+<!-- level: intermediate -->
 
 Register the service in `ConfigureServices` (or `builder.Services` in .NET 6+), then accept it in the constructor:
 
@@ -93,6 +115,8 @@ public void ConfigureServices(IServiceCollection services)
 
 ### What is the difference between Scoped, Transient and Singleton?
 
+<!-- level: intermediate -->
+
 - **`AddScoped`** – the same instance within the scope of a given HTTP request, but a new instance across different HTTP requests
 - **`AddTransient`** – a new instance every time one is requested, whether within the same HTTP request or across different ones
 - **`AddSingleton`** – a single instance is created when the service is first requested, and used by all HTTP requests for the lifetime of the application
@@ -103,15 +127,34 @@ public void ConfigureServices(IServiceCollection services)
 | Transient | New instance | New instance |
 | Singleton | Same instance | Same instance |
 
+> **Common mistake:** Injecting a scoped service (such as a `DbContext`) into a singleton. The singleton captures the scoped instance, so it lives for the whole application – this causes stale data and threading bugs. ASP.NET Core throws an error for this in development.
+
 ## Middleware
 
 ### What is middleware used for?
 
+<!-- level: intermediate -->
+
 Middleware components are pieces of code added to the application's pipeline. Each one handles the request and response, and can run logic before and after the next component – for example, pre-processing before a controller executes.
+
+```mermaid
+flowchart TB
+    subgraph in [" "]
+        direction LR
+        A[HTTP request] --> B[Exception handler] --> C[HTTPS redirection] --> D[Static files]
+    end
+    subgraph out [" "]
+        direction LR
+        E[Routing] --> F[Authentication] --> G[Authorization] --> H[Controller / endpoint]
+    end
+    in --> out
+```
 
 ![Middleware](./img/middleware-1.png)
 
 ### How do you implement custom middleware?
+
+<!-- level: advanced -->
 
 1. Create a middleware class (from the Visual Studio template, or by hand)
 2. Write your logic inside the `Invoke` / `InvokeAsync` method
@@ -144,9 +187,13 @@ app.UseMiddleware<CustomMiddleware>();
 
 ### What is Kestrel?
 
+<!-- level: beginner -->
+
 Kestrel is an open-source, cross-platform web server built into ASP.NET Core.
 
 ### Why Kestrel?
+
+<!-- level: beginner -->
 
 Kestrel is cross-platform and lightweight, so ASP.NET Core applications can be self-hosted on Windows, Linux and macOS without IIS.
 
@@ -154,13 +201,19 @@ Kestrel is cross-platform and lightweight, so ASP.NET Core applications can be s
 
 ### What are cookies?
 
+<!-- level: beginner -->
+
 Cookies are small text files stored in the end user's browser by a website.
 
 ### What is session management?
 
+<!-- level: beginner -->
+
 Session management techniques maintain state between HTTP requests, because HTTP itself is stateless.
 
 ### What are the different ways of doing session management?
+
+<!-- level: beginner -->
 
 - Session
 - Cookies

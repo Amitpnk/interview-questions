@@ -4,6 +4,8 @@
 
 ### Can you walk us through a recent project where you played the role of an architect? What challenges did you face, and how did you overcome them?
 
+<!-- level: advanced -->
+
 One of the recent projects where I played the role of an architect is the Gate Management System at Honeywell. The goal was to build a system that interfaces with third-party devices like UVSS (Under Vehicle Surveillance System), LPR (License Plate Recognition), and X-RAY to control the entry of vehicles into a site.
 
 #### Key responsibilities
@@ -47,6 +49,8 @@ The HBOC OS portal became an efficient, scalable, and real-time platform that al
 
 ### Can you talk about a challenging situation you faced at work and how you overcame it?
 
+<!-- level: advanced -->
+
 One of the more challenging situations I faced was during the development of the CDM-Historical project at Société Générale, where the system provided critical KPIs for monitoring electronic trading activity. The challenge arose when we needed to significantly enhance the performance of the system, which had become sluggish due to the growing volume of historical trading data. The system needed to provide real-time insights, but was frequently bogged down by the size of the data being processed.
 
 #### Challenges
@@ -67,6 +71,8 @@ One of the more challenging situations I faced was during the development of the
 By optimizing the database, implementing caching, and refactoring the system for scalability, we were able to improve the performance of the CDM-Historical system significantly. The response time for data retrieval was reduced by over 60%, and the system became far more scalable, ensuring that it could handle increasing data volumes as the business grew. Traders were able to access real-time insights without delay, resulting in a better overall user experience.
 
 ### In your experience, how do you approach client interactions during the software development cycle?
+
+<!-- level: advanced -->
 
 In my experience, effective client interactions are key to the success of any software development project. I follow a structured approach during each phase of the software development cycle to ensure that the client is engaged, their requirements are understood, and feedback is incorporated.
 
@@ -107,6 +113,8 @@ Here’s how I approach client interactions:
 - **Continual improvement:** After the initial release, I often work with clients on iterative improvements, offering advice on how they can evolve the system as their business grows.
 
 ### Can you discuss some challenges you faced when transitioning from traditional monolithic architectures to microservices?
+
+<!-- level: advanced -->
 
 Transitioning from traditional monolithic architectures to microservices is often necessary to meet scalability, flexibility, and agility needs, but it comes with several challenges. Here’s how I approached and overcame some of the most significant challenges during this transition in my projects:
 
@@ -175,6 +183,8 @@ Transitioning from traditional monolithic architectures to microservices is ofte
 By addressing these challenges, I successfully transitioned the monolithic systems into microservices-based architectures that were more scalable, maintainable, and responsive to business needs. This transformation enabled better agility in development, faster deployment cycles, and easier scaling of individual services based on demand. Additionally, the use of modern DevOps practices with **CI/CD pipelines**, **Kubernetes**, and **Docker** ensured that microservices could be deployed and managed efficiently.
 
 ### How do you manage technical debt while architecting new solutions?
+
+<!-- level: advanced -->
 
 Managing technical debt while architecting new solutions is crucial to ensuring long-term maintainability, scalability, and efficiency. Here's my approach:
 

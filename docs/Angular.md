@@ -4,12 +4,16 @@
 
 ### What is Angular used for?
 
+<!-- level: beginner -->
+
 Angular is a JavaScript binding framework that binds the HTML UI to a JavaScript model.
 
 - It helps you build SPAs (single page applications) using routing
 - It has many other built-in features – HTTP, DI, `@Input`, `@Output` and more – so you don't need other frameworks
 
 ### What is the difference between AngularJS and Angular?
+
+<!-- level: beginner -->
 
 | | AngularJS | Angular |
 | --- | --- | --- |
@@ -21,11 +25,15 @@ Angular is a JavaScript binding framework that binds the HTML UI to a JavaScript
 
 ### What is TypeScript and why do we need it?
 
+<!-- level: beginner -->
+
 - TypeScript is a superset of JavaScript that adds static types
 - It provides an object-oriented programming environment that transpiles (converts) to JavaScript
 - Because it is strongly typed, errors are caught at compile time
 
 ### What is the importance of the Angular CLI?
+
+<!-- level: beginner -->
 
 The Angular CLI is a command-line interface for creating the initial Angular project template, and for generating components, services, modules and so on.
 
@@ -35,6 +43,8 @@ ng new project-app
 ```
 
 ### What is the architecture of Angular?
+
+<!-- level: intermediate -->
 
 ![Angular architecture](./img/Architecture.png)
 
@@ -50,6 +60,8 @@ ng new project-app
 
 ### What are components and modules?
 
+<!-- level: beginner -->
+
 - A **component** is where you write your binding code
 - A **module** logically groups components
 
@@ -57,9 +69,13 @@ Create a component with `@Component` and a module with `@NgModule`.
 
 ### What are annotations or metadata?
 
+<!-- level: beginner -->
+
 They are **decorators** – e.g. `@Component`, `@NgModule`, `@Injectable` – that attach metadata to a class.
 
 ### What is a template?
+
+<!-- level: beginner -->
 
 A template is the HTML view of an Angular component, in which you can use directives and bindings.
 
@@ -69,6 +85,8 @@ There are two types:
 - **Separate HTML file** – referenced by the `templateUrl` property
 
 ### What are the four types of data binding in Angular?
+
+<!-- level: beginner -->
 
 | Binding | Syntax | Direction |
 | --- | --- | --- |
@@ -81,9 +99,13 @@ There are two types:
 
 ### What are directives in Angular?
 
+<!-- level: beginner -->
+
 Directives are instructions applied to HTML elements that change their appearance, behaviour or the DOM layout.
 
 ### What are the different types of directives?
+
+<!-- level: beginner -->
 
 Mnemonic: **SAC** – Structural, Attribute, Component.
 
@@ -121,6 +143,8 @@ export class GridComponent { }
 
 ### What are `ViewChild` and `ViewChildren`?
 
+<!-- level: intermediate -->
+
 `ViewChild` references an element or child component from the view in its component class.
 
 `ViewChild` references **one** object, while `ViewChildren` references a **collection**.
@@ -137,6 +161,8 @@ export class Comp1 {
 
 ### Why do we need template reference variables?
 
+<!-- level: intermediate -->
+
 A template reference variable gives a reference to a DOM element, component, directive or web component within the template.
 
 ```html
@@ -146,6 +172,8 @@ A template reference variable gives a reference to a DOM element, component, dir
 
 ### What is content projection?
 
+<!-- level: intermediate -->
+
 Content projection lets a parent component project content into a child component.
 
 ```html
@@ -153,6 +181,8 @@ Content projection lets a parent component project content into a child componen
 ```
 
 ### What is a content projection slot?
+
+<!-- level: intermediate -->
 
 A slot projects specific content into a specific place in the child component.
 
@@ -164,18 +194,26 @@ A slot projects specific content into a specific place in the child component.
 
 ### What is an SPA?
 
+<!-- level: beginner -->
+
 A single page application – the main UI is loaded once, and the rest of the UI is loaded on demand.
 
 ### How do you implement an SPA in Angular?
+
+<!-- level: beginner -->
 
 Through routing.
 
 ### What is routing?
 
+<!-- level: beginner -->
+
 - Routing is a collection of pairs, each with a URL and a component
 - When the URL is called, the matching component is loaded
 
 ### How do you implement routing?
+
+<!-- level: beginner -->
 
 1. Define the routing collection in `app-routing.module.ts`
 2. Add `<router-outlet></router-outlet>` where the component should be loaded
@@ -183,9 +221,13 @@ Through routing.
 
 ### What is lazy loading?
 
+<!-- level: intermediate -->
+
 Lazy loading means on-demand loading – loading only the HTML, CSS and JavaScript that is needed, for better performance.
 
 ### How do you implement lazy loading?
+
+<!-- level: intermediate -->
 
 **Step 1:** Create a separate module for each feature:
 
@@ -219,9 +261,13 @@ const routes: Routes = [
 
 ### What are services?
 
+<!-- level: beginner -->
+
 Services share common logic across an Angular project.
 
 ### What is dependency injection?
+
+<!-- level: beginner -->
 
 Dependency injection means the component does not create object instances itself – Angular injects them, through the constructor.
 
@@ -231,6 +277,8 @@ There are two types of DI:
 - Conditional DI
 
 ### How do you implement dependency injection?
+
+<!-- level: advanced -->
 
 **Step 1:** Create the logger classes:
 
@@ -304,12 +352,16 @@ constructor(injector: Injector) {
 
 ### What is the benefit of dependency injection?
 
+<!-- level: beginner -->
+
 - Decoupled classes
 - Easier unit testing, because dependencies can be mocked
 
 ## Component life cycle
 
 ### What are the events and sequence of the component life cycle?
+
+<!-- level: intermediate -->
 
 The three most commonly used hooks:
 
@@ -321,7 +373,11 @@ The three most commonly used hooks:
 
 ![Angular life cycle](./img/AngularLifeCycle.png)
 
+> **Common mistake:** Forgetting to unsubscribe from observables in `ngOnDestroy`. The subscription keeps running after the component is destroyed and causes memory leaks. Use the `async` pipe or `takeUntilDestroyed()` where you can.
+
 ### What is the difference between the constructor and `ngOnInit()`?
+
+<!-- level: intermediate -->
 
 | Constructor | `ngOnInit()` |
 | --- | --- |
@@ -333,10 +389,14 @@ The three most commonly used hooks:
 
 ### What is the difference between `ng serve` and `ng build`?
 
+<!-- level: beginner -->
+
 - `ng serve` – builds the app in memory and serves it with a development server
 - `ng build` – builds the app and writes the output to disk (the `dist` folder)
 
 ### What does the `--prod` parameter in `ng build` do?
+
+<!-- level: beginner -->
 
 It creates a production build: minified and compressed JavaScript, ahead-of-time (AOT) compilation and tree-shaking.
 

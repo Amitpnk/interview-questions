@@ -4,6 +4,8 @@
 
 ### What is Intermediate Language (IL) code?
 
+<!-- level: intermediate -->
+
 IL is also called MSIL (Microsoft IL) or CIL (Common IL).
 
 - IL code is partially compiled code
@@ -13,9 +15,13 @@ You can view the IL code of a DLL or EXE with the **ILDASM** tool.
 
 ### What is JIT (Just-In-Time compiler)?
 
+<!-- level: beginner -->
+
 The JIT compiler compiles IL code into machine (native) code at run time.
 
 ### What are the different types of JIT?
+
+<!-- level: intermediate -->
 
 - **Normal JIT (default)** – compiles only the methods called at run time and caches them. Uses more memory; suited to ASP.NET and Windows applications.
 - **Econo JIT** – compiles only the methods called at run time, without caching. Uses less memory; suited to mobile devices and console applications.
@@ -23,15 +29,21 @@ The JIT compiler compiles IL code into machine (native) code at run time.
 
 ### What is the CLR (Common Language Runtime)?
 
+<!-- level: beginner -->
+
 - Invokes the JIT to compile IL into machine (native) code
 - Cleans up unused objects using the garbage collector (GC)
 
 ### What is the difference between managed and unmanaged code?
 
+<!-- level: beginner -->
+
 - **Managed code** – runs under the control of the CLR
 - **Unmanaged code** – runs outside the CLR (e.g. C, C++ or COM components)
 
 ### What is the CTS (Common Type System)?
+
+<!-- level: intermediate -->
 
 The CTS ensures that data types defined in two different languages compile to a common data type. For example, both of these compile to `System.Int32`:
 
@@ -45,16 +57,22 @@ int i;
 
 ### What is the CLS (Common Language Specification)?
 
+<!-- level: intermediate -->
+
 The CLS is a set of rules and guidelines that a .NET language must follow, so that code written in one language can be used from another.
 
 ## Memory management
 
 ### What is the difference between stack and heap?
 
+<!-- level: beginner -->
+
 - **Stack** memory stores value types such as `int`, `double` and `bool`
 - **Heap** memory stores reference types such as `string` and objects
 
 ### What is the difference between value types and reference types?
+
+<!-- level: beginner -->
 
 - **Value types** contain the actual data
 - **Reference types** contain a pointer (reference), and the pointer points to the actual data
@@ -69,6 +87,8 @@ obj.Name = "Amit";
 ![Stack and heap](./img/StackHeap.png)
 
 ### What is the difference between boxing and unboxing?
+
+<!-- level: beginner -->
 
 - **Boxing** – converting a value type to a reference type
 - **Unboxing** – converting a reference type to a value type
@@ -88,6 +108,8 @@ Boxing and unboxing reduce performance, because data has to move between stack a
 
 ### What is the garbage collector?
 
+<!-- level: intermediate -->
+
 The garbage collector is a background process that cleans up unused **managed** resources.
 
 ```csharp
@@ -101,6 +123,8 @@ You can watch the GC at work with the Visual Studio Diagnostic Tools window or C
 
 ### Can we call the garbage collector explicitly?
 
+<!-- level: intermediate -->
+
 Yes, but it is not recommended.
 
 ```csharp
@@ -109,12 +133,16 @@ GC.Collect();
 
 ### How do you dispose of an object?
 
+<!-- level: intermediate -->
+
 Release unmanaged resources as soon as you are done with them, by either:
 
 1. Calling the `Dispose()` method
 2. Wrapping the object in a `using` block
 
 ### What are the uses of the `using` keyword?
+
+<!-- level: intermediate -->
 
 **Using directives** import namespaces, or create aliases for namespaces or types. They go at the top of the file, before any declarations.
 
@@ -134,6 +162,8 @@ using (Stream input = File.OpenRead(filename))
 ```
 
 ### What is the equivalent code of a `using` statement?
+
+<!-- level: intermediate -->
 
 ```csharp
 using (MyType obj = new MyType())
@@ -160,6 +190,8 @@ finally
 ```
 
 ### What is the difference between `Finalize` and `Dispose`?
+
+<!-- level: advanced -->
 
 Both are used to clean up unmanaged resources.
 
@@ -212,6 +244,8 @@ public class Demo : IDisposable
 
 ### What are casting, implicit casting and explicit casting?
 
+<!-- level: beginner -->
+
 Casting converts one data type to another.
 
 - **Implicit casting** – from a smaller to a larger data type (no data loss)
@@ -226,6 +260,8 @@ int y = (int)d2;     // explicit casting - data loss
 ```
 
 ### What is the difference between `Array` and `ArrayList`?
+
+<!-- level: beginner -->
 
 | | Array | ArrayList |
 | --- | --- | --- |
@@ -244,6 +280,8 @@ arrList.Add("three");
 
 ### What is a generic collection?
 
+<!-- level: beginner -->
+
 A generic collection is strongly typed **and** flexible in size. It performs better than `ArrayList` because there is no boxing/unboxing.
 
 ```csharp
@@ -255,6 +293,8 @@ list.Add(2);
 ## Methods and parameters
 
 ### What is the `out` keyword?
+
+<!-- level: beginner -->
 
 Use `out` when you want a method to return multiple values.
 
@@ -272,6 +312,8 @@ static void Calculate(int n1, int n2, out int add, out int sub)
 ```
 
 ### What is the difference between `ref` and `out`?
+
+<!-- level: beginner -->
 
 - With `ref`, the variable **must be initialised** before it is passed
 - With `out`, the method **must assign** the value before it returns
@@ -312,6 +354,8 @@ static void Main()
 
 ### How do you handle exceptions in C#?
 
+<!-- level: beginner -->
+
 ```csharp
 try
 {
@@ -329,11 +373,15 @@ finally
 
 ### What is `finally`?
 
+<!-- level: beginner -->
+
 The `finally` block always executes, whether or not the code throws an exception.
 
 ## Threading
 
 ### What are threads (multithreading)?
+
+<!-- level: intermediate -->
 
 Threads let code run in parallel.
 
@@ -347,6 +395,8 @@ t2.Start();
 
 ### How are threads different from the TPL (Task Parallel Library)?
 
+<!-- level: intermediate -->
+
 ```csharp
 Task t1 = new Task(Method1);
 t1.Start();
@@ -359,6 +409,8 @@ The TPL works at a higher level than threads: tasks run on the thread pool, and 
 
 ### What is the difference between a Task and a Thread?
 
+<!-- level: intermediate -->
+
 Tasks provide:
 
 - Parallel processing that uses all CPU cores efficiently
@@ -369,11 +421,15 @@ Tasks provide:
 
 ### What are delegates and how are they used?
 
+<!-- level: intermediate -->
+
 Delegates are type-safe function pointers, used for callbacks between async and parallel executions.
 
 Example: if two processes run in parallel and one needs to send data to the other, a delegate is helpful.
 
 ### What are multicast delegates?
+
+<!-- level: intermediate -->
 
 A multicast delegate calls multiple methods with a single invocation.
 
@@ -406,6 +462,8 @@ class Example
 
 ### What is an anonymous method?
 
+<!-- level: intermediate -->
+
 - Used when the delegate is needed only inside the same function
 - Reduces the overhead of instantiating a separate method for the delegate
 
@@ -417,6 +475,8 @@ MyDelegate myDelegate = delegate ()
 ```
 
 ### What are events?
+
+<!-- level: intermediate -->
 
 Events use delegates internally. They encapsulate the delegate and make it safe: subscribers can only add (`+=`) or remove (`-=`) handlers, and cannot overwrite or invoke it.
 
@@ -431,6 +491,8 @@ void Button_Click()
 ```
 
 ### What is the difference between delegates and events?
+
+<!-- level: intermediate -->
 
 - Events use delegates
 - Delegates are for callbacks and are not encapsulated

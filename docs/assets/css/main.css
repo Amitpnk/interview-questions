@@ -600,3 +600,251 @@ section.cover .cover-main > p:last-child a:hover {
         font-size: 1.02rem;
     }
 }
+
+/* ==========================================================================
+   Reading progress bar
+   ========================================================================== */
+
+.read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brand), var(--brand-2));
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   Back-to-top button (bottom-right)
+   ========================================================================== */
+
+.back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 24px;
+    z-index: 30;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s, border-color 0.2s ease, color 0.2s ease;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+.back-to-top.show:hover {
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Page meta (question count, reading time) and footer
+   ========================================================================== */
+
+.markdown-section .page-meta {
+    margin: -0.5rem 0 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.markdown-section .page-footer {
+    margin-top: 3.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+}
+
+.markdown-section .page-footer a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.markdown-section .page-footer a:hover {
+    color: var(--brand);
+}
+
+.markdown-section .page-footer svg {
+    width: 16px;
+    height: 16px;
+}
+
+.topic-card .topic-count {
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--brand);
+}
+
+/* ==========================================================================
+   Difficulty badges on questions
+   ========================================================================== */
+
+.markdown-section h3 .level {
+    display: inline-block;
+    margin-left: 0.6rem;
+    padding: 0.12rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    text-transform: uppercase;
+    vertical-align: 0.15em;
+    white-space: nowrap;
+}
+
+.level-beginner {
+    background: rgba(16, 185, 129, 0.14);
+    color: #047857;
+}
+
+.level-intermediate {
+    background: rgba(245, 158, 11, 0.16);
+    color: #b45309;
+}
+
+.level-advanced {
+    background: rgba(239, 68, 68, 0.14);
+    color: #b91c1c;
+}
+
+:root[data-theme="dark"] .level-beginner { color: #34d399; }
+:root[data-theme="dark"] .level-intermediate { color: #fbbf24; }
+:root[data-theme="dark"] .level-advanced { color: #f87171; }
+
+/* ==========================================================================
+   Callout boxes: > **Note:** / **Interview tip:** / **Common mistake:**
+   ========================================================================== */
+
+.markdown-section blockquote.callout {
+    position: relative;
+    padding: 0.9rem 1rem 0.9rem 3rem;
+    border: 1px solid var(--callout-border);
+    border-left: 4px solid var(--callout-color);
+    border-radius: 0 10px 10px 0;
+    background: var(--callout-bg);
+}
+
+.markdown-section blockquote.callout::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 20px;
+    height: 20px;
+    background: var(--callout-color);
+    -webkit-mask: var(--callout-icon) center / contain no-repeat;
+    mask: var(--callout-icon) center / contain no-repeat;
+}
+
+.markdown-section blockquote.callout p {
+    margin: 0;
+    color: var(--text);
+}
+
+.markdown-section blockquote.callout strong:first-child {
+    color: var(--callout-color);
+}
+
+.callout-note {
+    --callout-color: var(--brand);
+    --callout-bg: var(--brand-soft);
+    --callout-border: transparent;
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E");
+}
+
+.callout-tip {
+    --callout-color: #059669;
+    --callout-bg: rgba(16, 185, 129, 0.1);
+    --callout-border: transparent;
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z'/%3E%3C/svg%3E");
+}
+
+.callout-warning {
+    --callout-color: #d97706;
+    --callout-bg: rgba(245, 158, 11, 0.1);
+    --callout-border: transparent;
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .callout-tip { --callout-color: #34d399; }
+:root[data-theme="dark"] .callout-warning { --callout-color: #fbbf24; }
+
+/* ==========================================================================
+   Mermaid diagrams
+   ========================================================================== */
+
+.markdown-section .mermaid-diagram {
+    margin: 1.5rem 0;
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    text-align: center;
+    overflow-x: auto;
+}
+
+.markdown-section .mermaid-diagram svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ==========================================================================
+   404 page
+   ========================================================================== */
+
+.markdown-section .not-found {
+    padding: 4rem 0 2rem;
+    text-align: center;
+}
+
+.markdown-section .not-found .code {
+    font-size: clamp(4rem, 14vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    background: linear-gradient(90deg, var(--brand), var(--brand-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.markdown-section .not-found h2 {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.5rem;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--heading-color);
+}
+
+.markdown-section .not-found a.home-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    padding: 0.65em 1.6em;
+    border-radius: 999px;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        right: 12px;
+        bottom: 16px;
+    }
+
+    .markdown-section h3 .level {
+        margin-left: 0.4rem;
+    }
+}

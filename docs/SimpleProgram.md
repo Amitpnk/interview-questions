@@ -4,6 +4,8 @@
 
 ### Reverse a string
 
+<!-- level: beginner -->
+
 ```text
 Input: hello        Output: olleh
 Input: hello world  Output: dlrow olleh
@@ -24,6 +26,8 @@ public static void ReverseString(string str)
 ```
 
 ### Reverse the order of words in a string
+
+<!-- level: intermediate -->
 
 ```text
 Input: Welcome to hello world  Output: world hello to Welcome
@@ -64,6 +68,8 @@ public static void ReverseWordOrder(string str)
 
 ### Reverse each word in a string
 
+<!-- level: intermediate -->
+
 ```text
 Input: Welcome to hello world  Output: emocleW ot olleh dlrow
 ```
@@ -98,6 +104,8 @@ public static void ReverseWords(string str)
 
 ### Check whether a string is a palindrome
 
+<!-- level: beginner -->
+
 ```text
 Input: madam            Output: Palindrome
 Input: step on no pets  Output: Palindrome
@@ -122,6 +130,8 @@ public static void CheckPalindrome(string str)
 ```
 
 ### Count the occurrences of each character in a string
+
+<!-- level: beginner -->
 
 ```text
 Input: hello world
@@ -164,6 +174,8 @@ public static void CountCharacter(string str)
 
 ### Remove duplicate characters from a string
 
+<!-- level: beginner -->
+
 ```text
 Input: helloworld  Output: helowrd
 ```
@@ -187,6 +199,8 @@ public static void RemoveDuplicate(string str)
 ## Numbers
 
 ### Check whether a number is prime
+
+<!-- level: beginner -->
 
 ```text
 Input: 20  Output: Not Prime
@@ -212,6 +226,8 @@ public static bool IsPrime(int number)
 
 ### Find the factorial of a number
 
+<!-- level: beginner -->
+
 ```text
 Input: 5  Output: 120
 ```
@@ -229,6 +245,8 @@ public static long Factorial(int number)
 ```
 
 ### Print the Fibonacci series
+
+<!-- level: beginner -->
 
 ```text
 Input: 8  Output: 0 1 1 2 3 5 8 13
@@ -251,6 +269,8 @@ public static void Fibonacci(int count)
 
 ### Reverse a number
 
+<!-- level: beginner -->
+
 ```text
 Input: 12345  Output: 54321
 ```
@@ -271,6 +291,8 @@ public static int ReverseNumber(int number)
 
 ### Check whether a number is a palindrome
 
+<!-- level: beginner -->
+
 ```text
 Input: 121  Output: Palindrome
 Input: 123  Output: Not Palindrome
@@ -284,6 +306,8 @@ public static bool IsPalindromeNumber(int number)
 ```
 
 ### Check whether a number is an Armstrong number
+
+<!-- level: beginner -->
 
 An Armstrong number equals the sum of its digits, each raised to the power of the number of digits.
 
@@ -310,6 +334,8 @@ public static bool IsArmstrong(int number)
 ```
 
 ### Convert numbers to words
+
+<!-- level: advanced -->
 
 ```text
 Input: 1234  Output: One Thousand Two Hundred And Thirty Four
@@ -363,6 +389,8 @@ public static string Convert(int i)
 
 ### Product of array except self
 
+<!-- level: advanced -->
+
 Return an array where each element is the product of all the other elements.
 
 ```text
@@ -405,6 +433,8 @@ public static int[] ProductExceptSelf(int[] nums)
 
 ### Bubble sort
 
+<!-- level: beginner -->
+
 Repeatedly swaps adjacent elements that are in the wrong order. Time complexity: O(n²).
 
 ```csharp
@@ -430,6 +460,8 @@ public static void BubbleSort(int[] arr)
 
 ### Insertion sort
 
+<!-- level: intermediate -->
+
 Builds the sorted array one element at a time, inserting each element into its correct position. Time complexity: O(n²), but fast for small or nearly sorted arrays.
 
 ```csharp
@@ -451,6 +483,8 @@ public static void InsertionSort(int[] arr)
 ```
 
 ### Quick sort
+
+<!-- level: advanced -->
 
 Picks a pivot, partitions the array so smaller elements are on the left and larger on the right, then sorts each side recursively. Average time complexity: O(n log n).
 
@@ -485,6 +519,8 @@ private static int Partition(int[] arr, int low, int high)
 
 ### Merge sort
 
+<!-- level: advanced -->
+
 Splits the array in half, sorts each half recursively, then merges the two sorted halves. Time complexity: O(n log n).
 
 ```csharp
@@ -517,6 +553,8 @@ private static void Merge(int[] arr, int left, int mid, int right)
 ```
 
 ### Binary search
+
+<!-- level: intermediate -->
 
 Searches a **sorted** array by repeatedly halving the search range. Time complexity: O(log n).
 
