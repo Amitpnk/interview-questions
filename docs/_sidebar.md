@@ -1,4 +1,5 @@
 - [Home](/)
+- [🎤 Mock interview](mock-interview.html ':ignore')
 
 - **Programming**
   - [C# & OOP](CsharpOops.md)

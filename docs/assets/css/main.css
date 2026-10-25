@@ -1204,3 +1204,58 @@ body[data-page="index.md"] .markdown-section {
         margin-bottom: 3rem;
     }
 }
+
+/* ==========================================================================
+   Home page – mock interview call to action
+   ========================================================================== */
+
+.markdown-section a.mock-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 48rem;
+    margin: -1rem 0 2rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background:
+        linear-gradient(var(--surface-2), var(--surface-2)) padding-box,
+        linear-gradient(90deg, var(--brand), var(--brand-2)) border-box;
+    box-shadow: var(--shadow);
+    color: var(--text);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.markdown-section a.mock-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.mock-cta-icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--brand-soft);
+    font-size: 1.4rem;
+}
+
+.mock-cta b {
+    display: block;
+    color: var(--heading-color);
+}
+
+.mock-cta small {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.mock-cta-arrow {
+    margin-left: auto;
+    color: var(--brand);
+    font-size: 1.3rem;
+    font-weight: 700;
+}

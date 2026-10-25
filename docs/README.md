@@ -7,6 +7,8 @@ Practical interview questions and answers for software engineers – from full s
 
 **Website:** [amitpnk.github.io/interview-questions](https://amitpnk.github.io/interview-questions)
 
+**Mock interview:** [practise out loud](https://amitpnk.github.io/interview-questions/mock-interview.html) – pick topics, answer each question by speaking, and get a confidence score (key points covered + delivery: pace, filler words, hedging, pauses). Runs entirely in the browser; voice answers need Chrome or Edge.
+
 <p float="left">
   <a href="https://amitpnk.github.io/interview-questions"><img alt="Cover page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/screenshot-1.png" width="49%"></a>
   <a href="https://amitpnk.github.io/interview-questions"><img alt="Question page" src="https://raw.githubusercontent.com/Amitpnk/interview-questions/main/docs/img/screenshot-2.png" width="49%"></a>
@@ -53,6 +55,7 @@ interview-questions/
 ├── docs/                   # Docsify website (published with GitHub Pages)
 │   ├── index.html          # Docsify configuration and plugins
 │   ├── index.md            # Home page
+│   ├── mock-interview.html # Mock interview (speech-to-text + scoring, all in the browser)
 │   ├── _coverpage.md       # Cover page
 │   ├── _sidebar.md         # Sidebar navigation
 │   ├── *.md                # One page per topic

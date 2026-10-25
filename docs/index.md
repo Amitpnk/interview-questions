@@ -2,6 +2,8 @@
 
 <p class="hero">Short, practical answers with code samples for software engineering interviews – from full stack and cloud to AI, ML and GenAI, plus the managerial rounds. Pick a topic to start, or use the search box to find a question.</p>
 
+<a class="mock-cta" href="mock-interview.html"><span class="mock-cta-icon" aria-hidden="true">🎤</span><span><b>New: Mock interview</b><small>Pick a topic, answer out loud and get a confidence score with feedback.</small></span><span class="mock-cta-arrow" aria-hidden="true">→</span></a>
+
 ## Topics
 
 <div class="topic-grid">

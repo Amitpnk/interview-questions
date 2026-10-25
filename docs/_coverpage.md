@@ -17,4 +17,5 @@
 - Manager Rounds
 
 [Get Started](?id=topics)
+[Mock interview](mock-interview.html ':ignore')
 [GitHub](https://github.com/Amitpnk/interview-questions)
