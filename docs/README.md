@@ -44,6 +44,7 @@ Practical interview questions and answers for software engineers – from full s
 | AI Agents *(coming soon)* | [AIAgents.md](AIAgents.md) |
 | MLOps & LLMOps *(coming soon)* | [MLOps.md](MLOps.md) |
 | AI Evaluation & Safety *(coming soon)* | [AIEvaluation.md](AIEvaluation.md) |
+| AI System Design | [AISystemDesign.md](AISystemDesign.md) |
 | Forward Deployed Engineer *(coming soon)* | [ForwardDeployedEngineer.md](ForwardDeployedEngineer.md) |
 | Techno-Managerial Round *(coming soon)* | [TechnoManagerRound.md](TechnoManagerRound.md) |
 | Manager Round *(coming soon)* | [ManagerRound.md](ManagerRound.md) |

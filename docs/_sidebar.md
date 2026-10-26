@@ -40,6 +40,7 @@
   - [AI Agents](AIAgents.md)
   - [MLOps & LLMOps](MLOps.md)
   - [AI Evaluation & Safety](AIEvaluation.md)
+  - [AI System Design](AISystemDesign.md)
   - [Forward Deployed Engineer](ForwardDeployedEngineer.md)
 
 - **Interview Rounds**
