@@ -502,39 +502,22 @@ section.cover .cover-main > p:last-child a:hover {
     font-size: 1.1rem;
 }
 
-/* Home page: let the card grid use the full width (topic pages keep a reading width) */
-body[data-page="index.md"] .markdown-section {
+/* Home page: let the card grid use the full width (topic pages keep a reading width).
+   Matched by content (:has) as well as docsify's data-page, which is not always "index.md" */
+body[data-page="index.md"] .markdown-section,
+.markdown-section:has(.topic-grid) {
     max-width: 92rem;
     padding-left: clamp(1rem, 3vw, 3rem);
     padding-right: clamp(1rem, 3vw, 3rem);
-    container-type: inline-size;
 }
 
-/* Columns follow the space available to the content (the sidebar takes room on tablets):
-   1 column on phones, 2 on tablets, 3 on laptops, 4 on wide screens */
+/* Columns follow the space available to the grid itself (the sidebar takes room on tablets):
+   as many 14rem+ columns as fit, at most 4 – 1 on phones, 2 on tablets, 3–4 on laptops and wide screens */
 .topic-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, max(14rem, (100% - 3rem) / 4)), 1fr));
     gap: 1rem;
     margin: 1.5rem 0 3rem;
-}
-
-@container (min-width: 28rem) {
-    .topic-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@container (min-width: 50rem) {
-    .topic-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
-
-@container (min-width: 72rem) {
-    .topic-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
 }
 
 .markdown-section a.topic-card {
